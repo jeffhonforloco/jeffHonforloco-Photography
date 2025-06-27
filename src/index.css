@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -55,26 +55,49 @@
   }
 
   body {
-    @apply bg-photo-black text-photo-white font-montserrat;
+    @apply bg-photo-black text-photo-white font-inter antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
   }
 
   html {
     scroll-behavior: smooth;
   }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C8102E;
+  }
 }
 
 @layer components {
   .hero-section {
-    @apply min-h-screen bg-photo-black text-photo-white;
+    @apply min-h-screen bg-photo-black text-photo-white relative;
   }
   
   .section-padding {
-    @apply px-6 md:px-12 lg:px-20;
+    @apply px-8 md:px-16 lg:px-24 xl:px-32;
   }
   
   .photo-button {
-    @apply bg-photo-red hover:bg-photo-red-hover text-photo-white px-8 py-3 font-medium transition-all duration-300 hover:scale-105;
+    @apply bg-photo-red hover:bg-photo-red-hover text-photo-white px-10 py-4 font-medium tracking-wider uppercase text-sm transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-photo-red/20;
+  }
+  
+  .photo-button-outline {
+    @apply border border-photo-white text-photo-white hover:bg-photo-white hover:text-photo-black px-10 py-4 font-medium tracking-wider uppercase text-sm transition-all duration-500 hover:scale-105;
   }
   
   .photo-text-accent {
@@ -84,4 +107,93 @@
   .photo-border {
     @apply border-gray-800;
   }
+
+  .luxury-spacing {
+    @apply py-32 md:py-40;
+  }
+
+  .editorial-title {
+    @apply font-playfair text-5xl md:text-7xl lg:text-8xl font-light tracking-wide leading-[0.9] mb-8;
+  }
+
+  .editorial-subtitle {
+    @apply font-inter text-xl md:text-2xl font-light tracking-wide text-gray-300 leading-relaxed;
+  }
+
+  .editorial-text {
+    @apply font-inter text-lg md:text-xl font-light leading-relaxed text-gray-400;
+  }
+
+  .image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-all duration-700;
+  }
+
+  .image-hover-effect {
+    @apply transition-all duration-700 group-hover:scale-110 group-hover:brightness-110;
+  }
+
+  .nav-link {
+    @apply relative font-inter font-light tracking-wider uppercase text-sm transition-all duration-300 hover:text-photo-red;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-photo-red transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .portfolio-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12;
+  }
+
+  .portfolio-item {
+    @apply group cursor-pointer overflow-hidden aspect-[3/4] relative;
+  }
+
+  .portfolio-category-grid {
+    @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6;
+  }
+}
+
+/* Premium animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out;
+}
+
+.animate-scale-in-slow {
+  animation: scaleIn 1.2s ease-out;
 }
