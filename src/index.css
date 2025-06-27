@@ -125,11 +125,11 @@
   }
 
   .image-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-all duration-700;
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-all duration-700;
   }
 
   .image-hover-effect {
-    @apply transition-all duration-700 group-hover:scale-110 group-hover:brightness-110;
+    @apply transition-all duration-700;
   }
 
   .nav-link {
@@ -150,7 +150,7 @@
   }
 
   .portfolio-item {
-    @apply group cursor-pointer overflow-hidden aspect-[3/4] relative;
+    @apply cursor-pointer overflow-hidden aspect-[3/4] relative;
   }
 
   .portfolio-category-grid {
