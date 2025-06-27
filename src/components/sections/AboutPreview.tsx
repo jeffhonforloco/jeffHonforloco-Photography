@@ -1,0 +1,53 @@
+
+import { Link } from 'react-router-dom';
+
+const AboutPreview = () => {
+  return (
+    <section className="py-40 md:py-48 bg-photo-black relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-photo-gray-900/30 to-photo-black"></div>
+      
+      <div className="relative max-w-8xl mx-auto px-8 md:px-16">
+        <div className="grid lg:grid-cols-2 gap-24 items-center">
+          <div>
+            <h2 className="font-playfair text-6xl md:text-7xl lg:text-8xl font-extralight tracking-wide text-white mb-12 leading-[0.9]">
+              About Jeff
+            </h2>
+            <div className="w-32 h-px bg-gradient-to-r from-photo-red to-transparent mb-16"></div>
+            
+            <p className="font-light text-xl md:text-2xl text-gray-300 leading-relaxed mb-10 tracking-wide">
+              With over a decade of experience capturing the essence of fashion and beauty, 
+              I specialize in creating powerful visual narratives that transcend traditional photography.
+            </p>
+            
+            <p className="font-light text-xl md:text-2xl text-gray-300 leading-relaxed mb-16 tracking-wide">
+              My work has been featured in leading publications and campaigns worldwide, 
+              combining technical mastery with an unwavering commitment to artistic excellence.
+            </p>
+            
+            <Link 
+              to="/about" 
+              className="group inline-flex items-center font-medium text-white tracking-[0.2em] uppercase text-sm hover:text-photo-red transition-colors duration-500"
+            >
+              Discover More
+              <span className="ml-6 w-16 h-px bg-photo-red transition-all duration-500 group-hover:w-20"></span>
+            </Link>
+          </div>
+          
+          <div className="relative">
+            <div className="aspect-[4/5] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Jeff Honforloco"
+                className="w-full h-full object-cover hover:scale-105 transition-all duration-1000"
+              />
+            </div>
+            <div className="absolute -bottom-12 -right-12 w-40 h-40 border border-photo-red/30"></div>
+            <div className="absolute -top-12 -left-12 w-32 h-32 border border-photo-red/50"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AboutPreview;
