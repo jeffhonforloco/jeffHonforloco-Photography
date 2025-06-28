@@ -186,6 +186,12 @@
   }
 }
 
+@keyframes slideUp {
+  0% { transform: translateY(100%); }
+  50% { transform: translateY(-10%); }
+  100% { transform: translateY(0%); }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -196,4 +202,8 @@
 
 .animate-scale-in-slow {
   animation: scaleIn 1.2s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp linear infinite;
 }

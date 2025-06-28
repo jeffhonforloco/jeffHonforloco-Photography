@@ -1,5 +1,4 @@
 
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
@@ -18,109 +17,122 @@ const HeroSection = () => {
 
   const portfolioImages = [
     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1506629905963-b3b17f54e5b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1619895862022-09114b41f16f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
   ];
 
   return (
-    <section className="relative min-h-screen bg-photo-black overflow-hidden">
-      {/* Image Grid Background */}
+    <section className="relative min-h-screen bg-black overflow-hidden">
+      {/* Animated Image Grid */}
       <div className="absolute inset-0">
         <div className="grid grid-cols-12 grid-rows-8 h-full gap-1">
-          {/* Top Row - 3 images */}
-          <div className="col-span-4 row-span-3 relative overflow-hidden">
+          {/* Row 1 */}
+          <div className="col-span-3 row-span-4 relative overflow-hidden">
             <img
               src={portfolioImages[0]}
               alt="Fashion Portrait"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '0s', animationDuration: '20s' }}
             />
           </div>
-          <div className="col-span-4 row-span-4 relative overflow-hidden">
+          <div className="col-span-6 row-span-3 relative overflow-hidden">
             <img
               src={portfolioImages[1]}
               alt="Beauty Portrait"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '2s', animationDuration: '18s' }}
             />
           </div>
-          <div className="col-span-4 row-span-3 relative overflow-hidden">
+          <div className="col-span-3 row-span-4 relative overflow-hidden">
             <img
               src={portfolioImages[2]}
               alt="Editorial Portrait"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '1s', animationDuration: '22s' }}
             />
           </div>
 
-          {/* Middle Section - Space for name */}
-          <div className="col-span-4 row-span-2"></div>
-          <div className="col-span-4 row-span-1"></div>
-          <div className="col-span-4 row-span-2"></div>
-
-          {/* Bottom Row - 3 images */}
+          {/* Row 2 */}
           <div className="col-span-4 row-span-3 relative overflow-hidden">
             <img
               src={portfolioImages[3]}
               alt="Glamour Portrait"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '3s', animationDuration: '16s' }}
             />
           </div>
-          <div className="col-span-4 row-span-3 relative overflow-hidden">
+          <div className="col-span-2 row-span-2 relative overflow-hidden">
             <img
               src={portfolioImages[4]}
-              alt="Lifestyle Portrait"
-              className="w-full h-full object-cover"
+              alt="Fashion Model"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '4s', animationDuration: '19s' }}
             />
           </div>
-          <div className="col-span-4 row-span-3 relative overflow-hidden">
+          <div className="col-span-3 row-span-3 relative overflow-hidden">
             <img
               src={portfolioImages[5]}
-              alt="Fashion Portrait"
-              className="w-full h-full object-cover"
+              alt="Portrait Photography"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '1.5s', animationDuration: '21s' }}
+            />
+          </div>
+
+          {/* Row 3 */}
+          <div className="col-span-3 row-span-2 relative overflow-hidden">
+            <img
+              src={portfolioImages[6]}
+              alt="Beauty Shot"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '2.5s', animationDuration: '17s' }}
+            />
+          </div>
+          <div className="col-span-4 row-span-1 relative overflow-hidden">
+            <img
+              src={portfolioImages[7]}
+              alt="Fashion Editorial"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '3.5s', animationDuration: '20s' }}
+            />
+          </div>
+          <div className="col-span-2 row-span-3 relative overflow-hidden">
+            <img
+              src={portfolioImages[8]}
+              alt="Lifestyle Portrait"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '0.5s', animationDuration: '23s' }}
+            />
+          </div>
+
+          {/* Bottom row */}
+          <div className="col-span-6 row-span-2 relative overflow-hidden">
+            <img
+              src={portfolioImages[9]}
+              alt="Professional Portrait"
+              className="w-full h-full object-cover animate-slide-up"
+              style={{ animationDelay: '4.5s', animationDuration: '15s' }}
             />
           </div>
         </div>
-
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
-      {/* Centered Name and Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <div className="text-center max-w-4xl mx-auto px-8">
-          <h1 className="font-playfair text-8xl md:text-9xl lg:text-[12rem] font-light tracking-[0.02em] text-white mb-8 leading-[0.8] drop-shadow-2xl">
+      {/* Centered Name Overlay */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="text-center">
+          <h1 className="font-playfair text-white text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-light tracking-[0.1em] leading-[0.8] drop-shadow-2xl">
             JEFF
           </h1>
-          <h2 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.25em] text-white/95 mb-12 drop-shadow-lg">
+          <div className="w-24 h-px bg-white mx-auto my-4"></div>
+          <h2 className="font-playfair text-white text-2xl md:text-3xl lg:text-4xl font-light tracking-[0.3em] drop-shadow-lg">
             HONFORLOCO
           </h2>
-          
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-12"></div>
-          
-          <p className="font-light text-xl md:text-2xl text-white/90 tracking-wide leading-relaxed max-w-3xl mx-auto mb-8 drop-shadow-md">
-            {contentData.personal.profession}
-          </p>
-          
-          <blockquote className="font-playfair text-lg md:text-xl text-white/80 italic tracking-wide leading-relaxed max-w-2xl mx-auto mb-16 drop-shadow-md">
-            "{contentData.personal.quote}"
-          </blockquote>
-          
-          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-            <Link 
-              to="/portfolio" 
-              className="group relative bg-photo-red hover:bg-photo-red-hover text-white px-12 py-4 font-medium tracking-[0.2em] uppercase text-sm transition-all duration-700 hover:scale-105 hover:shadow-2xl hover:shadow-photo-red/40 overflow-hidden"
-            >
-              <span className="relative z-10">View Portfolio</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-photo-red-hover to-photo-red opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-            </Link>
-            <Link 
-              to="/contact" 
-              className="group border-2 border-white/80 text-white hover:bg-white hover:text-photo-black px-12 py-4 font-medium tracking-[0.2em] uppercase text-sm transition-all duration-700 hover:scale-105 backdrop-blur-sm"
-            >
-              Book Session
-            </Link>
-          </div>
         </div>
       </div>
     </section>
