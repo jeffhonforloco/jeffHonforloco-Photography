@@ -1,0 +1,29 @@
+
+{
+  "personal": {
+    "name": "Jeff Honforloco",
+    "profession": "Hyper-creative photographer and astute businessman",
+    "location": "Providence, RI area, USA",
+    "specialization": "Fashion and Beauty photography",
+    "quote": "A well-captured image represents a moment in time that is expressed infinitely",
+    "bio": "With over a decade of experience in professional photography, I've dedicated my career to creating compelling visual stories that capture the essence and beauty of my subjects. My work spans across fashion, beauty, editorial, and lifestyle photography.",
+    "philosophy": "Photography is not just about capturing what you see—it's about revealing what others might miss. Every frame is an opportunity to create something timeless and meaningful."
+  },
+  "contact": {
+    "address": "Wisdom Ave, Providence, RI 02908",
+    "phone": "+646-379-4237",
+    "emails": ["info@jeffhonforloco.com", "jeffhonforloco@gmail.com"]
+  },
+  "services": [
+    "Fashion photography",
+    "Beauty photography", 
+    "Portrait photography",
+    "Album cover photography",
+    "Custom photography projects"
+  ],
+  "experience": {
+    "years": "15+",
+    "publishedWorks": "50+",
+    "happyClients": "100+"
+  }
+}

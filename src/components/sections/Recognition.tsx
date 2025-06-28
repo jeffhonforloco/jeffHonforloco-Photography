@@ -1,5 +1,20 @@
 
+import { useState, useEffect } from 'react';
+
 const Recognition = () => {
+  const [contentData, setContentData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('/data/jeff-content.json')
+      .then(response => response.json())
+      .then(data => setContentData(data))
+      .catch(error => console.error('Error loading content:', error));
+  }, []);
+
+  if (!contentData) {
+    return <div className="py-40 md:py-48 bg-photo-gray-900"></div>;
+  }
+
   return (
     <section className="py-40 md:py-48 bg-photo-gray-900 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-photo-black/20 to-photo-gray-900"></div>
@@ -11,15 +26,21 @@ const Recognition = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
           <div className="text-center">
-            <div className="text-photo-red font-playfair text-5xl md:text-6xl lg:text-7xl font-extralight mb-6">50+</div>
+            <div className="text-photo-red font-playfair text-5xl md:text-6xl lg:text-7xl font-extralight mb-6">
+              {contentData.experience.publishedWorks}
+            </div>
             <p className="font-light text-lg md:text-xl text-gray-300 tracking-[0.1em] uppercase">Published Works</p>
           </div>
           <div className="text-center">
-            <div className="text-photo-red font-playfair text-5xl md:text-6xl lg:text-7xl font-extralight mb-6">15+</div>
+            <div className="text-photo-red font-playfair text-5xl md:text-6xl lg:text-7xl font-extralight mb-6">
+              {contentData.experience.years}
+            </div>
             <p className="font-light text-lg md:text-xl text-gray-300 tracking-[0.1em] uppercase">Years Experience</p>
           </div>
           <div className="text-center">
-            <div className="text-photo-red font-playfair text-5xl md:text-6xl lg:text-7xl font-extralight mb-6">100+</div>
+            <div className="text-photo-red font-playfair text-5xl md:text-6xl lg:text-7xl font-extralight mb-6">
+              {contentData.experience.happyClients}
+            </div>
             <p className="font-light text-lg md:text-xl text-gray-300 tracking-[0.1em] uppercase">Happy Clients</p>
           </div>
         </div>

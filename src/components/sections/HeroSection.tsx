@@ -1,7 +1,21 @@
 
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
+  const [contentData, setContentData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('/data/jeff-content.json')
+      .then(response => response.json())
+      .then(data => setContentData(data))
+      .catch(error => console.error('Error loading content:', error));
+  }, []);
+
+  if (!contentData) {
+    return <div className="min-h-screen bg-photo-black"></div>;
+  }
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div 
@@ -25,10 +39,13 @@ const HeroSection = () => {
         
         <div className="w-24 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-16"></div>
         
-        <p className="font-light text-xl md:text-2xl text-white/85 tracking-wide leading-relaxed max-w-4xl mx-auto mb-20 drop-shadow-md">
-          Award-winning photographer specializing in fashion, beauty, and editorial imagery. 
-          Creating compelling visual narratives that transcend the ordinary.
+        <p className="font-light text-xl md:text-2xl text-white/85 tracking-wide leading-relaxed max-w-4xl mx-auto mb-8 drop-shadow-md">
+          {contentData.personal.profession}
         </p>
+        
+        <blockquote className="font-playfair text-lg md:text-xl text-white/75 italic tracking-wide leading-relaxed max-w-3xl mx-auto mb-20 drop-shadow-md">
+          "{contentData.personal.quote}"
+        </blockquote>
         
         <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
           <Link 

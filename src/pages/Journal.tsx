@@ -1,98 +1,55 @@
 
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 
 const Journal = () => {
-  const categories = [
-    'Photography Tips & Techniques',
-    'Client Preparation & Session Insights',
-    'Equipment Reviews & Recommendations',
-    'Industry Trends & News',
-    'Personal Projects & Artistic Explorations',
-    'Business & Marketing Advice'
-  ];
+  const [blogData, setBlogData] = useState<any>(null);
 
-  const featuredPosts = [
-    {
-      title: 'Mastering Natural Light in Portrait Photography',
-      excerpt: 'Discover the secrets to creating stunning portraits using only natural light sources. Learn about golden hour timing, window light techniques, and outdoor portrait strategies.',
-      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      category: 'Photography Tips & Techniques',
-      date: 'March 15, 2024',
-      readTime: '8 min read',
-      href: '/journal/mastering-natural-light'
-    },
-    {
-      title: 'Building Your Fashion Photography Portfolio',
-      excerpt: 'Essential tips for creating a compelling fashion photography portfolio that gets noticed by clients, agencies, and collaborators in the industry.',
-      image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      category: 'Business & Marketing Advice',
-      date: 'March 10, 2024',
-      readTime: '12 min read',
-      href: '/journal/building-fashion-portfolio'
-    },
-    {
-      title: 'Essential Camera Gear for Professional Portraits',
-      excerpt: 'A comprehensive guide to the must-have equipment for professional portrait photography, from cameras and lenses to lighting and accessories.',
-      image: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      category: 'Equipment Reviews & Recommendations',
-      date: 'March 5, 2024',
-      readTime: '10 min read',
-      href: '/journal/essential-camera-gear'
-    },
-    {
-      title: 'Preparing Models for Their First Photoshoot',
-      excerpt: 'How to guide and prepare first-time models for a successful photoshoot experience, covering everything from wardrobe to posing basics.',
-      image: 'https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      category: 'Client Preparation & Session Insights',
-      date: 'February 28, 2024',
-      readTime: '6 min read',
-      href: '/journal/preparing-first-time-models'
-    },
-    {
-      title: '2024 Photography Trends: What\'s Next',
-      excerpt: 'Exploring the latest trends in photography for 2024, from aesthetic styles to technological innovations shaping the industry.',
-      image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      category: 'Industry Trends & News',
-      date: 'February 20, 2024',
-      readTime: '7 min read',
-      href: '/journal/2024-photography-trends'
-    },
-    {
-      title: 'Behind the Scenes: Creating Artistic Self-Portraits',
-      excerpt: 'A personal exploration into the creative process of artistic self-portraiture, sharing techniques and inspiration behind recent work.',
-      image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      category: 'Personal Projects & Artistic Explorations',
-      date: 'February 15, 2024',
-      readTime: '9 min read',
-      href: '/journal/artistic-self-portraits'
-    }
-  ];
+  useEffect(() => {
+    fetch('/data/blog-posts.json')
+      .then(response => response.json())
+      .then(data => setBlogData(data))
+      .catch(error => console.error('Error loading blog data:', error));
+  }, []);
+
+  if (!blogData) {
+    return (
+      <Layout>
+        <div className="py-20 section-padding">
+          <div className="text-center">Loading...</div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-20 section-padding">
-        <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Journal</h1>
-          <p className="text-gray-400 text-xl max-w-3xl mx-auto leading-relaxed">
+      <section className="py-40 md:py-48 pt-32 max-w-8xl mx-auto px-8 md:px-16">
+        <div className="text-center mb-20 animate-fade-in">
+          <h1 className="font-playfair text-6xl md:text-7xl lg:text-8xl font-extralight tracking-wide text-white mb-12 leading-[0.9]">
+            Journal
+          </h1>
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-12"></div>
+          <p className="text-gray-400 text-xl max-w-4xl mx-auto leading-relaxed tracking-wide">
             Photography insights, techniques, equipment reviews, and behind-the-scenes 
             stories from professional shoots and personal projects.
           </p>
         </div>
 
         {/* Categories */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center">Explore by Category</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {categories.map((category, index) => (
+        <div className="mb-20">
+          <h2 className="font-playfair text-4xl font-extralight tracking-wide text-white mb-12 text-center">Explore by Category</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogData.categories.map((category: string, index: number) => (
               <div
                 key={category}
-                className="bg-gray-900 p-6 hover:bg-gray-800 transition-colors cursor-pointer animate-scale-in"
+                className="bg-photo-gray-900 p-8 hover:bg-photo-gray-800 transition-colors cursor-pointer animate-scale-in group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <h3 className="font-semibold text-photo-red mb-2">{category}</h3>
-                <p className="text-gray-400 text-sm">
+                <h3 className="font-semibold text-photo-red mb-3 text-lg group-hover:text-white transition-colors">{category}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
                   {category === 'Photography Tips & Techniques' && 'Lighting, composition, editing workflows'}
                   {category === 'Client Preparation & Session Insights' && 'Props, locations, session planning'}
                   {category === 'Equipment Reviews & Recommendations' && 'Cameras, lenses, software, accessories'}
@@ -107,34 +64,34 @@ const Journal = () => {
 
         {/* Featured Posts */}
         <div>
-          <h2 className="text-3xl font-bold mb-12 text-center">Latest Articles</h2>
-          <div className="grid lg:grid-cols-2 gap-8">
-            {featuredPosts.map((post, index) => (
+          <h2 className="font-playfair text-4xl font-extralight tracking-wide text-white mb-16 text-center">Latest Articles</h2>
+          <div className="grid lg:grid-cols-2 gap-12">
+            {blogData.posts.map((post: any, index: number) => (
               <Link
-                key={post.title}
-                to={post.href}
+                key={post.id}
+                to={`/journal/${post.id}`}
                 className="group animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="overflow-hidden aspect-[16/10] bg-gray-900 mb-6">
+                <div className="overflow-hidden aspect-[16/10] bg-photo-gray-900 mb-8">
                   <img
                     src={post.image}
                     alt={post.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="mb-4">
-                  <span className="text-photo-red text-sm font-medium">{post.category}</span>
-                  <div className="flex items-center gap-3 text-gray-400 text-sm mt-1">
+                <div className="mb-6">
+                  <span className="text-photo-red text-sm font-medium tracking-wider uppercase">{post.category}</span>
+                  <div className="flex items-center gap-3 text-gray-400 text-sm mt-2">
                     <span>{post.date}</span>
                     <span>•</span>
                     <span>{post.readTime}</span>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-photo-red transition-colors">
+                <h3 className="font-playfair text-3xl font-extralight tracking-wide text-white mb-4 group-hover:text-photo-red transition-colors leading-tight">
                   {post.title}
                 </h3>
-                <p className="text-gray-400 leading-relaxed">
+                <p className="text-gray-400 leading-relaxed text-lg">
                   {post.excerpt}
                 </p>
               </Link>
@@ -144,20 +101,20 @@ const Journal = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-20 section-padding bg-gray-900">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Stay Updated</h2>
-          <p className="text-gray-400 mb-8">
+      <section className="py-40 md:py-48 bg-photo-gray-900">
+        <div className="text-center max-w-3xl mx-auto px-8 md:px-16">
+          <h2 className="font-playfair text-4xl font-extralight tracking-wide text-white mb-8">Stay Updated</h2>
+          <p className="text-gray-400 mb-12 text-lg leading-relaxed">
             Get the latest photography tips, techniques, and industry insights 
             delivered directly to your inbox.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 bg-black border border-gray-700 text-white focus:border-photo-red focus:outline-none"
+              className="flex-1 px-6 py-4 bg-photo-black border border-gray-700 text-white focus:border-photo-red focus:outline-none text-lg"
             />
-            <button className="photo-button whitespace-nowrap">
+            <button className="bg-photo-red hover:bg-photo-red-hover text-white px-12 py-4 font-medium tracking-[0.2em] uppercase text-sm transition-all duration-700 hover:scale-105 whitespace-nowrap">
               Subscribe
             </button>
           </div>

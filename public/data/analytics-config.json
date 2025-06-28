@@ -1,0 +1,16 @@
+
+{
+  "googleAnalytics": {
+    "trackingId": "GA_MEASUREMENT_ID",
+    "enabled": false
+  },
+  "facebookPixel": {
+    "pixelId": "FB_PIXEL_ID", 
+    "enabled": false
+  },
+  "events": {
+    "portfolioView": "portfolio_category_view",
+    "contactForm": "contact_form_submit",
+    "blogPost": "blog_post_view"
+  }
+}

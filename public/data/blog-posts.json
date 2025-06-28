@@ -1,0 +1,43 @@
+
+{
+  "categories": [
+    "Photography Tips & Techniques",
+    "Client Preparation & Session Insights", 
+    "Equipment Reviews & Recommendations",
+    "Industry Trends & News",
+    "Personal Projects & Artistic Explorations",
+    "Business & Marketing Advice"
+  ],
+  "posts": [
+    {
+      "id": "mastering-natural-light",
+      "title": "Mastering Natural Light in Portrait Photography",
+      "excerpt": "Discover the secrets to creating stunning portraits using only natural light sources. Learn about golden hour timing, window light techniques, and outdoor portrait strategies.",
+      "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "Photography Tips & Techniques",
+      "date": "March 15, 2024",
+      "readTime": "8 min read",
+      "content": "Natural light photography is an art that requires understanding of timing, positioning, and technique..."
+    },
+    {
+      "id": "building-fashion-portfolio",
+      "title": "Building Your Fashion Photography Portfolio",
+      "excerpt": "Essential tips for creating a compelling fashion photography portfolio that gets noticed by clients, agencies, and collaborators in the industry.",
+      "image": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "Business & Marketing Advice",
+      "date": "March 10, 2024",
+      "readTime": "12 min read",
+      "content": "Building a strong fashion photography portfolio requires strategic planning and careful curation..."
+    },
+    {
+      "id": "essential-camera-gear",
+      "title": "Essential Camera Gear for Professional Portraits",
+      "excerpt": "A comprehensive guide to the must-have equipment for professional portrait photography, from cameras and lenses to lighting and accessories.",
+      "image": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "Equipment Reviews & Recommendations",
+      "date": "March 5, 2024",
+      "readTime": "10 min read",
+      "content": "Professional portrait photography requires the right equipment to achieve consistent, high-quality results..."
+    }
+  ]
+}

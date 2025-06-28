@@ -1,7 +1,21 @@
 
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const AboutPreview = () => {
+  const [contentData, setContentData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('/data/jeff-content.json')
+      .then(response => response.json())
+      .then(data => setContentData(data))
+      .catch(error => console.error('Error loading content:', error));
+  }, []);
+
+  if (!contentData) {
+    return <div className="py-40 md:py-48 bg-photo-black"></div>;
+  }
+
   return (
     <section className="py-40 md:py-48 bg-photo-black relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-photo-gray-900/30 to-photo-black"></div>
@@ -15,13 +29,11 @@ const AboutPreview = () => {
             <div className="w-32 h-px bg-gradient-to-r from-photo-red to-transparent mb-16"></div>
             
             <p className="font-light text-xl md:text-2xl text-gray-300 leading-relaxed mb-10 tracking-wide">
-              With over a decade of experience capturing the essence of fashion and beauty, 
-              I specialize in creating powerful visual narratives that transcend traditional photography.
+              {contentData.personal.bio}
             </p>
             
             <p className="font-light text-xl md:text-2xl text-gray-300 leading-relaxed mb-16 tracking-wide">
-              My work has been featured in leading publications and campaigns worldwide, 
-              combining technical mastery with an unwavering commitment to artistic excellence.
+              Located in {contentData.personal.location}, specializing in {contentData.personal.specialization.toLowerCase()}.
             </p>
             
             <Link 
