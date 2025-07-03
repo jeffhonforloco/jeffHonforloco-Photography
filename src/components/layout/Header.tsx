@@ -17,11 +17,11 @@ const Header = () => {
   }, []);
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Journal', href: '/journal' },
+    { name: 'Portfolios', href: '/portfolio' },
     { name: 'About', href: '/about' },
+    { name: 'Journal', href: '/journal' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Book a Session', href: '/contact?session=true' },
   ];
 
   const isActive = (path: string) => {
@@ -32,13 +32,17 @@ const Header = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-photo-black/95 backdrop-blur-md py-4' : 'bg-transparent py-6'
+      isScrolled ? 'bg-black/95 backdrop-blur-md py-4' : 'bg-transparent py-6'
     }`}>
       <div className="max-w-8xl mx-auto px-8 md:px-16">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="font-playfair text-2xl md:text-3xl font-light tracking-wider hover:text-photo-red transition-colors duration-300">
-            JEFF HONFORLOCO
+          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300">
+            <img 
+              src="/lovable-uploads/73dc6884-f3c8-4a35-b5f5-4b36c8cc8c36.png" 
+              alt="J Logo" 
+              className="w-8 h-8 md:w-10 md:h-10"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -47,8 +51,8 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`nav-link ${
-                  isActive(item.href) ? 'text-photo-red' : 'text-photo-white'
+                className={`luxury-nav-link ${
+                  isActive(item.href) ? 'text-white' : 'text-white/70'
                 }`}
               >
                 {item.name}
@@ -70,7 +74,7 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden absolute top-0 left-0 w-full h-screen bg-photo-black/98 backdrop-blur-md transform transition-all duration-500 ${
+        <div className={`md:hidden absolute top-0 left-0 w-full h-screen bg-black/98 backdrop-blur-md transform transition-all duration-500 ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
           <div className="flex flex-col justify-center items-center h-full space-y-8">
@@ -78,8 +82,8 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-3xl font-playfair font-light tracking-wider transition-all duration-300 hover:text-photo-red transform ${
-                  isActive(item.href) ? 'text-photo-red' : 'text-photo-white'
+                className={`text-2xl md:text-3xl font-light tracking-wider transition-all duration-300 hover:text-white transform ${
+                  isActive(item.href) ? 'text-white' : 'text-white/70'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={() => setIsMenuOpen(false)}
