@@ -31,7 +31,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 flex">
         {/* Column 1 */}
         <div className="flex-1 relative overflow-hidden">
-          <div className="animate-slide-up-slow" style={{animationDuration: '40s'}}>
+          <div className="animate-slide-up-slow" style={{animationDuration: '120s'}}>
             <div className="flex flex-col">
               {portfolioImages.concat(portfolioImages).map((image, index) => (
                 <div key={`col1-${index}`} className="h-[70vh] mb-4">
@@ -51,7 +51,7 @@ const HeroSection = () => {
 
         {/* Column 2 */}
         <div className="flex-1 relative overflow-hidden">
-          <div className="animate-slide-up-slow" style={{animationDuration: '35s', animationDelay: '-10s'}}>
+          <div className="animate-slide-up-slow" style={{animationDuration: '100s', animationDelay: '-30s'}}>
             <div className="flex flex-col">
               {portfolioImages.slice(3).concat(portfolioImages.slice(0, 3)).concat(portfolioImages.slice(3)).concat(portfolioImages.slice(0, 3)).map((image, index) => (
                 <div key={`col2-${index}`} className="h-[60vh] mb-4">
@@ -71,7 +71,7 @@ const HeroSection = () => {
 
         {/* Column 3 */}
         <div className="flex-1 relative overflow-hidden">
-          <div className="animate-slide-up-slow" style={{animationDuration: '45s', animationDelay: '-20s'}}>
+          <div className="animate-slide-up-slow" style={{animationDuration: '140s', animationDelay: '-60s'}}>
             <div className="flex flex-col">
               {portfolioImages.slice(6).concat(portfolioImages.slice(0, 6)).concat(portfolioImages.slice(6)).concat(portfolioImages.slice(0, 6)).map((image, index) => (
                 <div key={`col3-${index}`} className="h-[80vh] mb-4">
@@ -97,9 +97,9 @@ const HeroSection = () => {
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="text-center animate-fade-in">
           <img 
-            src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
+            src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
             alt="J Logo" 
-            className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 mx-auto filter drop-shadow-2xl opacity-95 hover:opacity-100 transition-opacity duration-500"
+            className="mx-auto filter drop-shadow-2xl opacity-95 hover:opacity-100 transition-opacity duration-500"
           />
         </div>
       </div>
