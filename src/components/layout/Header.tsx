@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Facebook, Instagram, Youtube } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,9 +36,21 @@ const Header = () => {
     }`}>
       <div className="max-w-8xl mx-auto px-8 md:px-16">
         <div className="flex justify-between items-center">
-          {/* Logo - Only show on non-homepage */}
+          {/* Mobile menu button - Left side */}
+          <button
+            className="md:hidden z-50"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="w-7 h-7 text-white" />
+            ) : (
+              <Menu className="w-7 h-7 text-white" />
+            )}
+          </button>
+
+          {/* Logo - Only show on non-homepage and desktop */}
           {location.pathname !== '/' && (
-            <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300">
+            <Link to="/" className="hidden md:flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300">
               <img 
                 src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
                 alt="J Logo" 
@@ -62,17 +74,23 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden z-50"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="w-7 h-7 text-white" />
-            ) : (
-              <Menu className="w-7 h-7 text-white" />
-            )}
-          </button>
+          {/* Mobile Social Media Icons - Right side */}
+          <div className="md:hidden flex space-x-4">
+            <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <Youtube className="w-5 h-5" />
+            </a>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
