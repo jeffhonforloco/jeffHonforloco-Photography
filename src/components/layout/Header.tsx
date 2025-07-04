@@ -97,7 +97,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <div className={`md:hidden absolute top-0 left-0 w-full h-screen bg-black/98 backdrop-blur-md transform transition-all duration-500 ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}>
           <div className="flex flex-col justify-center items-center h-full space-y-8">
             {navigation.map((item, index) => (
