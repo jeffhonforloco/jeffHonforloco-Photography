@@ -36,18 +36,6 @@ const Header = () => {
     }`}>
       <div className="max-w-8xl mx-auto px-8 md:px-16">
         <div className="flex justify-between items-center">
-          {/* Mobile menu button - Left side */}
-          <button
-            className="md:hidden z-50"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="w-7 h-7 text-white" />
-            ) : (
-              <Menu className="w-7 h-7 text-white" />
-            )}
-          </button>
-
           {/* Logo - Only show on non-homepage and desktop */}
           {location.pathname !== '/' && (
             <Link to="/" className="hidden md:flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300">
@@ -74,8 +62,8 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Mobile Social Media Icons - Right side */}
-          <div className="md:hidden flex space-x-4">
+          {/* Mobile Right Side - Social Media Icons and Menu */}
+          <div className="md:hidden flex items-center space-x-4">
             <a href="#" className="text-white/70 hover:text-white transition-colors">
               <Facebook className="w-5 h-5" />
             </a>
@@ -90,6 +78,17 @@ const Header = () => {
             <a href="#" className="text-white/70 hover:text-white transition-colors">
               <Youtube className="w-5 h-5" />
             </a>
+            {/* Mobile menu button */}
+            <button
+              className="z-50 ml-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="w-7 h-7 text-white" />
+              ) : (
+                <Menu className="w-7 h-7 text-white" />
+              )}
+            </button>
           </div>
         </div>
 
