@@ -35,7 +35,7 @@ const Header = () => {
       isScrolled ? 'bg-black/95 backdrop-blur-md py-4' : 'bg-transparent py-6'
     }`}>
       <div className="max-w-8xl mx-auto px-8 md:px-16">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-start">
           {/* Logo - Only show on non-homepage and desktop */}
           {location.pathname !== '/' && (
             <Link to="/" className="hidden md:flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300">
@@ -62,31 +62,31 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Mobile Right Side - Social Media Icons then Menu */}
-          <div className="md:hidden flex items-center space-x-4">
+          {/* Mobile Right Side - Social Media Icons then Menu - Positioned at top */}
+          <div className="md:hidden flex items-center space-x-3 mt-2">
             <a href="#" className="text-white/70 hover:text-white transition-colors">
-              <Facebook className="w-5 h-5" />
+              <Facebook className="w-4 h-4" />
             </a>
             <a href="#" className="text-white/70 hover:text-white transition-colors">
-              <Instagram className="w-5 h-5" />
+              <Instagram className="w-4 h-4" />
             </a>
             <a href="#" className="text-white/70 hover:text-white transition-colors">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
             </a>
             <a href="#" className="text-white/70 hover:text-white transition-colors">
-              <Youtube className="w-5 h-5" />
+              <Youtube className="w-4 h-4" />
             </a>
             {/* Mobile menu button */}
             <button
-              className="z-50 ml-2"
+              className="z-50 ml-3"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className="w-7 h-7 text-white" />
+                <X className="w-6 h-6 text-white" />
               ) : (
-                <Menu className="w-7 h-7 text-white" />
+                <Menu className="w-6 h-6 text-white" />
               )}
             </button>
           </div>
