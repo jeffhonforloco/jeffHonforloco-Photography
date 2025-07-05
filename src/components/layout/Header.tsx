@@ -36,34 +36,8 @@ const Header = () => {
     }`}>
       <div className="max-w-8xl mx-auto px-8 md:px-16">
         <div className="flex justify-between items-start">
-          {/* Mobile Left Side - Social Media Icons then Menu - Positioned at top */}
-          <div className="md:hidden flex items-center space-x-3 mt-2">
-            <a href="#" className="text-white/70 hover:text-white transition-colors">
-              <Facebook className="w-4 h-4" />
-            </a>
-            <a href="#" className="text-white/70 hover:text-white transition-colors">
-              <Instagram className="w-4 h-4" />
-            </a>
-            <a href="#" className="text-white/70 hover:text-white transition-colors">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <a href="#" className="text-white/70 hover:text-white transition-colors">
-              <Youtube className="w-4 h-4" />
-            </a>
-            {/* Mobile menu button */}
-            <button
-              className="z-50 ml-3"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6 text-white" />
-              ) : (
-                <Menu className="w-6 h-6 text-white" />
-              )}
-            </button>
-          </div>
+          {/* Empty div for spacing on mobile */}
+          <div className="md:hidden"></div>
 
           {/* Logo - Only show on non-homepage and desktop */}
           {location.pathname !== '/' && (
@@ -91,13 +65,39 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Empty div for spacing on mobile */}
-          <div className="md:hidden"></div>
+          {/* Mobile Right Side - Social Media Icons then Menu */}
+          <div className="md:hidden flex items-center space-x-3 mt-2">
+            <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <Youtube className="w-4 h-4" />
+            </a>
+            {/* Mobile menu button */}
+            <button
+              className="z-50 ml-3"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6 text-white" />
+              ) : (
+                <Menu className="w-6 h-6 text-white" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden absolute top-0 left-0 w-full h-screen bg-black/98 backdrop-blur-md transform transition-all duration-500 ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        <div className={`md:hidden absolute top-0 right-0 w-full h-screen bg-black/98 backdrop-blur-md transform transition-all duration-500 ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
           <div className="flex flex-col justify-center items-center h-full space-y-8">
             {navigation.map((item, index) => (
