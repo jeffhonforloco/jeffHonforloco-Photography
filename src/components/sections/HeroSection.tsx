@@ -20,15 +20,15 @@ const HeroSection = () => {
         <div className="md:hidden grid grid-cols-2 gap-1 h-full">
           {/* Column 1 - Mobile */}
           <div className="flex flex-col gap-1">
-            <div className="relative group overflow-hidden rounded-lg h-[35vh]">
+            <div className="relative group overflow-hidden h-[35vh]">
               <img src={portfolioImages[0]} alt="Portfolio 1" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-lg h-[25vh]">
+            <div className="relative group overflow-hidden h-[25vh]">
               <img src={portfolioImages[1]} alt="Portfolio 2" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-lg h-[30vh]">
+            <div className="relative group overflow-hidden h-[30vh]">
               <img src={portfolioImages[2]} alt="Portfolio 3" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
@@ -36,15 +36,15 @@ const HeroSection = () => {
           
           {/* Column 2 - Mobile */}
           <div className="flex flex-col gap-1">
-            <div className="relative group overflow-hidden rounded-lg h-[30vh]">
+            <div className="relative group overflow-hidden h-[30vh]">
               <img src={portfolioImages[3]} alt="Portfolio 4" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-lg h-[40vh]">
+            <div className="relative group overflow-hidden h-[40vh]">
               <img src={portfolioImages[4]} alt="Portfolio 5" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-lg h-[20vh]">
+            <div className="relative group overflow-hidden h-[20vh]">
               <img src={portfolioImages[5]} alt="Portfolio 6" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
@@ -55,15 +55,15 @@ const HeroSection = () => {
         <div className="hidden md:grid grid-cols-3 gap-2 h-full">
           {/* Column 1 - Desktop */}
           <div className="flex flex-col gap-2">
-            <div className="relative group overflow-hidden rounded-xl h-[45vh]">
+            <div className="relative group overflow-hidden h-[45vh]">
               <img src={portfolioImages[0]} alt="Portfolio 1" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-xl h-[30vh]">
+            <div className="relative group overflow-hidden h-[30vh]">
               <img src={portfolioImages[1]} alt="Portfolio 2" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-xl h-[20vh]">
+            <div className="relative group overflow-hidden h-[20vh]">
               <img src={portfolioImages[2]} alt="Portfolio 3" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
@@ -71,11 +71,11 @@ const HeroSection = () => {
           
           {/* Column 2 - Desktop (with logo overlay area) */}
           <div className="flex flex-col gap-2">
-            <div className="relative group overflow-hidden rounded-xl h-[25vh]">
+            <div className="relative group overflow-hidden h-[25vh]">
               <img src={portfolioImages[3]} alt="Portfolio 4" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-xl h-[50vh]">
+            <div className="relative group overflow-hidden h-[50vh]">
               <img src={portfolioImages[4]} alt="Portfolio 5" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all duration-500"></div>
               {/* Logo overlay area */}
@@ -87,7 +87,7 @@ const HeroSection = () => {
                 />
               </div>
             </div>
-            <div className="relative group overflow-hidden rounded-xl h-[20vh]">
+            <div className="relative group overflow-hidden h-[20vh]">
               <img src={portfolioImages[5]} alt="Portfolio 6" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
@@ -95,15 +95,15 @@ const HeroSection = () => {
           
           {/* Column 3 - Desktop */}
           <div className="flex flex-col gap-2">
-            <div className="relative group overflow-hidden rounded-xl h-[35vh]">
+            <div className="relative group overflow-hidden h-[35vh]">
               <img src={portfolioImages[6]} alt="Portfolio 7" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-xl h-[40vh]">
+            <div className="relative group overflow-hidden h-[40vh]">
               <img src={portfolioImages[7]} alt="Portfolio 8" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
-            <div className="relative group overflow-hidden rounded-xl h-[20vh]">
+            <div className="relative group overflow-hidden h-[20vh]">
               <img src={portfolioImages[8]} alt="Portfolio 9" className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
             </div>
