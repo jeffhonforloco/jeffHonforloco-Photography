@@ -239,8 +239,13 @@
   animation: slideUp linear infinite;
 }
 
-.animate-slide-up-slow {
-  animation: slideUpSlow linear infinite;
+@keyframes slideUpMedium {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0%); opacity: 1; }
+}
+
+.animate-slide-up-medium {
+  animation: slideUpMedium 2.5s ease-out forwards;
 }
 
 /* Enhanced bright theme animations and styles */
