@@ -32,10 +32,7 @@ const Header = () => {
     { name: 'Fashion', href: '/portfolio/fashion' },
     { name: 'Editorial', href: '/portfolio/editorial' },
     { name: 'Glamour', href: '/portfolio/glamour' },
-    { name: 'Portrait', href: '/portfolio/portrait' },
-    { name: 'Creative', href: '/portfolio/creative' },
     { name: 'Lifestyle', href: '/portfolio/lifestyle' },
-    { name: 'Motion', href: '/portfolio/motion' },
   ];
 
   const isActive = (path: string) => {
