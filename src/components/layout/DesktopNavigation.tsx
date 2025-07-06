@@ -65,7 +65,7 @@ const DesktopNavigation = ({
         </Link>
       ))}
       
-      <div className="ml-4">
+      <div className="ml-2">
         <svg 
           className="w-5 h-5 text-white hover:opacity-80 transition-all duration-300 cursor-pointer" 
           onClick={onShareClick}
