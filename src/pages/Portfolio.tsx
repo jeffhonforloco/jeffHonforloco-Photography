@@ -34,16 +34,9 @@ const Portfolio = () => {
   return (
     <Layout>
       <div className="min-h-screen bg-black">
-        {/* Header Text */}
-        <div className="pt-32 pb-16 px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-light text-white mb-4 tracking-wide">
-            Portfolio
-          </h1>
-          <div className="w-16 h-px bg-photo-red mx-auto"></div>
-        </div>
 
         {/* Grid Layout */}
-        <div className="px-8 pb-20">
+        <div className="px-8 pt-32 pb-20">
           <div className="max-w-7xl mx-auto">
             {/* First Row - Beauty (large) + Fashion */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 h-[400px] md:h-[500px]">
