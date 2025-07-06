@@ -113,13 +113,6 @@ const HeroSection = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent rounded-full blur-2xl"></div>
             <div className="absolute -inset-4 bg-gradient-to-r from-photo-red/20 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-pulse-subtle"></div>
           </div>
-          
-          {/* Enhanced tagline for dark theme */}
-          <div className="mt-8 opacity-0 animate-fade-in" style={{ animationDelay: '1s', animationFillMode: 'forwards' }}>
-            <p className="text-white text-lg md:text-xl lg:text-2xl font-light tracking-wide max-w-2xl mx-auto leading-relaxed backdrop-blur-sm bg-black/30 rounded-2xl px-6 py-3 border border-white/20">
-              Capturing moments that shine with brilliance and beauty
-            </p>
-          </div>
         </div>
       </div>
 
