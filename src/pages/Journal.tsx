@@ -7,6 +7,7 @@ const Journal = () => {
   const [blogData, setBlogData] = useState<any>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     fetch('/data/blog-posts.json')
@@ -17,6 +18,31 @@ const Journal = () => {
       })
       .catch(error => console.error('Error loading blog data:', error));
   }, []);
+
+  // Auto-slide functionality
+  useEffect(() => {
+    if (!blogData) return;
+    
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % blogData.posts.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(timer);
+  }, [blogData]);
+
+  const nextSlide = () => {
+    if (!blogData) return;
+    setCurrentSlide((prev) => (prev + 1) % blogData.posts.length);
+  };
+
+  const prevSlide = () => {
+    if (!blogData) return;
+    setCurrentSlide((prev) => (prev - 1 + blogData.posts.length) % blogData.posts.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
 
   if (!blogData || !isLoaded) {
     return (
@@ -45,7 +71,7 @@ const Journal = () => {
             <div
               key={post.id}
               className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-                index === 0 ? 'opacity-100 z-20' : 'opacity-0 z-10'
+                index === currentSlide ? 'opacity-100 z-20' : 'opacity-0 z-10'
               }`}
             >
               {/* Background Image */}
@@ -128,21 +154,27 @@ const Journal = () => {
                 <button
                   key={index}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === 0 
+                    index === currentSlide 
                       ? 'bg-photo-red scale-125' 
                       : 'bg-white/30 hover:bg-white/50'
                   }`}
-                  onClick={() => {/* Handle slide change */}}
+                  onClick={() => goToSlide(index)}
                 />
               ))}
             </div>
           </div>
           
           {/* Navigation Arrows */}
-          <button className="absolute left-8 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110">
+          <button 
+            onClick={prevSlide}
+            className="absolute left-8 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+          >
             <ArrowRight className="w-5 h-5 rotate-180" />
           </button>
-          <button className="absolute right-8 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110">
+          <button 
+            onClick={nextSlide}
+            className="absolute right-8 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+          >
             <ArrowRight className="w-5 h-5" />
           </button>
         </div>
