@@ -37,44 +37,114 @@ const Journal = () => {
 
   return (
     <Layout>
-      {/* Hero Section with Animated Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/50 to-black">
-          <div className="absolute top-20 left-10 w-2 h-2 bg-photo-red rounded-full animate-pulse opacity-60"></div>
-          <div className="absolute top-40 right-20 w-1 h-1 bg-white rounded-full animate-pulse opacity-40 animation-delay-500"></div>
-          <div className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-photo-red/50 rounded-full animate-pulse opacity-30 animation-delay-1000"></div>
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white/30 rounded-full animate-pulse animation-delay-1500"></div>
-        </div>
-
-        <div className="relative z-10 text-center max-w-6xl mx-auto px-8 md:px-16 py-32">
-          <div className="animate-fade-in">
-            <h1 className="font-bold text-7xl md:text-8xl lg:text-9xl text-white mb-8 leading-[0.85] tracking-tight">
-              <span className="block">THE</span>
-              <span className="block text-photo-red">JOURNAL</span>
-            </h1>
-            
-            <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-12 animate-scale-in animation-delay-300"></div>
-            
-            <p className="text-gray-300 text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed font-light animate-fade-in animation-delay-500">
-              Where photography meets storytelling. Insights, techniques, and creative explorations 
-              from behind the lens of professional fashion and beauty photography.
-            </p>
-            
-            <div className="mt-16 animate-fade-in animation-delay-700">
-              <div className="inline-flex items-center text-photo-red font-medium tracking-wide uppercase text-sm">
-                <span>Scroll to explore</span>
-                <ArrowRight className="ml-2 w-4 h-4 animate-pulse" />
+      {/* Interactive Article Banner Slider */}
+      <section className="relative min-h-screen pt-20">
+        <div className="relative h-screen overflow-hidden">
+          {/* Article Slides */}
+          {blogData.posts.map((post: any, index: number) => (
+            <div
+              key={post.id}
+              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                index === 0 ? 'opacity-100 z-20' : 'opacity-0 z-10'
+              }`}
+            >
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+              </div>
+              
+              {/* Content Overlay */}
+              <div className="relative z-30 h-full flex items-center">
+                <div className="max-w-7xl mx-auto px-8 md:px-16 grid lg:grid-cols-2 gap-16 items-center">
+                  <div className="text-white animate-fade-in">
+                    {/* Category Badge */}
+                    <div className="inline-flex items-center px-4 py-2 bg-photo-red rounded-full mb-6">
+                      <Tag className="w-4 h-4 mr-2" />
+                      <span className="text-sm font-semibold uppercase tracking-wide">
+                        {post.category.split(' ').slice(0, 2).join(' ')}
+                      </span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight">
+                      {post.title}
+                    </h1>
+                    
+                    {/* Meta Info */}
+                    <div className="flex items-center gap-6 text-gray-300 mb-8">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>{post.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        <span>{post.readTime}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Excerpt */}
+                    <p className="text-xl text-gray-300 leading-relaxed mb-10 max-w-2xl">
+                      {post.excerpt}
+                    </p>
+                    
+                    {/* CTA Button */}
+                    <Link
+                      to={`/journal/${post.id}`}
+                      className="group inline-flex items-center px-8 py-4 bg-photo-red text-white font-semibold rounded-full hover:bg-photo-red-hover transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-photo-red/30"
+                    >
+                      <span>Read Full Article</span>
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                  </div>
+                  
+                  {/* Featured Image Preview */}
+                  <div className="hidden lg:block">
+                    <div className="relative">
+                      <div className="aspect-[4/5] bg-gradient-to-br from-photo-red/20 to-transparent p-1 rounded-2xl">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-full object-cover rounded-xl shadow-2xl"
+                        />
+                      </div>
+                      <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-photo-red/20 rounded-full blur-xl"></div>
+                      <div className="absolute -top-4 -left-4 w-16 h-16 border-2 border-photo-red/30 rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+          ))}
+          
+          {/* Navigation Dots */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40">
+            <div className="flex items-center gap-3">
+              {blogData.posts.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === 0 
+                      ? 'bg-photo-red scale-125' 
+                      : 'bg-white/30 hover:bg-white/50'
+                  }`}
+                  onClick={() => {/* Handle slide change */}}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
-          </div>
+          
+          {/* Navigation Arrows */}
+          <button className="absolute left-8 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110">
+            <ArrowRight className="w-5 h-5 rotate-180" />
+          </button>
+          <button className="absolute right-8 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110">
+            <ArrowRight className="w-5 h-5" />
+          </button>
         </div>
       </section>
 
