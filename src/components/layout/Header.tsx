@@ -78,7 +78,7 @@ const Header = () => {
           {/* Right side - Social Media Icons */}
           <div className="flex items-center">
             {/* Desktop Social Media Icons */}
-            <div className="hidden md:flex items-center space-x-6">
+            <div className="hidden md:flex items-center space-x-3">
               <a href="#" className="text-white/70 hover:text-white transition-colors duration-300">
                 <Facebook className="w-5 h-5" />
               </a>
@@ -96,7 +96,7 @@ const Header = () => {
             </div>
 
             {/* Mobile Right Side - Social Media Icons then Menu */}
-            <div className="md:hidden flex items-center space-x-3 mt-2">
+            <div className="md:hidden flex items-center space-x-2 mt-2">
               <a href="#" className="text-white/70 hover:text-white transition-colors">
                 <Facebook className="w-4 h-4" />
               </a>
