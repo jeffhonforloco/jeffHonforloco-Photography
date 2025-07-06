@@ -5,143 +5,159 @@ import Layout from '../components/Layout';
 const Portfolio = () => {
   const portfolioCategories = [
     {
-      title: 'Editorial Beauty',
-      subtitle: 'Sophisticated Editorial Work',
-      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      title: 'Beauty',
+      description: 'Elegant beauty photography showcasing natural and enhanced aesthetics with sophisticated lighting and composition',
+      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      href: '/portfolio/beauty',
+      count: '24 Images'
+    },
+    {
+      title: 'Fashion',
+      description: 'Contemporary fashion photography with bold styling, creative concepts, and innovative visual narratives',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      href: '/portfolio/fashion',
+      count: '31 Images'
+    },
+    {
+      title: 'Editorial',
+      description: 'Storytelling through sophisticated editorial and commercial work with artistic vision and technical excellence',
+      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       href: '/portfolio/editorial',
-      count: '18 Images',
-      size: 'large', // spans 2 columns on large screens
-      description: 'Storytelling through sophisticated editorial and commercial work'
+      count: '18 Images'
     },
     {
       title: 'Glamour',
-      subtitle: 'Dramatic & Elegant',
-      image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      description: 'Sophisticated glamour photography with dramatic lighting, elegant styling, and captivating visual appeal',
+      image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       href: '/portfolio/glamour',
-      count: '22 Images',
-      size: 'medium',
-      description: 'Sophisticated glamour photography with dramatic lighting'
-    },
-    {
-      title: 'Natural Beauty I',
-      subtitle: 'Authentic Moments',
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/beauty',
-      count: '24 Images',
-      size: 'medium',
-      description: 'Natural beauty showcasing authentic aesthetics'
-    },
-    {
-      title: 'Natural Beauty II',
-      subtitle: 'Refined Elegance',
-      image: 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/beauty',
-      count: '24 Images',
-      size: 'medium',
-      description: 'Enhanced natural beauty with sophisticated lighting'
-    },
-    {
-      title: 'Fashion I',
-      subtitle: 'Contemporary Style',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/fashion',
-      count: '31 Images',
-      size: 'large',
-      description: 'Bold fashion photography with creative concepts'
-    },
-    {
-      title: 'Fashion II',
-      subtitle: 'Editorial Fashion',
-      image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/fashion',
-      count: '31 Images',
-      size: 'medium',
-      description: 'Editorial fashion with innovative visual narratives'
-    },
-    {
-      title: 'Hair',
-      subtitle: 'Beauty & Texture',
-      image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/beauty',
-      count: '15 Images',
-      size: 'medium',
-      description: 'Specialized hair photography with artistic focus'
+      count: '22 Images'
     },
     {
       title: 'Lifestyle',
-      subtitle: 'Authentic Living',
-      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      description: 'Authentic lifestyle moments captured with artistic vision, showcasing real people in beautiful settings',
+      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       href: '/portfolio/lifestyle',
-      count: '27 Images',
-      size: 'large',
-      description: 'Authentic lifestyle moments with artistic vision'
+      count: '27 Images'
     }
   ];
 
   return (
     <Layout>
-      {/* Portfolio Grid */}
-      <section className="pt-24 pb-20">
-        <div className="max-w-8xl mx-auto px-4 md:px-8">
-          {/* Masonry Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {portfolioCategories.map((category, index) => (
-              <Link
-                key={`${category.title}-${index}`}
-                to={category.href}
-                className={`group relative overflow-hidden rounded-lg animate-fade-in hover:scale-[1.02] transition-all duration-500 ${
-                  category.size === 'large' 
-                    ? 'md:col-span-2 aspect-[16/10]' 
-                    : 'aspect-[4/5] md:aspect-square'
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img
-                    src={category.image}
-                    alt={category.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500"></div>
-                </div>
+      {/* Elegant Hero Section */}
+      <section className="pt-32 pb-16 bg-gradient-to-b from-black to-gray-900">
+        <div className="max-w-6xl mx-auto px-8 md:px-16 text-center">
+          <div className="animate-fade-in">
+            <h1 className="font-light text-5xl md:text-6xl lg:text-7xl text-white mb-8 tracking-wide leading-tight">
+              Portfolio
+            </h1>
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-12"></div>
+            <p className="text-gray-300 text-lg md:text-xl max-w-4xl mx-auto leading-relaxed font-light">
+              A curated collection of work spanning five distinct specializations, each representing 
+              a unique approach to visual storytelling and artistic expression.
+            </p>
+          </div>
+        </div>
+      </section>
 
-                {/* Content */}
-                <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-8">
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    {/* Category Title */}
-                    <h2 className="font-bold text-2xl md:text-3xl lg:text-4xl text-white mb-2 leading-tight tracking-tight">
-                      {category.title.toUpperCase()}
-                    </h2>
-                    
-                    {/* Subtitle - Hidden on mobile, visible on hover */}
-                    <p className="text-gray-300 text-sm md:text-base font-medium mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      {category.subtitle}
-                    </p>
-                    
-                    {/* Image Count */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-400 text-sm font-medium">
-                        {category.count}
-                      </span>
+      {/* Elegant Portfolio Grid */}
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-8 md:px-16">
+          <div className="space-y-32">
+            {portfolioCategories.map((category, index) => (
+              <div
+                key={category.title}
+                className={`grid lg:grid-cols-2 gap-16 lg:gap-24 items-center animate-fade-in ${
+                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
+                }`}
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                {/* Image Section */}
+                <div className={`relative group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                  <Link to={category.href} className="block">
+                    <div className="relative aspect-[4/5] overflow-hidden">
+                      <img
+                        src={category.image}
+                        alt={category.title}
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                      />
+                      {/* Elegant Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       
-                      {/* Arrow Icon - Appears on hover */}
-                      <div className="opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-500">
-                        <div className="w-8 h-8 bg-photo-red rounded-full flex items-center justify-center">
-                          <ArrowRight className="w-4 h-4 text-white" />
+                      {/* Hover Content */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div className="text-center text-white">
+                          <div className="w-16 h-16 bg-photo-red/90 rounded-full flex items-center justify-center mx-auto mb-4 transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                            <ArrowRight className="w-6 h-6" />
+                          </div>
+                          <p className="text-sm font-medium uppercase tracking-wider">View Collection</p>
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Bottom Line Accent */}
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-photo-red to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
+                    
+                    {/* Elegant Border Accent */}
+                    <div className="absolute -bottom-2 -right-2 w-full h-full border border-photo-red/20 -z-10 group-hover:border-photo-red/40 transition-colors duration-500"></div>
+                  </Link>
                 </div>
-              </Link>
+
+                {/* Content Section */}
+                <div className={`space-y-8 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                  <div>
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-px bg-photo-red"></div>
+                      <span className="text-photo-red text-sm font-medium uppercase tracking-widest">
+                        0{index + 1}
+                      </span>
+                    </div>
+                    
+                    <h2 className="font-light text-4xl md:text-5xl lg:text-6xl text-white mb-6 tracking-wide">
+                      {category.title}
+                    </h2>
+                    
+                    <div className="w-16 h-px bg-gray-600 mb-8"></div>
+                    
+                    <p className="text-gray-300 text-lg leading-relaxed font-light mb-8 max-w-lg">
+                      {category.description}
+                    </p>
+                    
+                    <div className="flex items-center justify-between max-w-lg">
+                      <span className="text-gray-500 text-sm font-medium uppercase tracking-wide">
+                        {category.count}
+                      </span>
+                      
+                      <Link
+                        to={category.href}
+                        className="group inline-flex items-center text-white hover:text-photo-red transition-colors duration-300"
+                      >
+                        <span className="text-sm font-medium uppercase tracking-wide mr-3">
+                          Explore Collection
+                        </span>
+                        <div className="w-8 h-8 border border-current rounded-full flex items-center justify-center group-hover:bg-photo-red group-hover:border-photo-red transition-all duration-300">
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Elegant Closing Section */}
+      <section className="py-32 bg-gradient-to-t from-gray-900 to-black">
+        <div className="max-w-4xl mx-auto px-8 md:px-16 text-center">
+          <div className="animate-fade-in">
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-12"></div>
+            <p className="text-gray-400 text-lg font-light leading-relaxed italic max-w-2xl mx-auto">
+              "Each photograph is a moment frozen in time, a story waiting to be told, 
+              and a memory crafted to last forever."
+            </p>
+            <div className="mt-8">
+              <span className="text-gray-500 text-sm font-medium uppercase tracking-widest">
+                — Jeff Honforloco
+              </span>
+            </div>
           </div>
         </div>
       </section>
