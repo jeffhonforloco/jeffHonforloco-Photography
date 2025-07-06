@@ -28,11 +28,11 @@ const MobileNavigation = ({ isMenuOpen, setIsMenuOpen, onShareClick }: MobileNav
   return (
     <>
       {/* Mobile Header Icons and Menu Button */}
-      <div className="md:hidden flex items-center space-x-2 mt-2">
+      <div className="md:hidden flex items-center space-x-3">
         <SocialMediaIcons variant="mobile" />
         {/* Mobile menu button */}
         <button
-          className="z-50 ml-3"
+          className="z-50 flex items-center justify-center"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (

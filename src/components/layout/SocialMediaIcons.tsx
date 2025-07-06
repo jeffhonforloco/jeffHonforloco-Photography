@@ -33,7 +33,7 @@ const SocialMediaIcons = ({ variant }: SocialMediaIconsProps) => {
 
   if (variant === 'mobile') {
     return (
-      <div className="md:hidden flex items-center space-x-2 mt-2">
+      <div className="md:hidden flex items-center space-x-2">
         {socialLinks.map(({ Icon, href }, index) => (
           <a key={index} href={href} className="text-white/70 hover:text-white transition-all duration-300 hover:scale-125 transform">
             <Icon className="w-6 h-6" />
