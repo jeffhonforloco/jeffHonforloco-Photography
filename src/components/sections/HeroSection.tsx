@@ -21,8 +21,8 @@ const HeroSection = () => {
           {/* Column 1 - Mobile */}
           <div className="flex flex-col gap-1 animate-slide-up-continuous">
             {portfolioImages.concat(portfolioImages).map((image, index) => (
-              <div key={`mobile-col1-${index}`} className="relative group overflow-hidden h-[35vh] flex-shrink-0">
-                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div key={`mobile-col1-${index}`} className="relative group overflow-hidden flex-shrink-0">
+                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
               </div>
             ))}
@@ -31,8 +31,8 @@ const HeroSection = () => {
           {/* Column 2 - Mobile */}
           <div className="flex flex-col gap-1 animate-slide-up-continuous" style={{ animationDelay: '-15s' }}>
             {portfolioImages.slice(3).concat(portfolioImages.slice(0, 3)).concat(portfolioImages.slice(3)).concat(portfolioImages.slice(0, 3)).map((image, index) => (
-              <div key={`mobile-col2-${index}`} className="relative group overflow-hidden h-[35vh] flex-shrink-0">
-                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div key={`mobile-col2-${index}`} className="relative group overflow-hidden flex-shrink-0">
+                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
               </div>
             ))}
@@ -44,8 +44,8 @@ const HeroSection = () => {
           {/* Column 1 - Desktop */}
           <div className="flex flex-col gap-2 animate-slide-up-continuous">
             {portfolioImages.concat(portfolioImages).map((image, index) => (
-              <div key={`desktop-col1-${index}`} className="relative group overflow-hidden h-[40vh] flex-shrink-0">
-                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div key={`desktop-col1-${index}`} className="relative group overflow-hidden flex-shrink-0">
+                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
               </div>
             ))}
@@ -54,8 +54,8 @@ const HeroSection = () => {
           {/* Column 2 - Desktop */}
           <div className="flex flex-col gap-2 animate-slide-up-continuous" style={{ animationDelay: '-20s' }}>
             {portfolioImages.slice(3).concat(portfolioImages.slice(0, 3)).concat(portfolioImages.slice(3)).concat(portfolioImages.slice(0, 3)).map((image, index) => (
-              <div key={`desktop-col2-${index}`} className="relative group overflow-hidden h-[40vh] flex-shrink-0">
-                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div key={`desktop-col2-${index}`} className="relative group overflow-hidden flex-shrink-0">
+                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all duration-500"></div>
               </div>
             ))}
@@ -64,8 +64,8 @@ const HeroSection = () => {
           {/* Column 3 - Desktop */}
           <div className="flex flex-col gap-2 animate-slide-up-continuous" style={{ animationDelay: '-10s' }}>
             {portfolioImages.slice(6).concat(portfolioImages.slice(0, 6)).concat(portfolioImages.slice(6)).concat(portfolioImages.slice(0, 6)).map((image, index) => (
-              <div key={`desktop-col3-${index}`} className="relative group overflow-hidden h-[40vh] flex-shrink-0">
-                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div key={`desktop-col3-${index}`} className="relative group overflow-hidden flex-shrink-0">
+                <img src={image} alt={`Portfolio ${index + 1}`} className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
               </div>
             ))}
