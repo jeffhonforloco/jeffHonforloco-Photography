@@ -245,7 +245,7 @@
 }
 
 .animate-slide-up-continuous {
-  animation: slideUpContinuous 30s linear infinite;
+  animation: slideUpContinuous 60s linear infinite;
 }
 
 /* Enhanced bright theme animations and styles */
