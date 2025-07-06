@@ -45,7 +45,7 @@ const Header = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       isScrolled ? 'bg-black/95 backdrop-blur-md py-4' : 'bg-transparent py-6'
     }`}>
-      <div className="max-w-8xl mx-auto pl-8 md:pl-16 pr-4 md:pr-8">
+      <div className="max-w-8xl mx-auto pl-8 md:pl-16 pr-2 md:pr-4">
         <div className="flex justify-between items-start">
           {/* Left side - Logo or empty space */}
           <div className="flex items-center">
@@ -55,7 +55,7 @@ const Header = () => {
                 <img 
                   src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
                   alt="J Logo" 
-                  className="w-40 h-40 md:w-48 md:h-48"
+                  className="w-64 h-64 md:w-80 md:h-80"
                 />
               </Link>
             )}
