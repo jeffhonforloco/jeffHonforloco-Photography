@@ -28,6 +28,11 @@ const Portfolio = () => {
       title: 'Lifestyle',
       image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       href: '/portfolio/lifestyle'
+    },
+    {
+      title: 'Motion',
+      image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      href: '/portfolio/motion'
     }
   ];
 
@@ -78,7 +83,7 @@ const Portfolio = () => {
             </div>
 
             {/* Second Row - Editorial + Glamour + Lifestyle */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[300px] md:h-[400px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[300px] md:h-[400px] mb-4">
               {/* Editorial */}
               <Link 
                 to={portfolioCategories[2].href}
@@ -129,6 +134,26 @@ const Portfolio = () => {
                 <div className="absolute bottom-8 left-8">
                   <h2 className="text-2xl md:text-3xl font-light text-white tracking-wide">
                     {portfolioCategories[4].title}
+                  </h2>
+                </div>
+              </Link>
+            </div>
+
+            {/* Third Row - Motion (Full Width) */}
+            <div className="h-[250px] md:h-[300px]">
+              <Link 
+                to={portfolioCategories[5].href}
+                className="block relative group overflow-hidden bg-gray-900 h-full"
+              >
+                <img
+                  src={portfolioCategories[5].image}
+                  alt={portfolioCategories[5].title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
+                <div className="absolute bottom-8 left-8">
+                  <h2 className="text-3xl md:text-4xl font-light text-white tracking-wide">
+                    {portfolioCategories[5].title}
                   </h2>
                 </div>
               </Link>

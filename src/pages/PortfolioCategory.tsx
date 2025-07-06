@@ -1,5 +1,6 @@
 
 import { useParams } from 'react-router-dom';
+import { Play } from 'lucide-react';
 import Layout from '../components/Layout';
 import ImageGallery from '../components/ImageGallery';
 
@@ -61,6 +62,45 @@ const PortfolioCategory = () => {
         alt: 'Fashion Portrait 4',
         caption: 'Avant-garde fashion concept'
       }
+    ],
+    motion: [
+      {
+        src: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        alt: 'Beauty Motion Film',
+        caption: 'Cinematic beauty in motion',
+        isVideo: true,
+        featured: true
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'Fashion Film',
+        caption: 'Dynamic fashion cinematography',
+        isVideo: true
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'Editorial Motion',
+        caption: 'Storytelling through motion',
+        isVideo: true
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'Glamour Film',
+        caption: 'Elegant motion portraits',
+        isVideo: true
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1574391884720-bbc0b76bffdc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'Lifestyle Motion',
+        caption: 'Authentic moments in motion',
+        isVideo: true
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        alt: 'Commercial Film',
+        caption: 'Professional motion content',
+        isVideo: true
+      }
     ]
   };
 
@@ -69,7 +109,8 @@ const PortfolioCategory = () => {
     fashion: 'Fashion',
     editorial: 'Editorial',
     glamour: 'Glamour',
-    lifestyle: 'Lifestyle'
+    lifestyle: 'Lifestyle',
+    motion: 'Motion'
   };
 
   const categoryDescriptions = {
@@ -77,13 +118,83 @@ const PortfolioCategory = () => {
     fashion: 'Contemporary fashion photography featuring bold styling, creative concepts, and innovative visual narratives.',
     editorial: 'Storytelling through sophisticated editorial and commercial work with artistic vision and technical excellence.',
     glamour: 'Sophisticated glamour photography with dramatic lighting, elegant styling, and captivating visual appeal.',
-    lifestyle: 'Authentic lifestyle moments captured with artistic vision, showcasing real people in beautiful settings.'
+    lifestyle: 'Authentic lifestyle moments captured with artistic vision, showcasing real people in beautiful settings.',
+    motion: 'Dynamic cinematography and motion content bringing stories to life through film and video production.'
   };
 
   const currentCategory = category || 'beauty';
   const images = portfolioImages[currentCategory as keyof typeof portfolioImages] || portfolioImages.beauty;
   const title = categoryTitles[currentCategory as keyof typeof categoryTitles] || 'Portfolio';
   const description = categoryDescriptions[currentCategory as keyof typeof categoryDescriptions] || '';
+
+  // Special layout for motion category
+  if (currentCategory === 'motion') {
+    const motionData = portfolioImages.motion as any[];
+    const featuredVideo = motionData.find(video => video.featured);
+    const otherVideos = motionData.filter(video => !video.featured);
+
+    return (
+      <Layout>
+        <div className="min-h-screen bg-black">
+          {/* Featured Video */}
+          <section className="pt-32 pb-8">
+            {featuredVideo && (
+              <div className="px-8">
+                <div className="max-w-7xl mx-auto">
+                  <div className="relative aspect-video overflow-hidden rounded-lg">
+                    <img
+                      src={featuredVideo.src}
+                      alt={featuredVideo.alt}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center group cursor-pointer hover:bg-black/20 transition-colors duration-500">
+                      <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                        <Play className="w-8 h-8 text-black ml-1" fill="currentColor" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </section>
+
+          {/* Motion Grid */}
+          <section className="pb-20">
+            <div className="px-8">
+              <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {otherVideos.map((video, index) => (
+                    <div key={index} className="relative aspect-video overflow-hidden rounded-lg group cursor-pointer">
+                      <img
+                        src={video.src}
+                        alt={video.alt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
+                      
+                      {/* Play Button */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                          <Play className="w-4 h-4 text-black ml-0.5" fill="currentColor" />
+                        </div>
+                      </div>
+
+                      {/* MORE Overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <div className="text-white">
+                          <h3 className="text-6xl font-bold opacity-80 tracking-wider">MORE</h3>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
