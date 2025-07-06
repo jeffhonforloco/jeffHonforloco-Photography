@@ -9,8 +9,8 @@ interface ShareModalProps {
 
 const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
   const { toast } = useToast();
-  const currentUrl = window.location.href;
-  const websiteTitle = "Lindsay Adler Beauty Photographer - New York";
+  const currentUrl = "https://jeffhonforlocophotos.com";
+  const websiteTitle = "Jeff Honforloco Photography | Portrait, Beauty & fashion Photographer";
 
   const copyToClipboard = async () => {
     try {
