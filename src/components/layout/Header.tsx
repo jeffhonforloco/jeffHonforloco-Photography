@@ -68,7 +68,8 @@ const Header = () => {
             <img 
               src="/lovable-uploads/099f5b67-8ba8-4e5f-94a3-d2f14679b248.png" 
               alt="Share" 
-              className="w-8 h-8 filter brightness-0 invert text-white opacity-100 hover:opacity-80 transition-all duration-300 cursor-pointer ml-12" 
+              className="w-8 h-8 filter brightness-0 invert opacity-100 hover:opacity-80 transition-all duration-300 cursor-pointer ml-12" 
+              style={{ backgroundColor: 'transparent' }}
             />
           </div>
 
@@ -144,7 +145,8 @@ const Header = () => {
             <img 
               src="/lovable-uploads/099f5b67-8ba8-4e5f-94a3-d2f14679b248.png" 
               alt="Share" 
-              className="w-8 h-8 filter brightness-0 invert text-white opacity-100 hover:opacity-80 transition-all duration-300 cursor-pointer mt-8" 
+              className="w-8 h-8 filter brightness-0 invert opacity-100 hover:opacity-80 transition-all duration-300 cursor-pointer mt-8" 
+              style={{ backgroundColor: 'transparent' }}
             />
             
             {/* Share Button */}
