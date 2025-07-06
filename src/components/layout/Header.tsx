@@ -82,13 +82,18 @@ const Header = () => {
               
               {/* Dropdown Menu */}
               {isPortfolioDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-black/95 backdrop-blur-md border border-white/10 rounded-lg shadow-xl z-50">
+                <div 
+                  className="absolute top-full left-0 mt-2 w-48 bg-black/95 backdrop-blur-md border border-white/10 rounded-lg shadow-xl z-[9999] max-h-64 overflow-y-auto"
+                  onMouseEnter={() => setIsPortfolioDropdownOpen(true)}
+                  onMouseLeave={() => setIsPortfolioDropdownOpen(false)}
+                >
                   <div className="py-2">
                     {portfolioCategories.map((category) => (
                       <Link
                         key={category.name}
                         to={category.href}
-                        className="block px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200 font-medium"
+                        className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200 font-medium"
+                        onClick={() => setIsPortfolioDropdownOpen(false)}
                       >
                         {category.name}
                       </Link>
