@@ -143,25 +143,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-
-            {/* Bottom Gallery Thumbnails */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-16">
-              <img
-                src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Portfolio Sample 1"
-                className="w-full aspect-square object-cover"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Portfolio Sample 2"
-                className="w-full aspect-square object-cover"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Portfolio Sample 3"
-                className="w-full aspect-square object-cover md:block hidden"
-              />
-            </div>
           </div>
         </div>
       </div>
