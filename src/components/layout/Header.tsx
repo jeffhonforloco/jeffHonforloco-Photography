@@ -36,7 +36,21 @@ const Header = () => {
     }`}>
       <div className="max-w-8xl mx-auto px-8 md:px-16">
         <div className="flex justify-between items-start">
-          {/* Desktop Social Media Icons - Left Side */}
+          {/* Empty div for spacing on mobile */}
+          <div className="md:hidden"></div>
+
+          {/* Logo - Only show on non-homepage and desktop */}
+          {location.pathname !== '/' && (
+            <Link to="/" className="hidden md:flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300">
+              <img 
+                src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
+                alt="J Logo" 
+                className="w-8 h-8 md:w-10 md:h-10"
+              />
+            </Link>
+          )}
+
+          {/* Desktop Social Media Icons - Right Side */}
           <div className="hidden md:flex items-center space-x-6">
             <a href="#" className="text-white/70 hover:text-white transition-colors duration-300">
               <Facebook className="w-5 h-5" />
@@ -53,20 +67,6 @@ const Header = () => {
               <Youtube className="w-5 h-5" />
             </a>
           </div>
-
-          {/* Logo - Only show on non-homepage and desktop */}
-          {location.pathname !== '/' && (
-            <Link to="/" className="hidden md:flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300">
-              <img 
-                src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
-                alt="J Logo" 
-                className="w-8 h-8 md:w-10 md:h-10"
-              />
-            </Link>
-          )}
-
-          {/* Empty div for spacing on mobile */}
-          <div className="md:hidden"></div>
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex space-x-12 absolute left-1/2 transform -translate-x-1/2">

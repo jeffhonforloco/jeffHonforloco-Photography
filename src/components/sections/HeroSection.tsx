@@ -24,23 +24,24 @@ const HeroSection = () => {
   }, [portfolioImages.length]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black">
-      {/* Image Collage - 2 columns on mobile, 3 on desktop */}
-      <div className="absolute inset-0 flex gap-4 p-4">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black">
+      {/* Enhanced Image Collage - 2 columns on mobile, 3 on desktop */}
+      <div className="absolute inset-0 flex gap-6 p-6">
         {/* Column 1 */}
         <div className="flex-1 relative overflow-hidden">
           <div className="animate-slide-up-slow" style={{animationDuration: '180s'}}>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               {portfolioImages.concat(portfolioImages).map((image, index) => (
-                <div key={`col1-${index}`} className="h-[70vh]">
+                <div key={`col1-${index}`} className="h-[70vh] relative group">
                   <img
                     src={image}
                     alt={`Editorial ${index + 1}`}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-2xl shadow-2xl transition-all duration-700 group-hover:shadow-3xl brightness-105 contrast-110 saturate-110"
                     onError={(e) => {
                       e.currentTarget.style.backgroundColor = '#000';
                     }}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-2xl"></div>
                 </div>
               ))}
             </div>
@@ -50,17 +51,18 @@ const HeroSection = () => {
         {/* Column 2 */}
         <div className="flex-1 relative overflow-hidden">
           <div className="animate-slide-up-slow" style={{animationDuration: '180s', animationDelay: '-60s'}}>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               {portfolioImages.slice(3).concat(portfolioImages.slice(0, 3)).concat(portfolioImages.slice(3)).concat(portfolioImages.slice(0, 3)).map((image, index) => (
-                <div key={`col2-${index}`} className="h-[70vh]">
+                <div key={`col2-${index}`} className="h-[70vh] relative group">
                   <img
                     src={image}
                     alt={`Editorial ${index + 1}`}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-2xl shadow-2xl transition-all duration-700 group-hover:shadow-3xl brightness-105 contrast-110 saturate-110"
                     onError={(e) => {
                       e.currentTarget.style.backgroundColor = '#000';
                     }}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-2xl"></div>
                 </div>
               ))}
             </div>
@@ -70,17 +72,18 @@ const HeroSection = () => {
         {/* Column 3 - Hidden on mobile */}
         <div className="hidden md:flex flex-1 relative overflow-hidden">
           <div className="animate-slide-up-slow" style={{animationDuration: '180s', animationDelay: '-120s'}}>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               {portfolioImages.slice(6).concat(portfolioImages.slice(0, 6)).concat(portfolioImages.slice(6)).concat(portfolioImages.slice(0, 6)).map((image, index) => (
-                <div key={`col3-${index}`} className="h-[70vh]">
+                <div key={`col3-${index}`} className="h-[70vh] relative group">
                   <img
                     src={image}
                     alt={`Editorial ${index + 1}`}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-2xl shadow-2xl transition-all duration-700 group-hover:shadow-3xl brightness-105 contrast-110 saturate-110"
                     onError={(e) => {
                       e.currentTarget.style.backgroundColor = '#000';
                     }}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-2xl"></div>
                 </div>
               ))}
             </div>
@@ -88,17 +91,20 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/40 z-10"></div>
+      {/* Enhanced Dark Overlay with subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50 z-10"></div>
 
-      {/* Central Logo */}
+      {/* Central Logo with enhanced presentation */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="text-center animate-fade-in">
-          <img 
-            src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
-            alt="J Logo" 
-            className="w-80 md:w-96 lg:w-[30rem] xl:w-[36rem] mx-auto filter drop-shadow-2xl opacity-95 hover:opacity-100 transition-opacity duration-500"
-          />
+          <div className="relative">
+            <img 
+              src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
+              alt="J Logo" 
+              className="w-80 md:w-96 lg:w-[30rem] xl:w-[36rem] mx-auto filter drop-shadow-3xl opacity-95 hover:opacity-100 transition-all duration-700 hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent rounded-full blur-3xl"></div>
+          </div>
         </div>
       </div>
     </section>
