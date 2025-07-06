@@ -55,7 +55,7 @@ const Header = () => {
                 <img 
                   src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
                   alt="J Logo" 
-                  className="w-8 h-8 md:w-10 md:h-10"
+                  className="w-12 h-12 md:w-16 md:h-16"
                 />
               </Link>
             )}
@@ -130,36 +130,36 @@ const Header = () => {
             {/* Desktop Social Media Icons */}
             <div className="hidden md:flex items-center space-x-3">
               <a href="#" className="text-white/70 hover:text-white transition-colors duration-300">
-                <Facebook className="w-5 h-5" />
+                <Facebook className="w-7 h-7" />
               </a>
               <a href="#" className="text-white/70 hover:text-white transition-colors duration-300">
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-7 h-7" />
               </a>
               <a href="#" className="text-white/70 hover:text-white transition-colors duration-300">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
               <a href="#" className="text-white/70 hover:text-white transition-colors duration-300">
-                <Youtube className="w-5 h-5" />
+                <Youtube className="w-7 h-7" />
               </a>
             </div>
 
             {/* Mobile Right Side - Social Media Icons then Menu */}
             <div className="md:hidden flex items-center space-x-2 mt-2">
               <a href="#" className="text-white/70 hover:text-white transition-colors">
-                <Facebook className="w-4 h-4" />
+                <Facebook className="w-6 h-6" />
               </a>
               <a href="#" className="text-white/70 hover:text-white transition-colors">
-                <Instagram className="w-4 h-4" />
+                <Instagram className="w-6 h-6" />
               </a>
               <a href="#" className="text-white/70 hover:text-white transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
               <a href="#" className="text-white/70 hover:text-white transition-colors">
-                <Youtube className="w-4 h-4" />
+                <Youtube className="w-6 h-6" />
               </a>
               {/* Mobile menu button */}
               <button
