@@ -161,8 +161,8 @@ const Portfolio = () => {
           </div>
 
           {/* Copyright Notice */}
-          <div className="text-center mt-16 pb-8">
-            <p className="text-gray-500 text-sm">
+          <div className="text-center mt-16 pb-8 px-8">
+            <p className="text-white/60 text-sm tracking-wide">
               © 2025 Jeff Honforloco Photography. All rights reserved.
             </p>
           </div>
