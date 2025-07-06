@@ -55,7 +55,7 @@ const Header = () => {
                 <img 
                   src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
                   alt="J Logo" 
-                  className="w-12 h-12 md:w-16 md:h-16"
+                  className="w-20 h-20 md:w-24 md:h-24"
                 />
               </Link>
             )}
