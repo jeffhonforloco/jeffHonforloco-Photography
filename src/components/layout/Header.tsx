@@ -6,7 +6,6 @@ import MobileNavigation from './MobileNavigation';
 import SocialMediaIcons from './SocialMediaIcons';
 
 const Header = () => {
-  console.log('Header component is rendering');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -39,7 +38,7 @@ const Header = () => {
                 <img 
                   src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
                   alt="J Logo" 
-                  className="w-64 h-64 md:w-80 md:h-80"
+                  className="w-16 h-16 md:w-20 md:h-20"
                 />
               </Link>
             )}
