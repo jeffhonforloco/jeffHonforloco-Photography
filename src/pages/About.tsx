@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 
@@ -24,93 +23,117 @@ const About = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="py-40 md:py-48 pt-32 max-w-8xl mx-auto px-8 md:px-16">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="animate-fade-in">
-            <h1 className="font-playfair text-6xl md:text-7xl lg:text-8xl font-extralight tracking-wide text-white mb-12 leading-[0.9]">
-              About Jeff
-            </h1>
-            <div className="w-32 h-px bg-gradient-to-r from-photo-red to-transparent mb-16"></div>
-            <div className="space-y-6 text-gray-300 text-xl leading-relaxed">
-              <p>{contentData.personal.bio}</p>
-              <p>
-                Based in {contentData.personal.location}, I specialize in {contentData.personal.specialization.toLowerCase()}.
-                Every photograph is an opportunity to tell a story, to freeze a moment in time 
-                that speaks to the viewer on an emotional level.
-              </p>
-              <p>
-                My approach to photography is collaborative and intuitive. I work closely with 
-                clients, models, and creative teams to ensure that every shoot produces authentic, 
-                striking imagery that serves its intended purpose while maintaining artistic integrity.
-              </p>
+      {/* Main Hero Section */}
+      <section className="min-h-screen bg-photo-black text-white pt-20 md:pt-24">
+        <div className="max-w-8xl mx-auto px-8 md:px-16 py-20 md:py-32">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center min-h-[70vh]">
+            {/* Left Column - Text Content */}
+            <div className="lg:pr-12">
+              <h1 className="font-bold text-5xl md:text-6xl lg:text-7xl leading-tight mb-8 tracking-tight">
+                PHOTOGRAPHER,<br />
+                CREATIVE,<br />
+                <span className="text-photo-red">AND ENTREPRENEUR</span>
+              </h1>
+              
+              <div className="space-y-6 text-gray-300 text-lg leading-relaxed max-w-2xl">
+                <p>
+                  Specializing in fashion and beauty photography, Jeff is a hyper-creative photographer 
+                  and astute businessman with over {contentData.experience.years} years of experience. 
+                  Based in {contentData.personal.location}, he has traveled extensively creating 
+                  compelling visual stories for brands and high-end editorial publications.
+                </p>
+                
+                <p>
+                  {contentData.personal.bio} Jeff is known for his signature bold, clean, and graphic style. 
+                  Driven by his passion to be a visual problem solver and his love for creative collaboration, 
+                  he utilizes his best-in-class crew and production resources to push boundaries and lift 
+                  his commissioned and personal work.
+                </p>
+                
+                <p>
+                  With {contentData.experience.publishedWorks} published works and {contentData.experience.happyClients} happy clients, 
+                  Jeff continues to create timeless imagery that captures the essence and beauty of his subjects 
+                  while maintaining artistic integrity and technical excellence.
+                </p>
+              </div>
+              
+              <div className="mt-12 pt-8 border-t border-gray-700">
+                <blockquote className="italic text-xl text-gray-400 font-light">
+                  "{contentData.personal.quote}"
+                </blockquote>
+                <cite className="block mt-4 text-sm text-gray-500 not-italic">
+                  — {contentData.personal.name}
+                </cite>
+              </div>
             </div>
-          </div>
-          <div className="animate-scale-in">
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Jeff Honforloco"
-                className="w-full aspect-[4/5] object-cover"
-              />
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 border border-photo-red/30"></div>
-              <div className="absolute -top-8 -left-8 w-24 h-24 border border-photo-red/50"></div>
+
+            {/* Right Column - Image */}
+            <div className="lg:pl-12">
+              <div className="relative">
+                {/* Main Image Container with Red Border */}
+                <div className="relative bg-gradient-to-br from-photo-red/20 to-photo-red/5 p-1 rounded-lg">
+                  <div className="bg-black rounded-lg overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                      alt={contentData.personal.name}
+                      className="w-full aspect-[4/5] object-cover rounded-lg"
+                    />
+                  </div>
+                </div>
+                
+                {/* Decorative Elements */}
+                <div className="absolute -top-4 -left-4 w-20 h-20 border-2 border-photo-red/30 rounded-full"></div>
+                <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-photo-red/20 rounded-lg rotate-45"></div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="py-40 md:py-48 bg-photo-gray-900">
-        <div className="max-w-6xl mx-auto px-8 md:px-16 text-center">
-          <h2 className="font-playfair text-5xl md:text-6xl font-extralight tracking-wide text-white mb-12 leading-[0.9]">
-            Artistic Philosophy
-          </h2>
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-16"></div>
-          <blockquote className="font-playfair text-2xl md:text-3xl text-gray-300 leading-relaxed italic mb-16 tracking-wide">
-            "{contentData.personal.philosophy}"
-          </blockquote>
-          
-          <div className="grid md:grid-cols-3 gap-12 mt-20">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-6 text-photo-red">Authenticity</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                Creating genuine connections and capturing real emotions that translate 
-                into powerful imagery.
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-6 text-photo-red">Innovation</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                Constantly exploring new techniques, styles, and creative approaches 
-                to visual storytelling.
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-6 text-photo-red">Excellence</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                Maintaining the highest standards in every aspect of the creative process, 
-                from concept to final delivery.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-40 md:py-48">
+      {/* Video Section */}
+      <section className="py-20 md:py-32 bg-photo-gray-900">
         <div className="max-w-6xl mx-auto px-8 md:px-16">
-          <h2 className="font-playfair text-5xl md:text-6xl font-extralight tracking-wide text-white mb-12 leading-[0.9] text-center">
-            Services
-          </h2>
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-20"></div>
+          <div className="text-center mb-16">
+            <h2 className="font-bold text-4xl md:text-5xl text-white mb-6">
+              Behind the Lens
+            </h2>
+            <p className="text-gray-400 text-xl max-w-3xl mx-auto">
+              Get to know Jeff's creative process and philosophy behind his award-winning photography work.
+            </p>
+          </div>
+          
+          {/* Video Placeholder */}
+          <div className="relative aspect-video bg-black rounded-lg overflow-hidden border border-photo-red/20">
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-photo-red/10 to-transparent">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-photo-red/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                  <svg className="w-8 h-8 text-photo-red" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+                <p className="text-gray-400">Featured Video Coming Soon</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-20 md:py-32 bg-photo-black">
+        <div className="max-w-6xl mx-auto px-8 md:px-16">
+          <div className="text-center mb-16">
+            <h2 className="font-bold text-4xl md:text-5xl text-white mb-6">
+              Services
+            </h2>
+            <div className="w-24 h-1 bg-photo-red mx-auto mb-8"></div>
+          </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {contentData.services.map((service: string, index: number) => (
-              <div key={index} className="bg-photo-gray-900 p-8 text-center hover:bg-photo-gray-800 transition-colors duration-300">
+              <div key={index} className="bg-photo-gray-900 p-8 rounded-lg hover:bg-photo-gray-800 transition-all duration-300 hover:transform hover:scale-105">
                 <h3 className="text-xl font-bold mb-4 text-photo-red capitalize">{service}</h3>
-                <p className="text-gray-400">
-                  Professional {service.toLowerCase()} with artistic vision and technical excellence.
+                <p className="text-gray-400 leading-relaxed">
+                  Professional {service.toLowerCase()} services with artistic vision and technical excellence that brings your creative vision to life.
                 </p>
               </div>
             ))}
@@ -119,21 +142,20 @@ const About = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-40 md:py-48 bg-photo-gray-900">
+      <section className="py-20 md:py-32 bg-photo-gray-900">
         <div className="text-center max-w-4xl mx-auto px-8 md:px-16">
-          <h2 className="font-playfair text-5xl md:text-6xl font-extralight tracking-wide text-white mb-12 leading-[0.9]">
-            Let's Create Something Amazing Together
+          <h2 className="font-bold text-4xl md:text-5xl text-white mb-8">
+            Let's Create Something <span className="text-photo-red">Amazing</span> Together
           </h2>
-          <p className="text-gray-400 text-xl mb-12 leading-relaxed tracking-wide">
-            Whether you're looking for professional portraits, fashion photography, 
-            or creative editorial work, I'm here to bring your vision to life with 
-            technical expertise and artistic passion.
+          <p className="text-gray-400 text-xl mb-12 leading-relaxed max-w-3xl mx-auto">
+            Ready to bring your creative vision to life? Whether you're looking for fashion photography, 
+            beauty shoots, or custom creative projects, let's collaborate to create something extraordinary.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a href="/contact" className="bg-photo-red hover:bg-photo-red-hover text-white px-16 py-6 font-medium tracking-[0.2em] uppercase text-sm transition-all duration-700 hover:scale-105">
-              Book a Session
+            <a href="/contact" className="bg-photo-red hover:bg-photo-red-hover text-white px-12 py-4 font-semibold tracking-wide uppercase text-sm transition-all duration-300 hover:scale-105 rounded-lg">
+              Start Your Project
             </a>
-            <a href="/portfolio" className="border-2 border-photo-red text-photo-red hover:bg-photo-red hover:text-white px-16 py-6 font-medium tracking-[0.2em] uppercase text-sm transition-all duration-700 hover:scale-105">
+            <a href="/portfolio" className="border-2 border-photo-red text-photo-red hover:bg-photo-red hover:text-white px-12 py-4 font-semibold tracking-wide uppercase text-sm transition-all duration-300 hover:scale-105 rounded-lg">
               View Portfolio
             </a>
           </div>
