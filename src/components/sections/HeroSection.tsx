@@ -52,7 +52,7 @@ const HeroSection = () => {
           <div className="animate-slide-up-slow" style={{animationDuration: '180s', animationDelay: '-60s'}}>
             <div className="flex flex-col gap-4">
               {portfolioImages.slice(3).concat(portfolioImages.slice(0, 3)).concat(portfolioImages.slice(3)).concat(portfolioImages.slice(0, 3)).map((image, index) => (
-                <div key={`col2-${index}`} className="h-[60vh]">
+                <div key={`col2-${index}`} className="h-[70vh]">
                   <img
                     src={image}
                     alt={`Editorial ${index + 1}`}
@@ -72,7 +72,7 @@ const HeroSection = () => {
           <div className="animate-slide-up-slow" style={{animationDuration: '180s', animationDelay: '-120s'}}>
             <div className="flex flex-col gap-4">
               {portfolioImages.slice(6).concat(portfolioImages.slice(0, 6)).concat(portfolioImages.slice(6)).concat(portfolioImages.slice(0, 6)).map((image, index) => (
-                <div key={`col3-${index}`} className="h-[80vh]">
+                <div key={`col3-${index}`} className="h-[70vh]">
                   <img
                     src={image}
                     alt={`Editorial ${index + 1}`}
@@ -99,21 +99,6 @@ const HeroSection = () => {
             alt="J Logo" 
             className="w-80 md:w-96 lg:w-[30rem] xl:w-[36rem] mx-auto filter drop-shadow-2xl opacity-95 hover:opacity-100 transition-opacity duration-500"
           />
-        </div>
-      </div>
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex space-x-3">
-          {portfolioImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-white w-8' : 'bg-white/40'
-              }`}
-            />
-          ))}
         </div>
       </div>
 
