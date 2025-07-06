@@ -161,26 +161,26 @@ const PortfolioCategory = () => {
           {/* Mobile Collage Layout */}
           <section className="md:hidden pt-20 pb-20">
             <div className="p-1">
-              {/* Mobile Collage Grid */}
-              <div className="grid grid-cols-2 gap-1 h-screen">
-                {/* Column 1 */}
-                <div className="flex flex-col gap-1">
-                  {/* Large video thumbnail */}
-                  <div className="relative h-[45vh] overflow-hidden group cursor-pointer">
-                    <img
-                      src={motionData[0]?.src}
-                      alt={motionData[0]?.alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                      <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                        <Play className="w-4 h-4 text-black ml-0.5" fill="currentColor" />
-                      </div>
+              {/* Mobile Collage Layout */}
+              <div className="flex flex-col gap-1 h-screen">
+                {/* Large Featured Video at Top */}
+                <div className="relative h-[50vh] overflow-hidden group cursor-pointer">
+                  <img
+                    src={motionData[0]?.src}
+                    alt={motionData[0]?.alt}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                      <Play className="w-6 h-6 text-black ml-1" fill="currentColor" />
                     </div>
                   </div>
-                  
-                  {/* Medium video thumbnail */}
-                  <div className="relative h-[25vh] overflow-hidden group cursor-pointer">
+                </div>
+                
+                {/* Bottom Grid of Smaller Videos */}
+                <div className="flex-1 grid grid-cols-2 gap-1">
+                  {/* Bottom Left */}
+                  <div className="relative overflow-hidden group cursor-pointer">
                     <img
                       src={motionData[1]?.src}
                       alt={motionData[1]?.alt}
@@ -193,66 +193,60 @@ const PortfolioCategory = () => {
                     </div>
                   </div>
                   
-                  {/* Small video thumbnail */}
-                  <div className="relative h-[20vh] overflow-hidden group cursor-pointer">
-                    <img
-                      src={motionData[2]?.src}
-                      alt={motionData[2]?.alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                      <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
-                        <Play className="w-3 h-3 text-black ml-0.5" fill="currentColor" />
+                  {/* Bottom Right - Grid of 4 smaller videos */}
+                  <div className="grid grid-cols-2 gap-1">
+                    {/* Top Left Small */}
+                    <div className="relative overflow-hidden group cursor-pointer">
+                      <img
+                        src={motionData[2]?.src}
+                        alt={motionData[2]?.alt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
+                        <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                          <Play className="w-2 h-2 text-black ml-0.5" fill="currentColor" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Column 2 */}
-                <div className="flex flex-col gap-1">
-                  {/* Medium video thumbnail */}
-                  <div className="relative h-[25vh] overflow-hidden group cursor-pointer">
-                    <img
-                      src={motionData[3]?.src}
-                      alt={motionData[3]?.alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                      <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
-                        <Play className="w-3 h-3 text-black ml-0.5" fill="currentColor" />
+                    
+                    {/* Top Right Small with MORE overlay */}
+                    <div className="relative overflow-hidden group cursor-pointer">
+                      <img
+                        src={motionData[3]?.src}
+                        alt={motionData[3]?.alt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-teal-500/80 group-hover:bg-teal-500/60 transition-colors duration-500"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h3 className="text-white text-2xl font-bold tracking-wider">MORE</h3>
                       </div>
                     </div>
-                  </div>
-                  
-                  {/* Large video thumbnail with MORE overlay */}
-                  <div className="relative h-[40vh] overflow-hidden group cursor-pointer">
-                    <img
-                      src={motionData[4]?.src}
-                      alt={motionData[4]?.alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                        <Play className="w-4 h-4 text-black ml-0.5" fill="currentColor" />
+                    
+                    {/* Bottom Left Small */}
+                    <div className="relative overflow-hidden group cursor-pointer">
+                      <img
+                        src={motionData[4]?.src}
+                        alt={motionData[4]?.alt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
+                        <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                          <Play className="w-2 h-2 text-black ml-0.5" fill="currentColor" />
+                        </div>
                       </div>
                     </div>
-                    {/* MORE Text Overlay */}
-                    <div className="absolute bottom-4 left-4">
-                      <h3 className="text-white text-4xl font-bold opacity-90 tracking-wider">MORE</h3>
-                    </div>
-                  </div>
-                  
-                  {/* Medium video thumbnail */}
-                  <div className="relative h-[25vh] overflow-hidden group cursor-pointer">
-                    <img
-                      src={motionData[5]?.src}
-                      alt={motionData[5]?.alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                      <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
-                        <Play className="w-3 h-3 text-black ml-0.5" fill="currentColor" />
+                    
+                    {/* Bottom Right Small */}
+                    <div className="relative overflow-hidden group cursor-pointer">
+                      <img
+                        src={motionData[5]?.src}
+                        alt={motionData[5]?.alt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
+                        <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                          <Play className="w-2 h-2 text-black ml-0.5" fill="currentColor" />
+                        </div>
                       </div>
                     </div>
                   </div>
