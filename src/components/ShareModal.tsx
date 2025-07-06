@@ -10,7 +10,7 @@ interface ShareModalProps {
 const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
   const { toast } = useToast();
   const currentUrl = "https://jeffhonforlocophotos.com";
-  const websiteTitle = "Jeff Honforloco Photography | Portrait, Beauty & fashion Photographer";
+  const websiteTitle = "Jeff Honforloco Photography | Portrait, Beauty & Fashion Photographer";
 
   const copyToClipboard = async () => {
     try {
