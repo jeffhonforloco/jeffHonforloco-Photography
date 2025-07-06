@@ -74,7 +74,7 @@ const About = () => {
                 <div className="relative bg-gradient-to-br from-photo-red/20 to-photo-red/5 p-1 rounded-lg">
                   <div className="bg-black rounded-lg overflow-hidden">
                     <img
-                      src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                      src="/lovable-uploads/be7f5d35-71c0-4752-8fbe-46cd1a9e1fdd.png"
                       alt={contentData.personal.name}
                       className="w-full aspect-[4/5] object-cover rounded-lg"
                     />
