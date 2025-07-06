@@ -45,24 +45,26 @@ const Contact = () => {
     <Layout>
       <div className="min-h-screen bg-black">
         {/* Header */}
-        <div className="pt-32 pb-12 text-center">
-          <h1 className="text-5xl md:text-6xl font-light text-white mb-2 tracking-wider">
-            CONTACT
-          </h1>
-          <h2 className="text-5xl md:text-6xl font-light text-white tracking-wider">
-            JEFF HONFORLOCO
-          </h2>
+        <div className="pt-32 pb-16">
+          <div className="max-w-7xl mx-auto px-8">
+            <h1 className="text-5xl md:text-6xl font-light text-white mb-2 tracking-wider">
+              CONTACT
+            </h1>
+            <h2 className="text-5xl md:text-6xl font-light text-white tracking-wider">
+              JEFF HONFORLOCO
+            </h2>
+          </div>
         </div>
 
         {/* Main Content */}
         <div className="px-8 pb-20">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <div className="grid lg:grid-cols-2 gap-20 items-start">
               {/* Contact Form */}
-              <div className="space-y-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="max-w-lg">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Name and Email Row */}
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <input
                       type="text"
                       name="name"
@@ -104,7 +106,7 @@ const Contact = () => {
                     name="message"
                     placeholder="Your message here"
                     required
-                    rows={8}
+                    rows={6}
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-white text-black placeholder-gray-500 border-0 focus:outline-none focus:ring-2 focus:ring-photo-red resize-none"
@@ -123,7 +125,7 @@ const Contact = () => {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 font-medium text-sm uppercase tracking-wider transition-colors duration-300"
+                    className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 font-medium text-sm uppercase tracking-wider transition-colors duration-300 w-full"
                   >
                     Send Message
                   </button>
@@ -131,8 +133,8 @@ const Contact = () => {
               </div>
 
               {/* Portrait Image */}
-              <div className="relative">
-                <div className="relative">
+              <div className="relative lg:ml-8">
+                <div className="relative max-w-md mx-auto lg:mx-0">
                   <img
                     src="/lovable-uploads/a1c7a9f7-09e2-44b4-9dbb-d807b674060c.png"
                     alt="Jeff Honforloco Portrait"
