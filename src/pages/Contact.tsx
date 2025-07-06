@@ -134,7 +134,7 @@ const Contact = () => {
               <div className="relative">
                 <div className="relative">
                   <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    src="/lovable-uploads/a1c7a9f7-09e2-44b4-9dbb-d807b674060c.png"
                     alt="Jeff Honforloco Portrait"
                     className="w-full aspect-[4/5] object-cover"
                   />
