@@ -14,29 +14,38 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-black">
-      {/* Responsive Image Grid */}
-      <div className="absolute inset-0 p-3 md:p-4 lg:p-6">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 h-full">
-          {portfolioImages.map((image, index) => (
-            <div 
-              key={index} 
-              className={`relative group overflow-hidden rounded-2xl lg:rounded-3xl ${
-                index % 7 === 0 || index % 7 === 3 ? 'row-span-2' : ''
-              } ${index % 11 === 0 ? 'col-span-2 md:col-span-1' : ''}`}
-            >
-              <img
-                src={image}
-                alt={`Portfolio ${index + 1}`}
-                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 brightness-90 group-hover:brightness-100"
-                loading="lazy"
-                onError={(e) => {
-                  e.currentTarget.style.backgroundColor = '#000';
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-all duration-700"></div>
-              <div className="absolute inset-0 ring-1 ring-white/5 rounded-2xl lg:rounded-3xl"></div>
-            </div>
-          ))}
+      {/* Responsive Image Grid - 2 cols mobile, 3 cols desktop */}
+      <div className="absolute inset-0 p-2 md:p-4 lg:p-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 lg:gap-4 h-full auto-rows-fr">
+          {portfolioImages.map((image, index) => {
+            // Create varied layouts for visual interest
+            const getGridClasses = (i) => {
+              if (i === 0) return 'row-span-2'; // First image spans 2 rows
+              if (i === 2) return 'row-span-2'; // Third image spans 2 rows  
+              if (i === 4) return 'row-span-2'; // Fifth image spans 2 rows
+              if (i === 6) return 'row-span-2'; // Seventh image spans 2 rows
+              return '';
+            };
+
+            return (
+              <div 
+                key={index} 
+                className={`relative group overflow-hidden rounded-xl md:rounded-2xl lg:rounded-3xl ${getGridClasses(index)}`}
+              >
+                <img
+                  src={image}
+                  alt={`Portfolio ${index + 1}`}
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-105"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.style.backgroundColor = '#000';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 opacity-70 group-hover:opacity-50 transition-all duration-700"></div>
+                <div className="absolute inset-0 ring-1 ring-white/10 rounded-xl md:rounded-2xl lg:rounded-3xl"></div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
