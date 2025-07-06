@@ -343,12 +343,10 @@ const Journal = () => {
       </section>
 
       {/* Copyright */}
-      <section className="py-8 bg-black border-t border-gray-900">
-        <div className="text-center">
-          <p className="text-gray-500 text-sm">
-            © 2025 Jeff Honforloco Photography. All rights reserved.
-          </p>
-        </div>
+      <section className="py-4 bg-black text-center">
+        <p className="text-gray-500 text-sm">
+          © 2025 Jeff Honforloco Photography. All rights reserved.
+        </p>
       </section>
     </Layout>
   );
