@@ -28,11 +28,6 @@ const Portfolio = () => {
       title: 'Lifestyle',
       image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       href: '/portfolio/lifestyle'
-    },
-    {
-      title: 'Motion',
-      image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/motion'
     }
   ];
 
@@ -139,32 +134,12 @@ const Portfolio = () => {
               </Link>
             </div>
 
-            {/* Third Row - Motion (Full Width) */}
-            <div className="h-[250px] md:h-[300px]">
-              <Link 
-                to={portfolioCategories[5].href}
-                className="block relative group overflow-hidden bg-gray-900 h-full"
-              >
-                <img
-                  src={portfolioCategories[5].image}
-                  alt={portfolioCategories[5].title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                <div className="absolute bottom-8 left-8">
-                  <h2 className="text-3xl md:text-4xl font-light text-white tracking-wide">
-                    {portfolioCategories[5].title}
-                  </h2>
-                </div>
-              </Link>
+            {/* Copyright Notice */}
+            <div className="text-center mt-16 pb-8 px-8">
+              <p className="text-white/60 text-sm tracking-wide">
+                © 2025 Jeff Honforloco Photography. All rights reserved.
+              </p>
             </div>
-          </div>
-
-          {/* Copyright Notice */}
-          <div className="text-center mt-16 pb-8 px-8">
-            <p className="text-white/60 text-sm tracking-wide">
-              © 2025 Jeff Honforloco Photography. All rights reserved.
-            </p>
           </div>
         </div>
       </div>
