@@ -6,6 +6,7 @@ import MobileNavigation from './MobileNavigation';
 import SocialMediaIcons from './SocialMediaIcons';
 
 const Header = () => {
+  console.log('Header component is rendering');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
