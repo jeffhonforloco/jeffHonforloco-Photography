@@ -78,7 +78,7 @@ const HeroSection = () => {
         <img 
           src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
           alt="J Logo" 
-          className="w-72 sm:w-80 filter drop-shadow-2xl"
+          className="w-72 sm:w-80 filter drop-shadow-2xl brightness-150 contrast-125"
         />
       </div>
 
@@ -87,7 +87,7 @@ const HeroSection = () => {
         <img 
           src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
           alt="J Logo" 
-          className="w-[30rem] lg:w-[36rem] xl:w-[42rem] 2xl:w-[48rem] filter drop-shadow-2xl"
+          className="w-[30rem] lg:w-[36rem] xl:w-[42rem] 2xl:w-[48rem] filter drop-shadow-2xl brightness-150 contrast-125"
         />
       </div>
 
