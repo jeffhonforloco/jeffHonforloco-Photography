@@ -52,17 +52,17 @@ const Header = () => {
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex space-x-12 absolute left-1/2 transform -translate-x-1/2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`luxury-nav-link-thin ${
-                  isActive(item.href) ? 'text-white' : 'text-white/70'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              to={item.href}
+              className={`luxury-nav-link-thin font-bold ${
+                isActive(item.href) ? 'text-white' : 'text-white'
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
           </div>
 
           {/* Mobile Right Side - Social Media Icons then Menu */}
@@ -104,8 +104,8 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-2xl md:text-3xl font-light tracking-wider transition-all duration-300 hover:text-white transform ${
-                  isActive(item.href) ? 'text-white' : 'text-white/70'
+                className={`text-2xl md:text-3xl font-bold tracking-wider transition-all duration-300 hover:text-white transform ${
+                  isActive(item.href) ? 'text-white' : 'text-white'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={() => setIsMenuOpen(false)}

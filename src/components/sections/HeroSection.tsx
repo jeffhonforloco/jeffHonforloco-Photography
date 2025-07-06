@@ -26,17 +26,17 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen overflow-hidden bg-black">
       {/* Image Collage - 2 columns on mobile, 3 on desktop */}
-      <div className="absolute inset-0 flex">
+      <div className="absolute inset-0 flex gap-4 p-4">
         {/* Column 1 */}
         <div className="flex-1 relative overflow-hidden">
           <div className="animate-slide-up-slow" style={{animationDuration: '180s'}}>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-4">
               {portfolioImages.concat(portfolioImages).map((image, index) => (
-                <div key={`col1-${index}`} className="h-[70vh] mb-4">
+                <div key={`col1-${index}`} className="h-[70vh]">
                   <img
                     src={image}
                     alt={`Editorial ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-lg"
                     onError={(e) => {
                       e.currentTarget.style.backgroundColor = '#000';
                     }}
@@ -50,13 +50,13 @@ const HeroSection = () => {
         {/* Column 2 */}
         <div className="flex-1 relative overflow-hidden">
           <div className="animate-slide-up-slow" style={{animationDuration: '160s', animationDelay: '-40s'}}>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-4">
               {portfolioImages.slice(3).concat(portfolioImages.slice(0, 3)).concat(portfolioImages.slice(3)).concat(portfolioImages.slice(0, 3)).map((image, index) => (
-                <div key={`col2-${index}`} className="h-[60vh] mb-4">
+                <div key={`col2-${index}`} className="h-[60vh]">
                   <img
                     src={image}
                     alt={`Editorial ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-lg"
                     onError={(e) => {
                       e.currentTarget.style.backgroundColor = '#000';
                     }}
@@ -70,13 +70,13 @@ const HeroSection = () => {
         {/* Column 3 - Hidden on mobile */}
         <div className="hidden md:flex flex-1 relative overflow-hidden">
           <div className="animate-slide-up-slow" style={{animationDuration: '200s', animationDelay: '-80s'}}>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-4">
               {portfolioImages.slice(6).concat(portfolioImages.slice(0, 6)).concat(portfolioImages.slice(6)).concat(portfolioImages.slice(0, 6)).map((image, index) => (
-                <div key={`col3-${index}`} className="h-[80vh] mb-4">
+                <div key={`col3-${index}`} className="h-[80vh]">
                   <img
                     src={image}
                     alt={`Editorial ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-lg"
                     onError={(e) => {
                       e.currentTarget.style.backgroundColor = '#000';
                     }}
@@ -97,7 +97,7 @@ const HeroSection = () => {
           <img 
             src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
             alt="J Logo" 
-            className="w-32 md:w-48 mx-auto filter drop-shadow-2xl opacity-95 hover:opacity-100 transition-opacity duration-500"
+            className="w-48 md:w-64 lg:w-80 mx-auto filter drop-shadow-2xl opacity-95 hover:opacity-100 transition-opacity duration-500"
           />
         </div>
       </div>
