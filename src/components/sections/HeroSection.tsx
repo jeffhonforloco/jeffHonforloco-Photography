@@ -1,113 +1,56 @@
 
-import { useState, useEffect } from 'react';
-
 const HeroSection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
   const portfolioImages = [
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95',
-    'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95',
-    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95',
-    'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95',
-    'https://images.unsplash.com/photo-1506629905963-b3b17f54e5b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95',
-    'https://images.unsplash.com/photo-1518577915332-c2a19f149a75?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95',
-    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95',
-    'https://images.unsplash.com/photo-1512646605205-78422b7c7896?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95',
-    'https://images.unsplash.com/photo-1539571696520-9f2891b92ac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2048&q=95'
+    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
+    'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
+    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
+    'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
+    'https://images.unsplash.com/photo-1506629905963-b3b17f54e5b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
+    'https://images.unsplash.com/photo-1518577915332-c2a19f149a75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
+    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
+    'https://images.unsplash.com/photo-1512646605205-78422b7c7896?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
+    'https://images.unsplash.com/photo-1539571696520-9f2891b92ac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95'
   ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % portfolioImages.length);
-    }, 8000);
-    return () => clearInterval(timer);
-  }, [portfolioImages.length]);
-
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black">
-      {/* Enhanced Image Collage - High Resolution with Black Background */}
-      <div className="absolute inset-0 flex gap-4 p-4 lg:gap-6 lg:p-6">
-        {/* Column 1 */}
-        <div className="flex-1 relative overflow-hidden">
-          <div className="animate-slide-up-slow" style={{animationDuration: '180s'}}>
-            <div className="flex flex-col gap-4 lg:gap-6">
-              {portfolioImages.concat(portfolioImages).map((image, index) => (
-                <div key={`col1-${index}`} className="h-[60vh] lg:h-[70vh] relative group">
-                  <img
-                    src={image}
-                    alt={`Portfolio ${index + 1}`}
-                    className="w-full h-full object-cover rounded-3xl shadow-2xl transition-all duration-700 group-hover:shadow-3xl brightness-110 contrast-115 saturate-125 hover:scale-[1.02]"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.style.backgroundColor = '#000';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 rounded-3xl"></div>
-                  <div className="absolute inset-0 ring-1 ring-white/10 rounded-3xl"></div>
-                </div>
-              ))}
+    <section className="relative min-h-screen overflow-hidden bg-black">
+      {/* Responsive Image Grid */}
+      <div className="absolute inset-0 p-3 md:p-4 lg:p-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 h-full">
+          {portfolioImages.map((image, index) => (
+            <div 
+              key={index} 
+              className={`relative group overflow-hidden rounded-2xl lg:rounded-3xl ${
+                index % 7 === 0 || index % 7 === 3 ? 'row-span-2' : ''
+              } ${index % 11 === 0 ? 'col-span-2 md:col-span-1' : ''}`}
+            >
+              <img
+                src={image}
+                alt={`Portfolio ${index + 1}`}
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 brightness-90 group-hover:brightness-100"
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.style.backgroundColor = '#000';
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-all duration-700"></div>
+              <div className="absolute inset-0 ring-1 ring-white/5 rounded-2xl lg:rounded-3xl"></div>
             </div>
-          </div>
-        </div>
-
-        {/* Column 2 */}
-        <div className="flex-1 relative overflow-hidden">
-          <div className="animate-slide-up-slow" style={{animationDuration: '180s', animationDelay: '-60s'}}>
-            <div className="flex flex-col gap-4 lg:gap-6">
-              {portfolioImages.slice(3).concat(portfolioImages.slice(0, 3)).concat(portfolioImages.slice(3)).concat(portfolioImages.slice(0, 3)).map((image, index) => (
-                <div key={`col2-${index}`} className="h-[60vh] lg:h-[70vh] relative group">
-                  <img
-                    src={image}
-                    alt={`Portfolio ${index + 1}`}
-                    className="w-full h-full object-cover rounded-3xl shadow-2xl transition-all duration-700 group-hover:shadow-3xl brightness-110 contrast-115 saturate-125 hover:scale-[1.02]"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.style.backgroundColor = '#000';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 rounded-3xl"></div>
-                  <div className="absolute inset-0 ring-1 ring-white/10 rounded-3xl"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Column 3 - Hidden on mobile */}
-        <div className="hidden md:flex flex-1 relative overflow-hidden">
-          <div className="animate-slide-up-slow" style={{animationDuration: '180s', animationDelay: '-120s'}}>
-            <div className="flex flex-col gap-4 lg:gap-6">
-              {portfolioImages.slice(6).concat(portfolioImages.slice(0, 6)).concat(portfolioImages.slice(6)).concat(portfolioImages.slice(0, 6)).map((image, index) => (
-                <div key={`col3-${index}`} className="h-[60vh] lg:h-[70vh] relative group">
-                  <img
-                    src={image}
-                    alt={`Portfolio ${index + 1}`}
-                    className="w-full h-full object-cover rounded-3xl shadow-2xl transition-all duration-700 group-hover:shadow-3xl brightness-110 contrast-115 saturate-125 hover:scale-[1.02]"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.style.backgroundColor = '#000';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 rounded-3xl"></div>
-                  <div className="absolute inset-0 ring-1 ring-white/10 rounded-3xl"></div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Dark Overlay with enhanced contrast */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 z-10"></div>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/50 z-10"></div>
 
-      {/* Central Logo with enhanced bright presentation on dark background */}
+      {/* Central Logo */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
-        <div className="text-center animate-fade-in">
+        <div className="text-center animate-fade-in px-4">
           <div className="relative">
             <img 
               src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
               alt="J Logo" 
-              className="w-72 md:w-80 lg:w-96 xl:w-[28rem] 2xl:w-[32rem] mx-auto filter drop-shadow-2xl brightness-105 hover:brightness-110 transition-all duration-700 hover:scale-105"
+              className="w-48 sm:w-60 md:w-80 lg:w-96 xl:w-[28rem] 2xl:w-[32rem] mx-auto filter drop-shadow-2xl brightness-105 hover:brightness-110 transition-all duration-700 hover:scale-105"
               style={{ imageRendering: 'crisp-edges' }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent rounded-full blur-2xl"></div>
@@ -116,10 +59,10 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Floating elements for depth on dark background */}
-      <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-photo-red/20 to-purple-400/20 rounded-full blur-xl animate-float"></div>
-      <div className="absolute bottom-32 right-32 w-24 h-24 bg-gradient-to-br from-pink-400/20 to-orange-400/20 rounded-full blur-xl animate-float" style={{ animationDelay: '-2s' }}></div>
-      <div className="absolute top-1/2 left-10 w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-red-400/20 rounded-full blur-xl animate-float" style={{ animationDelay: '-4s' }}></div>
+      {/* Floating elements */}
+      <div className="absolute top-20 left-4 md:left-20 w-16 md:w-32 h-16 md:h-32 bg-gradient-to-br from-photo-red/20 to-purple-400/20 rounded-full blur-xl animate-float"></div>
+      <div className="absolute bottom-32 right-4 md:right-32 w-12 md:w-24 h-12 md:h-24 bg-gradient-to-br from-pink-400/20 to-orange-400/20 rounded-full blur-xl animate-float" style={{ animationDelay: '-2s' }}></div>
+      <div className="absolute top-1/2 left-2 md:left-10 w-8 md:w-16 h-8 md:h-16 bg-gradient-to-br from-yellow-400/20 to-red-400/20 rounded-full blur-xl animate-float" style={{ animationDelay: '-4s' }}></div>
     </section>
   );
 };

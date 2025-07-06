@@ -28,22 +28,20 @@ const Header = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       isScrolled ? 'bg-black/95 backdrop-blur-md py-4' : 'bg-transparent py-6'
     }`}>
-      <div className="max-w-8xl mx-auto pl-8 md:pl-16 pr-2 md:pr-4">
-        <div className="flex justify-between items-start">
+      <div className="max-w-8xl mx-auto px-4 md:px-8 lg:px-16">
+        <div className="flex justify-between items-center">
           {/* Left side - Logo or empty space */}
-          <div className="flex items-center">
+          <div className="flex items-center min-w-0 flex-1 md:flex-initial">
             {/* Logo - Only show on non-homepage */}
             {location.pathname !== '/' && (
-              <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300">
+              <Link to="/" className="flex items-center hover:opacity-80 transition-opacity duration-300">
                 <img 
                   src="/lovable-uploads/f17266df-16a1-4edd-8581-23b10bdb2eda.png" 
                   alt="J Logo" 
-                  className="h-10 md:h-12 lg:h-14 w-auto object-contain"
+                  className="h-8 sm:h-10 md:h-12 lg:h-14 w-auto object-contain"
                 />
               </Link>
             )}
-            {/* Empty div for spacing on mobile */}
-            <div className="md:hidden"></div>
           </div>
 
           {/* Desktop Navigation - Centered */}
@@ -53,8 +51,8 @@ const Header = () => {
             onShareClick={handleShareClick}
           />
 
-          {/* Right side - Social Media Icons */}
-          <div className="flex items-center">
+          {/* Right side - Social Media Icons and Mobile Menu */}
+          <div className="flex items-center justify-end min-w-0 flex-1 md:flex-initial">
             {/* Desktop Social Media Icons */}
             <SocialMediaIcons variant="desktop" />
 
