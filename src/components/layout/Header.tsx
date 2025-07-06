@@ -74,7 +74,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`luxury-nav-link-thin font-bold ${
+                className={`luxury-nav-link-thin font-extrabold ${
                   isActive(item.href) ? 'text-white' : 'text-white'
                 }`}
               >

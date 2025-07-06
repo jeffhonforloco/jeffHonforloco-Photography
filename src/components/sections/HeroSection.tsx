@@ -101,11 +101,6 @@ const HeroSection = () => {
           />
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-        <div className="w-px h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
-      </div>
     </section>
   );
 };
