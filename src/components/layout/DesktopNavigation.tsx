@@ -34,10 +34,11 @@ const DesktopNavigation = ({
       <div className="relative group">
         <Link
           to="/portfolio"
-          className={`luxury-nav-link-thin font-black text-white brightness-150 hover:text-white ${
+          className={`luxury-nav-link-thin font-black text-white brightness-150 hover:text-white text-lg font-extrabold ${
             isActive('/portfolio') ? 'text-white' : 'text-white'
           }`}
           onMouseEnter={() => setIsPortfolioDropdownOpen(true)}
+          style={{ textShadow: '0 0 1px currentColor' }}
         >
           Portfolios
         </Link>
@@ -55,9 +56,10 @@ const DesktopNavigation = ({
         <Link
           key={item.name}
           to={item.href}
-          className={`luxury-nav-link-thin font-black text-white brightness-150 hover:text-white ${
+          className={`luxury-nav-link-thin font-black text-white brightness-150 hover:text-white text-lg font-extrabold ${
             isActive(item.href) ? 'text-white' : 'text-white'
           }`}
+          style={{ textShadow: '0 0 1px currentColor' }}
         >
           {item.name}
         </Link>
@@ -66,7 +68,7 @@ const DesktopNavigation = ({
       <img 
         src="/lovable-uploads/06e1e583-fc89-475d-bf22-b6d815ab75f0.png" 
         alt="Share" 
-        className="w-6 h-6 filter brightness-0 invert brightness-150 hover:opacity-80 transition-all duration-300 cursor-pointer" 
+        className="w-12 h-12 filter brightness-0 invert brightness-150 hover:opacity-80 transition-all duration-300 cursor-pointer" 
         onClick={onShareClick}
       />
     </div>
