@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Menu, X, Facebook, Instagram, Youtube, Share } from 'lucide-react';
+import { Menu, X, Facebook, Instagram, Youtube } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,7 +65,11 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <Share className="w-5 h-5 text-white/70 hover:text-white transition-colors duration-300 cursor-pointer ml-12" />
+            <img 
+              src="/lovable-uploads/099f5b67-8ba8-4e5f-94a3-d2f14679b248.png" 
+              alt="Share" 
+              className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer ml-12" 
+            />
           </div>
 
           {/* Right side - Social Media Icons */}
@@ -137,7 +141,11 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <Share className="w-6 h-6 text-white/70 hover:text-white transition-colors duration-300 cursor-pointer mt-8" />
+            <img 
+              src="/lovable-uploads/099f5b67-8ba8-4e5f-94a3-d2f14679b248.png" 
+              alt="Share" 
+              className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer mt-8" 
+            />
             
             {/* Share Button */}
             <div className="mt-8 flex items-center space-x-4">
