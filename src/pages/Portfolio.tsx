@@ -40,144 +40,64 @@ const Portfolio = () => {
 
   return (
     <Layout>
-      {/* SEO Header Section */}
-      <section className="pt-32 pb-12 bg-black">
-      </section>
+      {/* Main Portfolio Grid */}
+      <div className="min-h-screen bg-black pt-24">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          
+          {/* Mobile Grid - 2 columns */}
+          <div className="grid grid-cols-2 md:hidden gap-3">
+            {portfolioCategories.map((category, index) => (
+              <Link 
+                key={index}
+                to={category.href} 
+                className="relative group overflow-hidden aspect-square"
+              >
+                <img
+                  src={category.image}
+                  alt={category.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <h2 className="text-white text-lg font-light tracking-wider text-center uppercase px-4">
+                    {category.title}
+                  </h2>
+                </div>
+              </Link>
+            ))}
+          </div>
 
-      <div className="min-h-screen bg-black">
-
-        {/* Mobile Grid Layout - 2 columns */}
-        <div className="px-4 pt-24 pb-20">
-          <div className="max-w-md mx-auto md:max-w-7xl">
-            
-            {/* Mobile: Simple 2-column grid */}
-            <div className="md:hidden grid grid-cols-2 gap-3">
-              {portfolioCategories.map((category, index) => (
-                <Link 
-                  key={index}
-                  to={category.href} 
-                  className="relative group overflow-hidden aspect-square bg-gray-900"
-                >
-                  <img
-                    src={category.image}
-                    alt={category.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-                    <h2 className="text-lg font-light text-white tracking-wider text-center uppercase mb-2">
+          {/* Desktop Grid - 4 columns uniform */}
+          <div className="hidden md:grid grid-cols-4 gap-4">
+            {portfolioCategories.map((category, index) => (
+              <Link 
+                key={index}
+                to={category.href} 
+                className="relative group overflow-hidden aspect-square hover:scale-105 transition-transform duration-500"
+              >
+                <img
+                  src={category.image}
+                  alt={category.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-300"></div>
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  <div className="text-center">
+                    <h2 className="text-white text-2xl xl:text-3xl font-light tracking-wider uppercase mb-3">
                       {category.title}
                     </h2>
-                    <p className="text-xs text-gray-300 text-center px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {category.description.substring(0, 60)}...
-                    </p>
+                    <div className="w-16 h-px bg-white/60 mx-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                </Link>
-              ))}
-              
-              {/* Add an empty slot to make it 6 items (3 rows x 2 columns) if needed */}
-              <div className="aspect-square bg-transparent"></div>
-            </div>
+                </div>
+              </Link>
+            ))}
+          </div>
 
-            {/* Desktop Layout - Keep existing complex layout */}
-            <div className="hidden md:block">
-              {/* First Row - Beauty (large) + Fashion */}
-              <div className="grid grid-cols-3 gap-4 mb-4 h-[500px]">
-                {/* Beauty - Takes 2 columns on desktop */}
-                <Link 
-                  to={portfolioCategories[0].href}
-                  className="col-span-2 relative group overflow-hidden bg-gray-900"
-                >
-                  <img
-                    src={portfolioCategories[0].image}
-                    alt={portfolioCategories[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                  <div className="absolute bottom-8 left-8">
-                    <h2 className="text-4xl font-light text-white tracking-wide mb-2">
-                      {portfolioCategories[0].title}
-                    </h2>
-                    <p className="text-gray-300 text-sm max-w-md">
-                      {portfolioCategories[0].description}
-                    </p>
-                  </div>
-                </Link>
-
-                {/* Fashion - Takes 1 column on desktop */}
-                <Link 
-                  to={portfolioCategories[1].href}
-                  className="relative group overflow-hidden bg-gray-900"
-                >
-                  <img
-                    src={portfolioCategories[1].image}
-                    alt={portfolioCategories[1].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                  <div className="absolute bottom-8 left-8">
-                    <h2 className="text-3xl font-light text-white tracking-wide mb-2">
-                      {portfolioCategories[1].title}
-                    </h2>
-                    <p className="text-gray-300 text-sm max-w-xs">
-                      {portfolioCategories[1].description.substring(0, 80)}...
-                    </p>
-                  </div>
-                </Link>
-              </div>
-
-              {/* Second Row - Editorial + Celebrity & Lifestyle */}
-              <div className="grid grid-cols-2 gap-4 h-[400px] mb-4">
-                {/* Editorial */}
-                <Link 
-                  to={portfolioCategories[2].href}
-                  className="relative group overflow-hidden bg-gray-900"
-                >
-                  <img
-                    src={portfolioCategories[2].image}
-                    alt={portfolioCategories[2].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                  <div className="absolute bottom-8 left-8">
-                    <h2 className="text-3xl font-light text-white tracking-wide mb-2">
-                      {portfolioCategories[2].title}
-                    </h2>
-                    <p className="text-gray-300 text-sm max-w-xs">
-                      {portfolioCategories[2].description.substring(0, 80)}...
-                    </p>
-                  </div>
-                </Link>
-
-                {/* Celebrity & Lifestyle */}
-                <Link 
-                  to={portfolioCategories[3].href}
-                  className="relative group overflow-hidden bg-gray-900"
-                >
-                  <img
-                    src={portfolioCategories[3].image}
-                    alt={portfolioCategories[3].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                  <div className="absolute bottom-8 left-8">
-                    <h2 className="text-3xl font-light text-white tracking-wide mb-2">
-                      {portfolioCategories[3].title}
-                    </h2>
-                    <p className="text-gray-300 text-sm max-w-xs">
-                      {portfolioCategories[3].description.substring(0, 80)}...
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            </div>
-
-            {/* Copyright Notice */}
-            <div className="text-center mt-16 pb-8 px-8">
-              <p className="text-white/60 text-sm tracking-wide">
-                © 2025 Jeff Honforloco Photography. All rights reserved.
-              </p>
-            </div>
+          {/* Copyright Notice */}
+          <div className="text-center mt-16 pb-8">
+            <p className="text-white/60 text-sm tracking-wide">
+              © 2025 Jeff Honforloco Photography. All rights reserved.
+            </p>
           </div>
         </div>
       </div>
