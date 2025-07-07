@@ -1,7 +1,10 @@
 
-import { HeroImageGrid, HeroContent } from './hero';
+import { HeroImageGrid, HeroContent, HeroSlider } from './hero';
+import { useState } from 'react';
 
 const HeroSection = () => {
+  const [showSlider, setShowSlider] = useState(false);
+  
   const portfolioImages = [
     '/lovable-uploads/cd3eb066-6ffe-4e1e-9613-a1b067806092.png',
     '/lovable-uploads/060e27c9-b2d8-4f33-b575-794287894fd6.png',
@@ -18,33 +21,37 @@ const HeroSection = () => {
     '/lovable-uploads/b573482f-31ab-49e5-af48-586d9aeb6909.png',
     '/lovable-uploads/be107293-394e-46fd-9fcd-d1eb5781ff56.png',
     '/lovable-uploads/7c28c520-783d-4733-ad48-9683204ef054.png',
-    '/lovable-uploads/c279306c-86cb-49fe-a393-c5330888db34.png',
-    '/lovable-uploads/06e1e583-fc89-475d-bf22-b6d815ab75f0.png',
-    '/lovable-uploads/099f5b67-8ba8-4e5f-94a3-d2f14679b248.png',
-    '/lovable-uploads/09ac1697-3757-47bf-84fa-5d922e1f1779.png',
-    '/lovable-uploads/1a35b5b2-6090-4718-9833-79a270346b20.png',
-    '/lovable-uploads/2688f2e4-7158-4784-bdc4-2d84ff3a124d.png',
-    '/lovable-uploads/28ccb7e7-ed7f-4185-ad8b-8bacc6443c8f.png',
-    '/lovable-uploads/3566a61b-2d58-4e4a-920f-b2f011f69289.png',
-    '/lovable-uploads/3773cab4-5d54-45b9-befe-7e8b70874496.png'
+    '/lovable-uploads/c279306c-86cb-49fe-a393-c5330888db34.png'
   ];
 
-  // Distribute 24 images across 3 columns evenly
-  const imagesPerColumn = Math.ceil(portfolioImages.length / 3);
-  const col1Images = portfolioImages.slice(0, imagesPerColumn);
-  const col2Images = portfolioImages.slice(imagesPerColumn, imagesPerColumn * 2);
-  const col3Images = portfolioImages.slice(imagesPerColumn * 2);
+  // Create optimized image arrays for different columns to prevent duplicates
+  const col1Images = [...portfolioImages.slice(0, 6), ...portfolioImages.slice(0, 6)];
+  const col2Images = [...portfolioImages.slice(6, 12), ...portfolioImages.slice(6, 12)];
+  const col3Images = [...portfolioImages.slice(12), ...portfolioImages.slice(0, 4), ...portfolioImages.slice(12), ...portfolioImages.slice(0, 4)];
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-black">
       {/* Hidden SEO content */}
       <h1 className="sr-only">Jeff Honforloco Photography - Luxury Fashion & Beauty Photographer | Nationwide Bookings NYC, LA, Miami, Chicago</h1>
       
-      <HeroImageGrid 
-        col1Images={col1Images}
-        col2Images={col2Images}
-        col3Images={col3Images}
-      />
+      {/* Toggle Button */}
+      <button
+        onClick={() => setShowSlider(!showSlider)}
+        className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md text-sm font-medium transition-all duration-300"
+      >
+        {showSlider ? 'Grid View' : 'Slider View'}
+      </button>
+      
+      {/* Conditional rendering based on mode */}
+      {showSlider ? (
+        <HeroSlider images={portfolioImages} />
+      ) : (
+        <HeroImageGrid 
+          col1Images={col1Images}
+          col2Images={col2Images}
+          col3Images={col3Images}
+        />
+      )}
 
       {/* Hero Content Overlay */}
       <HeroContent />
