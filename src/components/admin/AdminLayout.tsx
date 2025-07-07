@@ -9,7 +9,8 @@ import {
   Settings, 
   LogOut,
   Menu,
-  X
+  X,
+  Video
 } from 'lucide-react';
 import { Button } from '../ui/button';
 
@@ -25,6 +26,7 @@ const AdminLayout = ({ children, onLogout }: AdminLayoutProps) => {
   const menuItems = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
     { name: 'Portfolio', href: '/admin/portfolio', icon: Image },
+    { name: 'Motion & Video', href: '/admin/motion', icon: Video },
     { name: 'Blog', href: '/admin/blog', icon: FileText },
     { name: 'Contacts', href: '/admin/contacts', icon: MessageSquare },
     { name: 'Users', href: '/admin/users', icon: Users },

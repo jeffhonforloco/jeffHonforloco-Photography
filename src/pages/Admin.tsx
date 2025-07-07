@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from '../components/admin/AdminLayout';
 import AdminDashboard from '../components/admin/AdminDashboard';
 import AdminPortfolio from '../components/admin/AdminPortfolio';
+import AdminMotion from '../components/admin/AdminMotion';
 import AdminBlog from '../components/admin/AdminBlog';
 import AdminContacts from '../components/admin/AdminContacts';
 import AdminSettings from '../components/admin/AdminSettings';
@@ -36,6 +37,7 @@ const Admin = () => {
         <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/portfolio" element={<AdminPortfolio />} />
+        <Route path="/motion" element={<AdminMotion />} />
         <Route path="/blog" element={<AdminBlog />} />
         <Route path="/contacts" element={<AdminContacts />} />
         <Route path="/users" element={<AdminUsers />} />
