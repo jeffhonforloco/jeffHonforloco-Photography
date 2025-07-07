@@ -65,4 +65,5 @@ export interface MotionItem {
   featured?: boolean;
   isYouTube?: boolean;
   youTubeId?: string;
+  isBehindLens?: boolean;
 }

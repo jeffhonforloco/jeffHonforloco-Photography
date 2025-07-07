@@ -92,19 +92,53 @@ const About = () => {
             </p>
           </div>
           
-          {/* Video Placeholder */}
-          <div className="relative aspect-video bg-black rounded-lg overflow-hidden border border-photo-red/20">
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-photo-red/10 to-transparent">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-photo-red/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg className="w-8 h-8 text-photo-red" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
+          {(() => {
+            const motionItems = JSON.parse(localStorage.getItem('motionItems') || '[]');
+            const behindLensVideo = motionItems.find((item: any) => item.isBehindLens);
+            
+            if (behindLensVideo) {
+              return (
+                <div className="aspect-video bg-black rounded-lg overflow-hidden border border-photo-red/20">
+                  {behindLensVideo.isYouTube ? (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${behindLensVideo.youTubeId}`}
+                      title={behindLensVideo.alt}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  ) : (
+                    <video
+                      controls
+                      className="w-full h-full object-cover"
+                      poster={behindLensVideo.thumbnail}
+                    >
+                      <source src={behindLensVideo.src} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                 </div>
-                <p className="text-gray-400">Featured Video Coming Soon</p>
+              );
+            }
+            
+            return (
+              <div className="relative aspect-video bg-black rounded-lg overflow-hidden border border-photo-red/20">
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-photo-red/10 to-transparent">
+                  <div className="text-center">
+                    <div className="w-20 h-20 bg-photo-red/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <svg className="w-8 h-8 text-photo-red" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                    <p className="text-gray-400">Featured Video Coming Soon</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            );
+          })()}
         </div>
       </section>
 
