@@ -21,6 +21,8 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-black">
+      {/* Hidden SEO content */}
+      <h1 className="sr-only">Jeff Honforloco Photography - Fashion & Beauty Photographer Providence RI</h1>
       {/* Masonry-style Grid matching reference image */}
       <div className="absolute inset-0 p-2 md:p-3">
         {/* Mobile: 2 columns */}
