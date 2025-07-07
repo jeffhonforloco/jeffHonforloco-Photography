@@ -4,6 +4,7 @@ import { Play } from 'lucide-react';
 import Layout from '../components/Layout';
 import ImageGallery from '../components/ImageGallery';
 import { MotionItem } from '@/types/content';
+import VideoPlayer from '@/components/VideoPlayer';
 
 const PortfolioCategory = () => {
   const { category } = useParams<{ category: string }>();
@@ -73,10 +74,12 @@ const PortfolioCategory = () => {
         featured: true
       },
       {
-        src: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        alt: 'Fashion Film',
-        caption: 'Dynamic fashion cinematography',
-        isVideo: true
+        src: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        alt: 'Sample YouTube Video',
+        caption: 'YouTube Integration Example',
+        isVideo: true,
+        isYouTube: true,
+        youTubeId: 'dQw4w9WgXcQ'
       },
       {
         src: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -85,10 +88,12 @@ const PortfolioCategory = () => {
         isVideo: true
       },
       {
-        src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        alt: 'Glamour Film',
-        caption: 'Elegant motion portraits',
-        isVideo: true
+        src: 'https://youtu.be/ScMzIvxBSi4',
+        alt: 'Another YouTube Sample',
+        caption: 'YouTube Short Link Example',
+        isVideo: true,
+        isYouTube: true,
+        youTubeId: 'ScMzIvxBSi4'
       },
       {
         src: 'https://images.unsplash.com/photo-1574391884720-bbc0b76bffdc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -142,17 +147,7 @@ const PortfolioCategory = () => {
             {featuredVideo && (
               <div className="px-8">
                 <div className="max-w-7xl mx-auto">
-                  <div className="relative aspect-video overflow-hidden">
-                    <video
-                      className="w-full h-full object-cover"
-                      controls
-                      poster={featuredVideo.src}
-                      preload="metadata"
-                    >
-                      <source src={featuredVideo.src} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
+                  <VideoPlayer video={featuredVideo} />
                 </div>
               </div>
             )}
@@ -162,58 +157,18 @@ const PortfolioCategory = () => {
           <section className="md:hidden pt-20 pb-20">
             <div className="p-1 space-y-1">
               {/* Large Featured Video at Top */}
-              <div className="relative aspect-video overflow-hidden group cursor-pointer">
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  poster={motionData[0]?.src}
-                  preload="metadata"
-                >
-                  <source src={motionData[0]?.src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+              <VideoPlayer video={motionData[0]} className="group cursor-pointer" />
               
               {/* 2-Column Grid Below */}
               <div className="grid grid-cols-2 gap-1">
                 {/* Video 2 */}
-                <div className="relative aspect-video overflow-hidden group cursor-pointer">
-                  <video
-                    className="w-full h-full object-cover"
-                    controls
-                    poster={motionData[1]?.src}
-                    preload="metadata"
-                  >
-                    <source src={motionData[1]?.src} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+                <VideoPlayer video={motionData[1]} className="group cursor-pointer" />
                 
                 {/* Video 3 */}
-                <div className="relative aspect-video overflow-hidden group cursor-pointer">
-                  <video
-                    className="w-full h-full object-cover"
-                    controls
-                    poster={motionData[2]?.src}
-                    preload="metadata"
-                  >
-                    <source src={motionData[2]?.src} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+                <VideoPlayer video={motionData[2]} className="group cursor-pointer" />
                 
                 {/* Video 4 */}
-                <div className="relative aspect-video overflow-hidden group cursor-pointer">
-                  <video
-                    className="w-full h-full object-cover"
-                    controls
-                    poster={motionData[3]?.src}
-                    preload="metadata"
-                  >
-                    <source src={motionData[3]?.src} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+                <VideoPlayer video={motionData[3]} className="group cursor-pointer" />
                 
                 {/* Video 5 with MORE overlay */}
                 <div className="relative aspect-video overflow-hidden group cursor-pointer">
@@ -237,17 +192,7 @@ const PortfolioCategory = () => {
               <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {otherVideos.map((video, index) => (
-                    <div key={index} className="relative aspect-video overflow-hidden group cursor-pointer">
-                      <video
-                        className="w-full h-full object-cover"
-                        controls
-                        poster={video.src}
-                        preload="metadata"
-                      >
-                        <source src={video.src} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
+                    <VideoPlayer key={index} video={video} className="group cursor-pointer" />
                   ))}
                 </div>
               </div>

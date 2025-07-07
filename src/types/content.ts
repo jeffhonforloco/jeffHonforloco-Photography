@@ -63,4 +63,6 @@ export interface MotionItem {
   caption: string;
   isVideo: boolean;
   featured?: boolean;
+  isYouTube?: boolean;
+  youTubeId?: string;
 }
