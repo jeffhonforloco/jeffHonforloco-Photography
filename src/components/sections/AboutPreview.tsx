@@ -31,19 +31,19 @@ const AboutPreview = () => {
             
             <div className="space-y-6 font-light text-xl md:text-2xl text-gray-300 leading-relaxed mb-16 tracking-wide">
               <p>
-                A visionary photographer and creative entrepreneur based in the United States, renowned for his captivating imagery and client-first approach. With years of hands-on experience in fashion, beauty, and lifestyle photography, Jeff has become a trusted name in the industry—recognized for delivering high-quality, emotionally compelling visuals that consistently leave clients amazed.
+                Award-winning luxury fashion and beauty photographer available nationwide for high-end brands, celebrities, and models. With over 15 years of experience, Jeff has established himself as a premier choice for luxury photography across New York City, Los Angeles, Miami, Chicago, and Atlanta.
               </p>
               
               <p>
-                Passionate about highlighting the glamour, strength, and individuality of every subject, Jeff's work has graced top fashion shows in Providence, Rhode Island, where he currently resides and operates. His artistic eye and attention to detail make him a go-to photographer for models, brands, agencies, and individuals seeking to tell their story through powerful visuals.
+                Specializing in high-end fashion photography, celebrity beauty campaigns, and editorial shoots, Jeff's work has graced fashion weeks and luxury brand campaigns. His artistic vision and commitment to excellence make him the go-to photographer for discerning clients seeking sophisticated, world-class imagery.
               </p>
               
               <p>
-                Specializing in fashion, beauty, editorial, lifestyle, and portrait photography, Jeff takes pride in understanding his clients' vision and turning it into timeless art. His clients not only value his technical skill but also his warm energy, professionalism, and commitment to excellence.
+                From fashion week in NYC to celebrity campaigns in LA, luxury beauty shoots in Miami to editorial work in Chicago, Jeff delivers consistently exceptional results. His clientele includes top models, luxury brands, and entertainment industry professionals who trust his expertise for their most important campaigns.
               </p>
               
               <p>
-                Whether in front of the lens or behind it, Jeff is dedicated to creating meaningful moments. He believes, "A well-captured image represents a moment in time that lives on forever."
+                "A well-captured image represents a moment in time that is expressed infinitely" - This philosophy drives every session, ensuring each client receives photography that exceeds expectations and delivers lasting impact.
               </p>
             </div>
             

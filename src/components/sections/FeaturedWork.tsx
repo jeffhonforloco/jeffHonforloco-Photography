@@ -3,18 +3,21 @@ const FeaturedWork = () => {
   const featuredWork = [
     {
       image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      category: 'Editorial',
-      title: 'Vogue Editorial Series'
+      category: 'High-End Editorial',
+      title: 'NYC Fashion Week Editorial',
+      description: 'Luxury editorial photography for fashion week campaigns'
     },
     {
       image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      category: 'Fashion',
-      title: 'Luxury Brand Campaign'
+      category: 'Celebrity Fashion',
+      title: 'LA Celebrity Campaign',
+      description: 'High-end fashion photography for celebrity brand partnerships'
     },
     {
       image: 'https://images.unsplash.com/photo-1534809027769-b00d750a6bac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      category: 'Beauty',
-      title: 'Cosmetics Campaign'
+      category: 'Luxury Beauty',
+      title: 'Miami Beauty Campaign',
+      description: 'Premium beauty photography for luxury cosmetic brands'
     }
   ];
 
@@ -25,11 +28,11 @@ const FeaturedWork = () => {
       <div className="relative max-w-8xl mx-auto px-8 md:px-16">
         <div className="text-center mb-32">
           <h2 className="font-playfair text-6xl md:text-7xl lg:text-8xl font-extralight tracking-wide text-white mb-12 leading-[0.9]">
-            Featured Work
+            Luxury Portfolio
           </h2>
           <div className="w-32 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-12"></div>
-          <p className="font-light text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed tracking-wide">
-            A curated selection showcasing the depth and artistry of contemporary photography
+          <p className="font-light text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed tracking-wide">
+            Award-winning fashion, beauty and editorial photography for high-end brands, celebrities and models across NYC, LA, Miami, Chicago and worldwide
           </p>
         </div>
 
