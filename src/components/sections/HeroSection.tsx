@@ -144,8 +144,8 @@ const HeroSection = () => {
             <h2 className="font-playfair text-xl sm:text-2xl font-light text-white mb-4 tracking-wide leading-tight">
               LUXURY FASHION & BEAUTY PHOTOGRAPHY
             </h2>
-            <p className="font-inter text-sm sm:text-base text-gray-200 mb-6 leading-relaxed">
-              Elite photography for luxury brands & celebrities
+            <p className="font-inter text-xs sm:text-sm text-gray-200 mb-6 leading-relaxed">
+              Nationwide bookings for high-end brands, celebrities & models
             </p>
             <div className="flex flex-row gap-2 justify-center pointer-events-auto">
               <a 
