@@ -5,34 +5,54 @@ import Layout from '../components/Layout';
 const Portfolio = () => {
   const portfolioCategories = [
     {
-      title: 'Beauty',
-      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/beauty'
-    },
-    {
-      title: 'Fashion', 
+      title: 'Fashion Photography',
+      slug: 'luxury-fashion-photography-nyc',
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/fashion'
+      href: '/portfolio/luxury-fashion-photography-nyc',
+      description: 'High-end fashion photography for luxury brands, fashion weeks, and celebrity campaigns across NYC, LA, and major fashion capitals.',
+      keywords: 'luxury fashion photographer NYC, high-end fashion photography, fashion week photographer, celebrity fashion shoots'
     },
     {
-      title: 'Editorial',
+      title: 'Beauty Photography', 
+      slug: 'luxury-beauty-photography-nationwide',
+      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      href: '/portfolio/luxury-beauty-photography-nationwide',
+      description: 'Premium beauty and cosmetic photography for luxury brands, featuring sophisticated lighting and flawless execution.',
+      keywords: 'luxury beauty photographer, cosmetic photography, beauty campaign photographer, high-end beauty shoots'
+    },
+    {
+      title: 'Editorial Photography',
+      slug: 'editorial-photography-magazines',
       image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 
-      href: '/portfolio/editorial'
+      href: '/portfolio/editorial-photography-magazines',
+      description: 'Magazine-quality editorial photography for publications, brands, and storytelling campaigns that captivate audiences.',
+      keywords: 'editorial photographer, magazine photographer, commercial editorial photography, brand storytelling'
     },
     {
-      title: 'Glamour',
+      title: 'Celebrity & Lifestyle',
+      slug: 'celebrity-lifestyle-photography',
       image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/glamour'
-    },
-    {
-      title: 'Lifestyle',
-      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/lifestyle'
+      href: '/portfolio/celebrity-lifestyle-photography',
+      description: 'Exclusive celebrity and luxury lifestyle photography capturing authentic moments and sophisticated aesthetics.',
+      keywords: 'celebrity photographer, luxury lifestyle photography, exclusive portrait photography, high-profile clients'
     }
   ];
 
   return (
     <Layout>
+      {/* SEO Header Section */}
+      <section className="pt-32 pb-12 bg-black">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-light text-white mb-8 tracking-wide">
+            Luxury Photography Portfolio
+          </h1>
+          <p className="text-gray-300 text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-12">
+            Award-winning fashion, beauty, editorial and celebrity photography. Nationwide availability for luxury brands and high-profile clients across NYC, LA, Miami, Chicago, and Atlanta.
+          </p>
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto"></div>
+        </div>
+      </section>
+
       <div className="min-h-screen bg-black">
 
         {/* Mobile Grid Layout - 2 columns */}
@@ -53,10 +73,13 @@ const Portfolio = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <h2 className="text-lg font-light text-white tracking-wider text-center uppercase">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                    <h2 className="text-lg font-light text-white tracking-wider text-center uppercase mb-2">
                       {category.title}
                     </h2>
+                    <p className="text-xs text-gray-300 text-center px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {category.description.substring(0, 60)}...
+                    </p>
                   </div>
                 </Link>
               ))}
@@ -81,9 +104,12 @@ const Portfolio = () => {
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
                   <div className="absolute bottom-8 left-8">
-                    <h2 className="text-4xl font-light text-white tracking-wide">
+                    <h2 className="text-4xl font-light text-white tracking-wide mb-2">
                       {portfolioCategories[0].title}
                     </h2>
+                    <p className="text-gray-300 text-sm max-w-md">
+                      {portfolioCategories[0].description}
+                    </p>
                   </div>
                 </Link>
 
@@ -99,15 +125,18 @@ const Portfolio = () => {
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
                   <div className="absolute bottom-8 left-8">
-                    <h2 className="text-3xl font-light text-white tracking-wide">
+                    <h2 className="text-3xl font-light text-white tracking-wide mb-2">
                       {portfolioCategories[1].title}
                     </h2>
+                    <p className="text-gray-300 text-sm max-w-xs">
+                      {portfolioCategories[1].description.substring(0, 80)}...
+                    </p>
                   </div>
                 </Link>
               </div>
 
-              {/* Second Row - Editorial + Glamour + Lifestyle */}
-              <div className="grid grid-cols-3 gap-4 h-[400px] mb-4">
+              {/* Second Row - Editorial + Celebrity & Lifestyle */}
+              <div className="grid grid-cols-2 gap-4 h-[400px] mb-4">
                 {/* Editorial */}
                 <Link 
                   to={portfolioCategories[2].href}
@@ -120,13 +149,16 @@ const Portfolio = () => {
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
                   <div className="absolute bottom-8 left-8">
-                    <h2 className="text-3xl font-light text-white tracking-wide">
+                    <h2 className="text-3xl font-light text-white tracking-wide mb-2">
                       {portfolioCategories[2].title}
                     </h2>
+                    <p className="text-gray-300 text-sm max-w-xs">
+                      {portfolioCategories[2].description.substring(0, 80)}...
+                    </p>
                   </div>
                 </Link>
 
-                {/* Glamour */}
+                {/* Celebrity & Lifestyle */}
                 <Link 
                   to={portfolioCategories[3].href}
                   className="relative group overflow-hidden bg-gray-900"
@@ -138,27 +170,12 @@ const Portfolio = () => {
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
                   <div className="absolute bottom-8 left-8">
-                    <h2 className="text-3xl font-light text-white tracking-wide">
+                    <h2 className="text-3xl font-light text-white tracking-wide mb-2">
                       {portfolioCategories[3].title}
                     </h2>
-                  </div>
-                </Link>
-
-                {/* Lifestyle */}
-                <Link 
-                  to={portfolioCategories[4].href}
-                  className="relative group overflow-hidden bg-gray-900"
-                >
-                  <img
-                    src={portfolioCategories[4].image}
-                    alt={portfolioCategories[4].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                  <div className="absolute bottom-8 left-8">
-                    <h2 className="text-3xl font-light text-white tracking-wide">
-                      {portfolioCategories[4].title}
-                    </h2>
+                    <p className="text-gray-300 text-sm max-w-xs">
+                      {portfolioCategories[3].description.substring(0, 80)}...
+                    </p>
                   </div>
                 </Link>
               </div>

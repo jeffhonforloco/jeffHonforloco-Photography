@@ -4,24 +4,28 @@ import { Link } from 'react-router-dom';
 const PortfolioCategories = () => {
   const portfolioCategories = [
     {
-      title: 'Beauty',
-      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/beauty'
-    },
-    {
-      title: 'Fashion',
+      title: 'Fashion Photography',
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/fashion'
+      href: '/portfolio/luxury-fashion-photography-nyc',
+      description: 'High-end fashion photography for luxury brands and fashion weeks'
     },
     {
-      title: 'Editorial',
+      title: 'Beauty Photography',
+      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      href: '/portfolio/luxury-beauty-photography-nationwide',
+      description: 'Premium beauty and cosmetic photography for luxury brands'
+    },
+    {
+      title: 'Editorial Photography',
       image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/editorial'
+      href: '/portfolio/editorial-photography-magazines',
+      description: 'Magazine-quality editorial photography and brand storytelling'
     },
     {
-      title: 'Glamour',
+      title: 'Celebrity & Lifestyle',
       image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      href: '/portfolio/glamour'
+      href: '/portfolio/celebrity-lifestyle-photography',
+      description: 'Exclusive celebrity and luxury lifestyle photography'
     }
   ];
 
@@ -32,11 +36,11 @@ const PortfolioCategories = () => {
       <div className="relative max-w-8xl mx-auto px-8 md:px-16">
         <div className="text-center mb-32">
           <h2 className="font-playfair text-6xl md:text-7xl lg:text-8xl font-extralight tracking-wide text-white mb-12 leading-[0.9]">
-            Portfolio
+            Luxury Portfolio
           </h2>
           <div className="w-32 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto mb-12"></div>
           <p className="font-light text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed tracking-wide">
-            Explore diverse photography disciplines, each crafted with precision and artistic vision
+            Award-winning fashion, beauty, editorial and celebrity photography across NYC, LA, Miami, Chicago and worldwide
           </p>
         </div>
 
@@ -56,9 +60,12 @@ const PortfolioCategories = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-all duration-700"></div>
                 <div className="absolute bottom-8 left-8">
-                  <h3 className="font-playfair text-3xl md:text-4xl font-light text-white tracking-wide group-hover:text-photo-red transition-colors duration-500">
+                  <h3 className="font-playfair text-3xl md:text-4xl font-light text-white tracking-wide group-hover:text-photo-red transition-colors duration-500 mb-2">
                     {category.title}
                   </h3>
+                  <p className="text-gray-300 text-sm max-w-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    {category.description}
+                  </p>
                 </div>
               </div>
             </Link>

@@ -111,15 +111,25 @@ const PortfolioCategory = () => {
   };
 
   const categoryTitles = {
-    beauty: 'Beauty',
-    fashion: 'Fashion',
-    editorial: 'Editorial',
-    glamour: 'Glamour',
-    lifestyle: 'Lifestyle',
-    motion: 'Motion'
+    'luxury-fashion-photography-nyc': 'Luxury Fashion Photography',
+    'luxury-beauty-photography-nationwide': 'Luxury Beauty Photography',
+    'editorial-photography-magazines': 'Editorial Photography',
+    'celebrity-lifestyle-photography': 'Celebrity & Lifestyle Photography',
+    // Legacy support
+    beauty: 'Beauty Photography',
+    fashion: 'Fashion Photography',
+    editorial: 'Editorial Photography',
+    glamour: 'Glamour Photography',
+    lifestyle: 'Lifestyle Photography',
+    motion: 'Motion & Video'
   };
 
   const categoryDescriptions = {
+    'luxury-fashion-photography-nyc': 'High-end fashion photography for luxury brands, fashion weeks, and celebrity campaigns. Available nationwide with specialization in NYC, LA, Miami, and major fashion capitals.',
+    'luxury-beauty-photography-nationwide': 'Premium beauty and cosmetic photography for luxury brands, featuring sophisticated lighting and flawless execution. Serving high-end beauty brands coast to coast.',
+    'editorial-photography-magazines': 'Magazine-quality editorial photography for publications, brands, and storytelling campaigns. Creating compelling narratives that captivate audiences and drive engagement.',
+    'celebrity-lifestyle-photography': 'Exclusive celebrity and luxury lifestyle photography capturing authentic moments with sophisticated aesthetics. Trusted by high-profile clients and entertainment industry professionals.',
+    // Legacy descriptions
     beauty: 'Elegant beauty photography showcasing natural and enhanced aesthetics with sophisticated lighting and composition.',
     fashion: 'Contemporary fashion photography featuring bold styling, creative concepts, and innovative visual narratives.',
     editorial: 'Storytelling through sophisticated editorial and commercial work with artistic vision and technical excellence.',
@@ -128,8 +138,10 @@ const PortfolioCategory = () => {
     motion: 'Dynamic cinematography and motion content bringing stories to life through film and video production.'
   };
 
-  const currentCategory = category || 'beauty';
-  const images = portfolioImages[currentCategory as keyof typeof portfolioImages] || portfolioImages.beauty;
+  const currentCategory = category || 'luxury-fashion-photography-nyc';
+  const images = portfolioImages[currentCategory as keyof typeof portfolioImages] || 
+                 portfolioImages[currentCategory.split('-')[0] as keyof typeof portfolioImages] || 
+                 portfolioImages.beauty;
   const title = categoryTitles[currentCategory as keyof typeof categoryTitles] || 'Portfolio';
   const description = categoryDescriptions[currentCategory as keyof typeof categoryDescriptions] || '';
 
@@ -216,17 +228,25 @@ const PortfolioCategory = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="py-20 section-padding">
-        <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">{title}</h1>
-          <p className="text-gray-400 text-xl max-w-3xl mx-auto leading-relaxed">
+      {/* SEO Header Section */}
+      <section className="pt-32 pb-12 bg-black">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-light text-white mb-6 tracking-wide">
+            {title}
+          </h1>
+          <p className="text-gray-300 text-lg md:text-xl max-w-4xl mx-auto leading-relaxed mb-8">
             {description}
           </p>
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-photo-red to-transparent mx-auto"></div>
         </div>
+      </section>
 
-        {/* Image Gallery */}
-        <ImageGallery images={images} className="animate-scale-in" />
+      {/* Portfolio Gallery Section */}
+      <section className="py-12 section-padding">
+        <div className="max-w-7xl mx-auto">
+          {/* Image Gallery */}
+          <ImageGallery images={images} className="animate-scale-in" />
+        </div>
       </section>
     </Layout>
   );

@@ -1,64 +1,112 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
   <url>
     <loc>https://jeffhonforlocophotos.com/</loc>
-    <lastmod>2024-12-28</lastmod>
+    <lastmod>2025-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- About Page -->
+  <url>
+    <loc>https://jeffhonforlocophotos.com/about</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Portfolio Main Page -->
   <url>
     <loc>https://jeffhonforlocophotos.com/portfolio</loc>
-    <lastmod>2024-12-28</lastmod>
+    <lastmod>2025-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  
+  <!-- SEO-Optimized Portfolio Categories -->
   <url>
-    <loc>https://jeffhonforlocophotos.com/portfolio/beauty</loc>
-    <lastmod>2024-12-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://jeffhonforlocophotos.com/portfolio/luxury-fashion-photography-nyc</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
-    <loc>https://jeffhonforlocophotos.com/portfolio/fashion</loc>
-    <lastmod>2024-12-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://jeffhonforlocophotos.com/portfolio/luxury-beauty-photography-nationwide</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
-    <loc>https://jeffhonforlocophotos.com/portfolio/editorial</loc>
-    <lastmod>2024-12-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://jeffhonforlocophotos.com/portfolio/editorial-photography-magazines</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
-    <loc>https://jeffhonforlocophotos.com/portfolio/glamour</loc>
-    <lastmod>2024-12-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://jeffhonforlocophotos.com/portfolio/celebrity-lifestyle-photography</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Motion/Video Portfolio -->
   <url>
-    <loc>https://jeffhonforlocophotos.com/portfolio/lifestyle</loc>
-    <lastmod>2024-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://jeffhonforlocophotos.com/journal</loc>
-    <lastmod>2024-12-28</lastmod>
+    <loc>https://jeffhonforlocophotos.com/portfolio/motion</loc>
+    <lastmod>2025-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  
+  <!-- Contact Page -->
   <url>
-    <loc>https://jeffhonforlocophotos.com/about</loc>
-    <lastmod>2024-12-28</lastmod>
+    <loc>https://jeffhonforlocophotos.com/contact</loc>
+    <lastmod>2025-01-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Journal/Blog Main Page -->
   <url>
-    <loc>https://jeffhonforlocophotos.com/contact</loc>
-    <lastmod>2024-12-28</lastmod>
+    <loc>https://jeffhonforlocophotos.com/journal</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Legacy portfolio URLs for backwards compatibility -->
+  <url>
+    <loc>https://jeffhonforlocophotos.com/portfolio/beauty</loc>
+    <lastmod>2025-01-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  
+  <url>
+    <loc>https://jeffhonforlocophotos.com/portfolio/fashion</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jeffhonforlocophotos.com/portfolio/editorial</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jeffhonforlocophotos.com/portfolio/lifestyle</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 </urlset>
