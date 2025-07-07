@@ -244,8 +244,19 @@
   to { transform: translateY(-100%); }
 }
 
+/* Enhanced seamless infinite scroll animation */
+@keyframes slideSeamless {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
 .animate-slide-up-continuous {
   animation: slideUpContinuous 40s linear infinite;
+}
+
+.animate-slide-seamless {
+  animation: slideSeamless 80s linear infinite;
+  will-change: transform;
 }
 
 /* Enhanced bright theme animations and styles */

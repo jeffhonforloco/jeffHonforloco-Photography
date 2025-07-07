@@ -19,6 +19,9 @@ const HeroSection = () => {
     '/lovable-uploads/c279306c-86cb-49fe-a393-c5330888db34.png'
   ];
 
+  // Create seamless loop by duplicating images
+  const seamlessImages = [...portfolioImages, ...portfolioImages];
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-black">
       {/* Hidden SEO content */}
@@ -28,12 +31,12 @@ const HeroSection = () => {
         {/* Mobile: 2 columns */}
         <div className="md:hidden grid grid-cols-2 gap-3 h-full">
           {/* Column 1 - Mobile */}
-          <div className="flex flex-col gap-3 animate-slide-up-continuous">
-            {portfolioImages.filter((_, index) => index % 2 === 0).map((image, index) => (
+          <div className="flex flex-col gap-3 animate-slide-seamless">
+            {seamlessImages.filter((_, index) => index % 2 === 0).map((image, index) => (
               <div key={`mobile-col1-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
+                  alt={`Jeff Honforloco Portfolio ${(index % portfolioImages.length) + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 2 ? "eager" : "lazy"}
                   decoding="async"
@@ -47,12 +50,12 @@ const HeroSection = () => {
           </div>
           
           {/* Column 2 - Mobile */}
-          <div className="flex flex-col gap-3 animate-slide-up-continuous" style={{ animationDelay: '-15s' }}>
-            {portfolioImages.filter((_, index) => index % 2 === 1).map((image, index) => (
+          <div className="flex flex-col gap-3 animate-slide-seamless" style={{ animationDelay: '-20s' }}>
+            {seamlessImages.filter((_, index) => index % 2 === 1).map((image, index) => (
               <div key={`mobile-col2-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
+                  alt={`Jeff Honforloco Portfolio ${(index % portfolioImages.length) + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 2 ? "eager" : "lazy"}
                   decoding="async"
@@ -69,12 +72,12 @@ const HeroSection = () => {
         {/* Desktop: 3 columns */}
         <div className="hidden md:grid grid-cols-3 gap-4 h-full">
           {/* Column 1 - Desktop */}
-          <div className="flex flex-col gap-4 animate-slide-up-continuous">
-            {portfolioImages.filter((_, index) => index % 3 === 0).map((image, index) => (
+          <div className="flex flex-col gap-4 animate-slide-seamless">
+            {seamlessImages.filter((_, index) => index % 3 === 0).map((image, index) => (
               <div key={`desktop-col1-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
+                  alt={`Jeff Honforloco Portfolio ${(index % portfolioImages.length) + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding="async"
@@ -88,12 +91,12 @@ const HeroSection = () => {
           </div>
           
           {/* Column 2 - Desktop */}
-          <div className="flex flex-col gap-4 animate-slide-up-continuous" style={{ animationDelay: '-20s' }}>
-            {portfolioImages.filter((_, index) => index % 3 === 1).map((image, index) => (
+          <div className="flex flex-col gap-4 animate-slide-seamless" style={{ animationDelay: '-27s' }}>
+            {seamlessImages.filter((_, index) => index % 3 === 1).map((image, index) => (
               <div key={`desktop-col2-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
+                  alt={`Jeff Honforloco Portfolio ${(index % portfolioImages.length) + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding="async"
@@ -107,12 +110,12 @@ const HeroSection = () => {
           </div>
           
           {/* Column 3 - Desktop */}
-          <div className="flex flex-col gap-4 animate-slide-up-continuous" style={{ animationDelay: '-10s' }}>
-            {portfolioImages.filter((_, index) => index % 3 === 2).map((image, index) => (
+          <div className="flex flex-col gap-4 animate-slide-seamless" style={{ animationDelay: '-13s' }}>
+            {seamlessImages.filter((_, index) => index % 3 === 2).map((image, index) => (
               <div key={`desktop-col3-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
+                  alt={`Jeff Honforloco Portfolio ${(index % portfolioImages.length) + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding="async"
