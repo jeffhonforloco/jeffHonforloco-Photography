@@ -72,6 +72,35 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- SEO Blog Articles -->
+  <url>
+    <loc>https://jeffhonforlocophotos.com/journal/how-to-prepare-beauty-photography-session-nyc</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://jeffhonforlocophotos.com/journal/best-editorial-photography-ideas-personal-brands</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://jeffhonforlocophotos.com/journal/luxury-fashion-photography-trends-2025</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://jeffhonforlocophotos.com/journal/celebrity-photographer-secrets-stunning-portraits</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Journal/Blog Main Page -->
   <url>
     <loc>https://jeffhonforlocophotos.com/journal</loc>

@@ -64,6 +64,12 @@ const Journal = () => {
 
   return (
     <Layout>
+      {/* SEO Header - Hidden but accessible for search engines */}
+      <div className="sr-only">
+        <h1>Photography Journal - Tips, Trends & Insights by Jeff Honforloco</h1>
+        <p>Professional photography blog featuring luxury fashion, beauty, and editorial photography tips. NYC photographer shares expert insights on techniques, client preparation, and industry trends.</p>
+      </div>
+      
       {/* Interactive Article Banner Slider */}
       <section className="relative min-h-screen pt-20">
         <div className="relative h-screen overflow-hidden">

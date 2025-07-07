@@ -10,34 +10,70 @@
   ],
   "posts": [
     {
+      "id": "how-to-prepare-beauty-photography-session-nyc",
+      "title": "How to Prepare for a Beauty Photography Session in NYC",
+      "slug": "how-to-prepare-beauty-photography-session-nyc",
+      "excerpt": "Complete guide to preparing for your luxury beauty photography session in New York City. Tips from a professional photographer on what to expect, how to prepare, and how to get the most stunning results.",
+      "image": "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "Client Preparation & Session Insights",
+      "date": "January 5, 2025",
+      "readTime": "12 min read",
+      "content": "Preparing for a luxury beauty photography session in NYC requires careful planning and attention to detail. As a professional beauty photographer serving Manhattan, Brooklyn, and the greater NYC area, I've compiled this comprehensive guide to help you get the most stunning results from your session."
+    },
+    {
+      "id": "best-editorial-photography-ideas-personal-brands",
+      "title": "Best Editorial Photography Ideas for Personal Brands",
+      "slug": "best-editorial-photography-ideas-personal-brands",
+      "excerpt": "Discover creative editorial photography concepts that elevate personal brands and create compelling visual narratives. Perfect for entrepreneurs, influencers, and professionals seeking high-impact imagery.",
+      "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "Business & Marketing Advice", 
+      "date": "January 3, 2025",
+      "readTime": "15 min read",
+      "content": "Editorial photography for personal brands goes beyond traditional headshots. It's about creating a visual story that communicates your values, expertise, and unique perspective to your target audience."
+    },
+    {
+      "id": "luxury-fashion-photography-trends-2025",
+      "title": "Luxury Fashion Photography Trends Dominating 2025",
+      "slug": "luxury-fashion-photography-trends-2025", 
+      "excerpt": "Explore the latest trends in luxury fashion photography for 2025. From minimalist aesthetics to bold color palettes, discover what's defining high-end fashion imagery this year.",
+      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "Industry Trends & News",
+      "date": "December 28, 2024",
+      "readTime": "10 min read",
+      "content": "The luxury fashion photography landscape continues to evolve in 2025, with new aesthetic directions and technological innovations shaping how we capture and present high-end fashion."
+    },
+    {
+      "id": "celebrity-photographer-secrets-stunning-portraits",
+      "title": "Celebrity Photographer Secrets: Creating Stunning Portraits",
+      "slug": "celebrity-photographer-secrets-stunning-portraits",
+      "excerpt": "Learn the professional techniques used by celebrity photographers to create magazine-worthy portraits. Insider tips on lighting, posing, and working with high-profile clients.",
+      "image": "https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "category": "Photography Tips & Techniques",
+      "date": "December 20, 2024", 
+      "readTime": "14 min read",
+      "content": "Working with celebrities and high-profile clients requires a unique set of skills beyond technical photography expertise. Here are the professional secrets that separate amateur photographers from those shooting for magazines and major brands."
+    },
+    {
       "id": "mastering-natural-light",
       "title": "Mastering Natural Light in Portrait Photography",
+      "slug": "mastering-natural-light-portrait-photography",
       "excerpt": "Discover the secrets to creating stunning portraits using only natural light sources. Learn about golden hour timing, window light techniques, and outdoor portrait strategies.",
       "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       "category": "Photography Tips & Techniques",
-      "date": "March 15, 2024",
+      "date": "December 15, 2024",
       "readTime": "8 min read",
       "content": "Natural light photography is an art that requires understanding of timing, positioning, and technique..."
     },
     {
       "id": "building-fashion-portfolio",
       "title": "Building Your Fashion Photography Portfolio",
+      "slug": "building-fashion-photography-portfolio-guide",
       "excerpt": "Essential tips for creating a compelling fashion photography portfolio that gets noticed by clients, agencies, and collaborators in the industry.",
       "image": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       "category": "Business & Marketing Advice",
-      "date": "March 10, 2024",
+      "date": "December 10, 2024",
       "readTime": "12 min read",
       "content": "Building a strong fashion photography portfolio requires strategic planning and careful curation..."
-    },
-    {
-      "id": "essential-camera-gear",
-      "title": "Essential Camera Gear for Professional Portraits",
-      "excerpt": "A comprehensive guide to the must-have equipment for professional portrait photography, from cameras and lenses to lighting and accessories.",
-      "image": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "category": "Equipment Reviews & Recommendations",
-      "date": "March 5, 2024",
-      "readTime": "10 min read",
-      "content": "Professional portrait photography requires the right equipment to achieve consistent, high-quality results..."
     }
   ]
 }
