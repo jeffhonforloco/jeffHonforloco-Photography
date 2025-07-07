@@ -1,25 +1,16 @@
 
 const HeroSection = () => {
   const portfolioImages = [
-    '/lovable-uploads/4a4d1d70-8ce9-4c45-b96c-f46b3bb46863.png',
-    '/lovable-uploads/69f2a872-9dde-4972-bb6a-e11577de7fec.png',
-    '/lovable-uploads/62b49f7c-4f73-4d92-881f-45f2809087b1.png',
-    '/lovable-uploads/6a95f17f-c979-43f4-9323-c4f01731a191.png',
-    '/lovable-uploads/d1ac41f4-eab2-40c7-8c53-61d619ab77c3.png',
-    '/lovable-uploads/d0aa1656-0697-40c8-aad3-a3756945228a.png',
-    '/lovable-uploads/db51011f-18fe-4e40-8977-b0b6a211a396.png',
-    '/lovable-uploads/3773cab4-5d54-45b9-befe-7e8b70874496.png',
-    '/lovable-uploads/e8cb69bc-d69a-44f0-9d6d-54cff80fa950.png',
-    '/lovable-uploads/c2476d8c-8e52-43a0-ac77-33d818c3fa2d.png',
-    '/lovable-uploads/bbbddcaa-c94f-4035-9aa8-16a225d5b527.png',
-    '/lovable-uploads/e06927fa-9c52-4746-895c-f21667b0197e.png',
-    '/lovable-uploads/3b2350e8-72d9-4325-bd13-a5b6ceec335f.png',
-    '/lovable-uploads/e30bcff1-8487-49cd-89f3-464e539e26c3.png',
-    '/lovable-uploads/28ccb7e7-ed7f-4185-ad8b-8bacc6443c8f.png',
-    '/lovable-uploads/d0c57cf0-4228-4e1e-8c62-5cf93ca380a5.png',
-    '/lovable-uploads/3566a61b-2d58-4e4a-920f-b2f011f69289.png',
-    '/lovable-uploads/3d46d1ef-3d6f-4cf4-b3e4-f62aa6b7323d.png',
-    '/lovable-uploads/9bed3b4d-3641-4170-91ba-2765ea59db49.png'
+    '/lovable-uploads/86a54898-0663-4d33-9cc9-a793f168d0ab.png',
+    '/lovable-uploads/47c04841-2b95-4229-8bea-7e1c4925bafb.png',
+    '/lovable-uploads/1a35b5b2-6090-4718-9833-79a270346b20.png',
+    '/lovable-uploads/91b16668-debd-4e7b-9fab-e6200abfaa53.png',
+    '/lovable-uploads/2688f2e4-7158-4784-bdc4-2d84ff3a124d.png',
+    '/lovable-uploads/e302a6bd-9a35-4c62-924e-5f14e4e2d241.png',
+    '/lovable-uploads/cc3dde2a-3f8c-4c40-b4b7-33cc0fd118e0.png',
+    '/lovable-uploads/09ac1697-3757-47bf-84fa-5d922e1f1779.png',
+    '/lovable-uploads/3ffed44f-cebf-4d6d-ba06-86e21b470903.png',
+    '/lovable-uploads/37f4ae80-0bd4-4eae-8c84-a252aa263a64.png'
   ];
 
   return (
