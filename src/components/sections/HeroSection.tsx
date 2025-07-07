@@ -132,14 +132,36 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Mobile Logo - Perfectly centered overlay */}
+      {/* Mobile Logo & Hero Text - Centered overlay */}
       <div className="md:hidden absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-        <div className="flex items-center justify-center w-full h-full">
+        <div className="text-center px-4">
           <img 
             src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
-            alt="J Logo" 
-            className="w-72 sm:w-80 max-w-[80vw] h-auto filter drop-shadow-2xl brightness-150 contrast-125"
+            alt="Jeff Honforloco Photography Logo" 
+            className="w-64 sm:w-72 max-w-[80vw] h-auto filter drop-shadow-2xl brightness-150 contrast-125 mx-auto mb-6"
           />
+          <div className="max-w-sm mx-auto">
+            <h2 className="font-playfair text-xl sm:text-2xl font-light text-white mb-4 tracking-wide leading-tight">
+              LUXURY FASHION & BEAUTY PHOTOGRAPHY
+            </h2>
+            <p className="font-inter text-sm sm:text-base text-gray-200 mb-6 leading-relaxed">
+              Nationwide bookings for high-end brands, celebrities & models
+            </p>
+            <div className="flex flex-col gap-3 pointer-events-auto">
+              <a 
+                href="/contact" 
+                className="bg-photo-red hover:bg-photo-red-hover text-white px-6 py-3 font-semibold tracking-wider uppercase text-xs transition-all duration-300 hover:scale-105 rounded-lg shadow-2xl"
+              >
+                Book Your Session
+              </a>
+              <a 
+                href="/portfolio" 
+                className="border-2 border-white/80 text-white hover:bg-white/10 px-6 py-3 font-semibold tracking-wider uppercase text-xs transition-all duration-300 hover:scale-105 rounded-lg backdrop-blur-sm"
+              >
+                View Portfolio
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
