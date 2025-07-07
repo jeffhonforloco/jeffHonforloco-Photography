@@ -8,9 +8,57 @@
     "pixelId": "FB_PIXEL_ID", 
     "enabled": false
   },
+  "hotjar": {
+    "siteId": "HOTJAR_SITE_ID",
+    "enabled": false
+  },
+  "linkedinInsight": {
+    "partnerId": "LINKEDIN_PARTNER_ID",
+    "enabled": false
+  },
   "events": {
     "portfolioView": "portfolio_category_view",
     "contactForm": "contact_form_submit",
-    "blogPost": "blog_post_view"
+    "blogPost": "blog_post_view",
+    "locationLanding": "location_landing_view",
+    "bookingIntent": "booking_intent",
+    "emailSignup": "email_signup",
+    "phoneCall": "phone_call_initiated",
+    "socialShare": "social_share"
+  },
+  "automationTriggers": {
+    "welcomeEmail": "immediate",
+    "followUp24h": "24h",
+    "followUp3d": "3d", 
+    "followUp7d": "7d",
+    "followUp14d": "14d"
+  },
+  "leadScoring": {
+    "budgetWeights": {
+      "$50,000+": 50,
+      "$25,000-$50,000": 35,
+      "$10,000-$25,000": 25,
+      "$5,000-$10,000": 15,
+      "Under $5,000": 5
+    },
+    "serviceWeights": {
+      "Celebrity Photography": 30,
+      "Fashion Photography": 25,
+      "Beauty Photography": 20,
+      "Editorial Photography": 20,
+      "Lifestyle Photography": 15
+    },
+    "locationWeights": {
+      "NYC": 20,
+      "Los Angeles": 20,
+      "Monaco": 25,
+      "Paris": 20,
+      "London": 18,
+      "Italy": 15,
+      "Switzerland": 15,
+      "Miami": 12,
+      "Lagos": 10,
+      "Malta": 8
+    }
   }
 }

@@ -3,6 +3,12 @@ import { useState, useEffect } from 'react';
 import { Camera, Star, MapPin, Phone, Mail, CheckCircle, Users, Award, Clock } from 'lucide-react';
 import Layout from '../components/Layout';
 import { ContentData } from '@/types/content';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from '@/components/ui/use-toast';
+import { triggerEmailSequence, calculateLeadScore, syncToCRM } from '../components/EmailAutomation';
+import { trackContactForm, trackBookingIntent } from '../components/Analytics';
 
 const Contact = () => {
   const [contentData, setContentData] = useState<ContentData | null>(null);
@@ -10,12 +16,13 @@ const Contact = () => {
     name: '',
     email: '',
     phone: '',
-    inquiryType: '',
-    eventDate: '',
+    service: '',
+    projectDate: '',
     location: '',
     message: '',
     budget: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetch('/data/jeff-content.json')
@@ -24,10 +31,52 @@ const Contact = () => {
       .catch(error => console.error('Error loading content:', error));
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission here
+    setIsLoading(true);
+
+    try {
+      // Calculate lead score
+      const leadScore = calculateLeadScore(formData);
+      
+      // Track analytics
+      trackContactForm(formData);
+      trackBookingIntent('contact_form', formData.location);
+      
+      // Trigger email automation
+      await triggerEmailSequence(formData);
+      
+      // Sync to CRM
+      await syncToCRM(formData, leadScore);
+      
+      console.log('Form submitted with lead score:', leadScore);
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your inquiry. You'll receive a confirmation email shortly and I'll get back to you within 24 hours.",
+      });
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        projectDate: '',
+        location: '',
+        message: '',
+        budget: ''
+      });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Error",
+        description: "There was an issue sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -129,8 +178,8 @@ const Contact = () => {
               {/* Project Details Row */}
               <div className="grid grid-cols-1 gap-4">
                 <select
-                  name="inquiryType"
-                  value={formData.inquiryType}
+                  name="service"
+                  value={formData.service}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-photo-red rounded-lg appearance-none"
                   required
@@ -146,9 +195,9 @@ const Contact = () => {
                 
                 <input
                   type="date"
-                  name="eventDate"
+                  name="projectDate"
                   placeholder="Preferred Date"
-                  value={formData.eventDate}
+                  value={formData.projectDate}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-photo-red rounded-lg"
                 />
@@ -204,9 +253,10 @@ const Contact = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="bg-photo-red hover:bg-photo-red-hover text-white px-8 py-4 font-semibold text-sm uppercase tracking-wider transition-all duration-300 w-full rounded-lg hover:shadow-lg hover:shadow-photo-red/25 hover:scale-105"
+                disabled={isLoading}
+                className="bg-photo-red hover:bg-photo-red-hover text-white px-8 py-4 font-semibold text-sm uppercase tracking-wider transition-all duration-300 w-full rounded-lg hover:shadow-lg hover:shadow-photo-red/25 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Book Consultation Call
+                {isLoading ? 'Sending...' : 'Book Consultation Call'}
               </button>
               
               <p className="text-gray-500 text-xs text-center">
@@ -296,8 +346,8 @@ const Contact = () => {
                         className="w-full px-4 py-3 bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-photo-red focus:border-transparent rounded-lg"
                       />
                       <select
-                        name="inquiryType"
-                        value={formData.inquiryType}
+                        name="service"
+                        value={formData.service}
                         onChange={handleChange}
                         className="w-full px-4 py-3 bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-photo-red rounded-lg appearance-none"
                         required
@@ -316,9 +366,9 @@ const Contact = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <input
                         type="date"
-                        name="eventDate"
+                        name="projectDate"
                         placeholder="Preferred Date"
-                        value={formData.eventDate}
+                        value={formData.projectDate}
                         onChange={handleChange}
                         className="w-full px-4 py-3 bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-photo-red rounded-lg"
                       />
@@ -372,9 +422,10 @@ const Contact = () => {
                     {/* Submit Button */}
                     <button
                       type="submit"
-                      className="bg-photo-red hover:bg-photo-red-hover text-white px-8 py-4 font-semibold text-sm uppercase tracking-wider transition-all duration-300 w-full rounded-lg hover:shadow-lg hover:shadow-photo-red/25 hover:scale-105"
+                      disabled={isLoading}
+                      className="bg-photo-red hover:bg-photo-red-hover text-white px-8 py-4 font-semibold text-sm uppercase tracking-wider transition-all duration-300 w-full rounded-lg hover:shadow-lg hover:shadow-photo-red/25 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Book Consultation Call
+                      {isLoading ? 'Sending...' : 'Book Consultation Call'}
                     </button>
                     
                     <p className="text-gray-500 text-xs text-center">
