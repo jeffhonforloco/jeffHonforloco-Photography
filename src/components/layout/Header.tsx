@@ -52,7 +52,7 @@ const Header = () => {
           />
 
           {/* Right side - Social Media Icons and Mobile Menu */}
-          <div className="flex items-center justify-end min-w-0 flex-1 md:flex-initial md:ml-12 lg:ml-16">
+          <div className="flex items-center justify-end min-w-0 flex-1 md:flex-initial md:absolute md:right-4 lg:right-8 xl:right-16">
             {/* Desktop Social Media Icons */}
             <SocialMediaIcons variant="desktop" />
 
