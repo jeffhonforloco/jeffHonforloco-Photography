@@ -147,16 +147,16 @@ const HeroSection = () => {
             <p className="font-inter text-sm sm:text-base text-gray-200 mb-6 leading-relaxed">
               Nationwide bookings for high-end brands, celebrities & models
             </p>
-            <div className="flex flex-col gap-3 pointer-events-auto">
+            <div className="flex flex-row gap-2 justify-center pointer-events-auto">
               <a 
                 href="/contact" 
-                className="bg-photo-red hover:bg-photo-red-hover text-white px-6 py-3 font-semibold tracking-wider uppercase text-xs transition-all duration-300 hover:scale-105 rounded-lg shadow-2xl"
+                className="bg-photo-red hover:bg-photo-red-hover text-white px-4 py-2 font-medium tracking-wide uppercase text-xs transition-all duration-300 hover:scale-105 rounded-md shadow-xl"
               >
-                Book Your Session
+                Book Session
               </a>
               <a 
                 href="/portfolio" 
-                className="border-2 border-white/80 text-white hover:bg-white/10 px-6 py-3 font-semibold tracking-wider uppercase text-xs transition-all duration-300 hover:scale-105 rounded-lg backdrop-blur-sm"
+                className="border border-white/80 text-white hover:bg-white/10 px-4 py-2 font-medium tracking-wide uppercase text-xs transition-all duration-300 hover:scale-105 rounded-md backdrop-blur-sm"
               >
                 View Portfolio
               </a>
