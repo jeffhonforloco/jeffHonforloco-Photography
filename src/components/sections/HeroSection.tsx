@@ -1,5 +1,5 @@
 
-import { HeroImageGrid, HeroContent } from './hero';
+import { HeroContent, HeroSlider } from './hero';
 
 const HeroSection = () => {
   const portfolioImages = [
@@ -21,21 +21,13 @@ const HeroSection = () => {
     '/lovable-uploads/c279306c-86cb-49fe-a393-c5330888db34.png'
   ];
 
-  // Create optimized image arrays for different columns to prevent duplicates
-  const col1Images = [...portfolioImages.slice(0, 6), ...portfolioImages.slice(0, 6)];
-  const col2Images = [...portfolioImages.slice(6, 12), ...portfolioImages.slice(6, 12)];
-  const col3Images = [...portfolioImages.slice(12), ...portfolioImages.slice(0, 4), ...portfolioImages.slice(12), ...portfolioImages.slice(0, 4)];
-
   return (
     <section className="relative min-h-screen overflow-hidden bg-black">
       {/* Hidden SEO content */}
       <h1 className="sr-only">Jeff Honforloco Photography - Luxury Fashion & Beauty Photographer | Nationwide Bookings NYC, LA, Miami, Chicago</h1>
       
-      <HeroImageGrid 
-        col1Images={col1Images}
-        col2Images={col2Images}
-        col3Images={col3Images}
-      />
+      {/* Continuous Auto Slider */}
+      <HeroSlider images={portfolioImages} />
 
       {/* Hero Content Overlay */}
       <HeroContent />
