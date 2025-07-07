@@ -19,8 +19,9 @@ const HeroSection = () => {
     '/lovable-uploads/c279306c-86cb-49fe-a393-c5330888db34.png'
   ];
 
-  // Create seamless loop by duplicating images
-  const seamlessImages = [...portfolioImages, ...portfolioImages];
+  // Create seamless loop with shuffled images to prevent obvious duplicates
+  const shuffledImages = [...portfolioImages.slice(8), ...portfolioImages, ...portfolioImages.slice(0, 8)];
+  const seamlessImages = shuffledImages;
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-black">
