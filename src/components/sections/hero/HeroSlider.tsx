@@ -1,65 +1,70 @@
-import { useCallback, useEffect, useRef } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface HeroSliderProps {
   images: string[];
 }
 
 const HeroSlider = ({ images }: HeroSliderProps) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    axis: 'y',
-    loop: true,
-    dragFree: true,
-    containScroll: false,
-  });
-
-  const autoScrollRef = useRef<NodeJS.Timeout>();
-
-  const startAutoScroll = useCallback(() => {
-    if (!emblaApi) return;
-    
-    autoScrollRef.current = setInterval(() => {
-      emblaApi.scrollNext();
-    }, 3000);
-  }, [emblaApi]);
-
-  const stopAutoScroll = useCallback(() => {
-    if (autoScrollRef.current) {
-      clearInterval(autoScrollRef.current);
-      autoScrollRef.current = undefined;
-    }
-  }, []);
+  const [direction, setDirection] = useState<'up' | 'down'>('up');
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!emblaApi) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    startAutoScroll();
-    
-    emblaApi.on('pointerDown', stopAutoScroll);
-    emblaApi.on('pointerUp', startAutoScroll);
+    let animationId: number;
+    let currentPosition = 0;
+    const speed = 0.5; // pixels per frame
+    const totalHeight = container.scrollHeight / 2; // Half because we duplicate images
+
+    const animate = () => {
+      if (direction === 'up') {
+        currentPosition += speed;
+        if (currentPosition >= totalHeight) {
+          setDirection('down');
+        }
+      } else {
+        currentPosition -= speed;
+        if (currentPosition <= 0) {
+          setDirection('up');
+        }
+      }
+
+      container.style.transform = `translateY(-${currentPosition}px)`;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
 
     return () => {
-      stopAutoScroll();
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
     };
-  }, [emblaApi, startAutoScroll, stopAutoScroll]);
+  }, [direction]);
+
+  // Triple the images for seamless loop
+  const tripleImages = [...images, ...images, ...images];
 
   return (
-    <div className="absolute inset-0">
-      <div className="overflow-hidden h-full" ref={emblaRef}>
-        <div className="flex flex-col h-full">
-          {[...images, ...images].map((image, index) => (
-            <div key={`slider-${index}`} className="flex-[0_0_33.33%] min-h-0 relative">
-              <img 
-                src={image} 
-                alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
-                className="w-full h-full object-cover" 
-                loading={index < 3 ? "eager" : "lazy"}
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-black/20"></div>
-            </div>
-          ))}
-        </div>
+    <div className="absolute inset-0 overflow-hidden">
+      <div 
+        ref={containerRef}
+        className="flex flex-col"
+        style={{ willChange: 'transform' }}
+      >
+        {tripleImages.map((image, index) => (
+          <div key={`slider-${index}`} className="h-screen flex-shrink-0 relative">
+            <img 
+              src={image} 
+              alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
+              className="w-full h-full object-cover" 
+              loading={index < 3 ? "eager" : "lazy"}
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-black/20"></div>
+          </div>
+        ))}
       </div>
     </div>
   );
