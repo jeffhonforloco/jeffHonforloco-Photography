@@ -143,16 +143,15 @@ const PortfolioCategory = () => {
               <div className="px-8">
                 <div className="max-w-7xl mx-auto">
                   <div className="relative aspect-video overflow-hidden">
-                    <img
-                      src={featuredVideo.src}
-                      alt={featuredVideo.alt}
+                    <video
                       className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center group cursor-pointer hover:bg-black/20 transition-colors duration-500">
-                      <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                        <Play className="w-8 h-8 text-black ml-1" fill="currentColor" />
-                      </div>
-                    </div>
+                      controls
+                      poster={featuredVideo.src}
+                      preload="metadata"
+                    >
+                      <source src={featuredVideo.src} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
                 </div>
               </div>
@@ -164,60 +163,56 @@ const PortfolioCategory = () => {
             <div className="p-1 space-y-1">
               {/* Large Featured Video at Top */}
               <div className="relative aspect-video overflow-hidden group cursor-pointer">
-                <img
-                  src={motionData[0]?.src}
-                  alt={motionData[0]?.alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                    <Play className="w-6 h-6 text-black ml-1" fill="currentColor" />
-                  </div>
-                </div>
+                <video
+                  className="w-full h-full object-cover"
+                  controls
+                  poster={motionData[0]?.src}
+                  preload="metadata"
+                >
+                  <source src={motionData[0]?.src} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
               
               {/* 2-Column Grid Below */}
               <div className="grid grid-cols-2 gap-1">
                 {/* Video 2 */}
                 <div className="relative aspect-video overflow-hidden group cursor-pointer">
-                  <img
-                    src={motionData[1]?.src}
-                    alt={motionData[1]?.alt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                      <Play className="w-4 h-4 text-black ml-0.5" fill="currentColor" />
-                    </div>
-                  </div>
+                  <video
+                    className="w-full h-full object-cover"
+                    controls
+                    poster={motionData[1]?.src}
+                    preload="metadata"
+                  >
+                    <source src={motionData[1]?.src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
                 
                 {/* Video 3 */}
                 <div className="relative aspect-video overflow-hidden group cursor-pointer">
-                  <img
-                    src={motionData[2]?.src}
-                    alt={motionData[2]?.alt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                      <Play className="w-4 h-4 text-black ml-0.5" fill="currentColor" />
-                    </div>
-                  </div>
+                  <video
+                    className="w-full h-full object-cover"
+                    controls
+                    poster={motionData[2]?.src}
+                    preload="metadata"
+                  >
+                    <source src={motionData[2]?.src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
                 
                 {/* Video 4 */}
                 <div className="relative aspect-video overflow-hidden group cursor-pointer">
-                  <img
-                    src={motionData[3]?.src}
-                    alt={motionData[3]?.alt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                      <Play className="w-4 h-4 text-black ml-0.5" fill="currentColor" />
-                    </div>
-                  </div>
+                  <video
+                    className="w-full h-full object-cover"
+                    controls
+                    poster={motionData[3]?.src}
+                    preload="metadata"
+                  >
+                    <source src={motionData[3]?.src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
                 
                 {/* Video 5 with MORE overlay */}
@@ -243,26 +238,15 @@ const PortfolioCategory = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {otherVideos.map((video, index) => (
                     <div key={index} className="relative aspect-video overflow-hidden group cursor-pointer">
-                      <img
-                        src={video.src}
-                        alt={video.alt}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500"></div>
-                      
-                      {/* Play Button */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                          <Play className="w-4 h-4 text-black ml-0.5" fill="currentColor" />
-                        </div>
-                      </div>
-
-                      {/* MORE Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <div className="text-white">
-                          <h3 className="text-6xl font-bold opacity-80 tracking-wider">MORE</h3>
-                        </div>
-                      </div>
+                      <video
+                        className="w-full h-full object-cover"
+                        controls
+                        poster={video.src}
+                        preload="metadata"
+                      >
+                        <source src={video.src} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
                     </div>
                   ))}
                 </div>
