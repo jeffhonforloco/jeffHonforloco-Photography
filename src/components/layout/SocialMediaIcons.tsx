@@ -7,7 +7,7 @@ interface SocialMediaIconsProps {
 const SocialMediaIcons = ({ variant }: SocialMediaIconsProps) => {
   const socialLinks = [
     { Icon: Facebook, href: "#" },
-    { Icon: Instagram, href: "#" },
+    { Icon: Instagram, href: "https://instagram.com/jeffhonforlocophotos" },
     { 
       Icon: ({ className }: { className: string }) => (
         <svg className={className} fill="currentColor" viewBox="0 0 24 24">
@@ -16,7 +16,7 @@ const SocialMediaIcons = ({ variant }: SocialMediaIconsProps) => {
       ), 
       href: "#" 
     },
-    { Icon: Youtube, href: "#" }
+    { Icon: Youtube, href: "https://youtube.com/@jeffhonforlocophotos" }
   ];
 
   if (variant === 'desktop') {
