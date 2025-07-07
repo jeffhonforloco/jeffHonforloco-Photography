@@ -138,7 +138,7 @@ const HeroSection = () => {
           <img 
             src="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" 
             alt="Jeff Honforloco Photography Logo" 
-            className="w-64 sm:w-72 max-w-[80vw] h-auto filter drop-shadow-2xl brightness-150 contrast-125 mx-auto mb-6"
+            className="w-80 sm:w-96 max-w-[85vw] h-auto filter drop-shadow-2xl brightness-150 contrast-125 mx-auto mb-6"
           />
           <div className="max-w-sm mx-auto">
             <h2 className="font-playfair text-xl sm:text-2xl font-light text-white mb-4 tracking-wide leading-tight">
