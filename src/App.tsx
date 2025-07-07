@@ -13,7 +13,6 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import LocationLanding from "./pages/LocationLanding";
 import NotFound from "./pages/NotFound";
-import Admin from "./pages/Admin";
 import Analytics from "./components/Analytics";
 
 const queryClient = new QueryClient();
@@ -46,8 +45,6 @@ const App = () => (
           <Route path="/switzerland" element={<LocationLanding />} />
           <Route path="/malta" element={<LocationLanding />} />
           <Route path="/monaco" element={<LocationLanding />} />
-          {/* Admin Panel */}
-          <Route path="/admin/*" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
