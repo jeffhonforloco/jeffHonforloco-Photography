@@ -5,6 +5,9 @@ Allow: /
 # Sitemap
 Sitemap: https://jeffhonforlocophotos.com/sitemap.xml
 
+# Allow crawling of images
+Allow: /lovable-uploads/
+
 # Specific crawl guidelines
 Crawl-delay: 1
 

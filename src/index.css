@@ -285,6 +285,26 @@
   }
 }
 
+/* Performance optimizations */
+img {
+  max-width: 100%;
+  height: auto;
+  image-rendering: optimizeQuality;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Will-change for animations */
+.animate-slide-up-continuous {
+  will-change: transform;
+}
+
+.image-hover-effect {
+  will-change: transform, filter;
+}
+
 /* 4K display optimizations */
 @media (min-width: 2560px) {
   .text-2xl { font-size: 2rem; line-height: 2.25rem; }

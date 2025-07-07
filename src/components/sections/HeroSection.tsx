@@ -31,10 +31,13 @@ const HeroSection = () => {
               <div key={`mobile-col1-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Portfolio ${index + 1}`} 
+                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 2 ? "eager" : "lazy"}
                   decoding="async"
+                  fetchPriority={index < 2 ? "high" : "low"}
+                  width="400"
+                  height="600"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
               </div>
@@ -47,10 +50,13 @@ const HeroSection = () => {
               <div key={`mobile-col2-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Portfolio ${index + 1}`} 
+                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 2 ? "eager" : "lazy"}
                   decoding="async"
+                  fetchPriority={index < 2 ? "high" : "low"}
+                  width="400"
+                  height="600"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
               </div>
@@ -66,10 +72,13 @@ const HeroSection = () => {
               <div key={`desktop-col1-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Portfolio ${index + 1}`} 
+                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding="async"
+                  fetchPriority={index < 3 ? "high" : "low"}
+                  width="400"
+                  height="600"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
               </div>
@@ -82,10 +91,13 @@ const HeroSection = () => {
               <div key={`desktop-col2-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Portfolio ${index + 1}`} 
+                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding="async"
+                  fetchPriority={index < 3 ? "high" : "low"}
+                  width="400"
+                  height="600"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all duration-500"></div>
               </div>
@@ -98,10 +110,13 @@ const HeroSection = () => {
               <div key={`desktop-col3-${index}`} className="relative group overflow-hidden flex-shrink-0">
                 <img 
                   src={image} 
-                  alt={`Portfolio ${index + 1}`} 
+                  alt={`Jeff Honforloco Portfolio ${index + 1} - Fashion Beauty Photography`} 
                   className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105" 
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding="async"
+                  fetchPriority={index < 3 ? "high" : "low"}
+                  width="400"
+                  height="600"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
               </div>
