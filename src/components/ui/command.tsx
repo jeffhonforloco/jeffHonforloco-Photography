@@ -21,7 +21,7 @@ const Command = React.forwardRef<
 ))
 Command.displayName = CommandPrimitive.displayName
 
-import { DialogProps } from "@radix-ui/react-dialog"
+
 
 const CommandDialog = ({ children, ...props }: DialogProps) => {
   return (

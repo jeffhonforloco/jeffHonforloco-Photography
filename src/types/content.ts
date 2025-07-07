@@ -1,6 +1,21 @@
 // Content data types for the photography website
 
 export interface ContentData {
+  personal: {
+    name: string;
+    profession: string;
+    location: string;
+    specialization: string;
+    quote: string;
+    bio: string;
+    philosophy: string;
+  };
+  contact: {
+    address: string;
+    phone: string;
+    emails: string[];
+  };
+  services: string[];
   experience: {
     publishedWorks: string;
     years: string;
