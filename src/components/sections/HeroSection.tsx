@@ -1,15 +1,15 @@
 
 const HeroSection = () => {
   const portfolioImages = [
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
-    'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
-    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
-    'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
-    'https://images.unsplash.com/photo-1506629905963-b3b17f54e5b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
-    'https://images.unsplash.com/photo-1518577915332-c2a19f149a75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
-    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
-    'https://images.unsplash.com/photo-1512646605205-78422b7c7896?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95',
-    'https://images.unsplash.com/photo-1539571696520-9f2891b92ac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=95'
+    '/lovable-uploads/4a4d1d70-8ce9-4c45-b96c-f46b3bb46863.png',
+    '/lovable-uploads/69f2a872-9dde-4972-bb6a-e11577de7fec.png',
+    '/lovable-uploads/62b49f7c-4f73-4d92-881f-45f2809087b1.png',
+    '/lovable-uploads/6a95f17f-c979-43f4-9323-c4f01731a191.png',
+    '/lovable-uploads/d1ac41f4-eab2-40c7-8c53-61d619ab77c3.png',
+    '/lovable-uploads/d0aa1656-0697-40c8-aad3-a3756945228a.png',
+    '/lovable-uploads/db51011f-18fe-4e40-8977-b0b6a211a396.png',
+    '/lovable-uploads/3773cab4-5d54-45b9-befe-7e8b70874496.png',
+    '/lovable-uploads/e8cb69bc-d69a-44f0-9d6d-54cff80fa950.png'
   ];
 
   return (
