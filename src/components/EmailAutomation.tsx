@@ -78,7 +78,7 @@ export const triggerEmailSequence = async (formData: ContactFormData) => {
 
     // Internal notification
     await sendEmail({
-      to: 'info@jeffhonforloco.com',
+      to: 'info@jeffhonforlocophotos.com',
       subject: `New High-Value Inquiry from ${formData.name}`,
       template: 'internal_notification',
       variables: formData,
