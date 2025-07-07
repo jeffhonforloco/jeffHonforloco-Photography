@@ -255,7 +255,7 @@
 }
 
 .animate-slide-seamless {
-  animation: slideSeamless 80s linear infinite;
+  animation: slideSeamless 50s linear infinite;
   will-change: transform;
   transform: translateZ(0);
   contain: layout style paint;
