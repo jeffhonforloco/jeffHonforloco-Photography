@@ -119,8 +119,8 @@ const Contact = () => {
               {/* Trust Indicators - Mobile */}
               <div className="flex justify-center gap-6 text-sm text-gray-400 mb-8">
                 <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 text-photo-red" />
-                  <span>Award-Winning</span>
+                  <Users className="w-4 h-4 text-photo-red" />
+                  <span>100+ Clients</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Users className="w-4 h-4 text-photo-red" />
@@ -282,10 +282,6 @@ const Contact = () => {
                 
                 {/* Trust Indicators - Desktop */}
                 <div className="flex justify-center gap-12 mt-8 text-gray-400">
-                  <div className="flex items-center gap-2">
-                    <Award className="w-5 h-5 text-photo-red" />
-                    <span className="text-sm">Award-Winning Photographer</span>
-                  </div>
                   <div className="flex items-center gap-2">
                     <Users className="w-5 h-5 text-photo-red" />
                     <span className="text-sm">100+ Happy Clients</span>
