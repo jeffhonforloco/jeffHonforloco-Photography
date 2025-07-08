@@ -34,6 +34,7 @@ const MobileNavigation = ({ isMenuOpen, setIsMenuOpen, onShareClick }: MobileNav
         <button
           className="z-50 flex items-center justify-center"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
           {isMenuOpen ? (
             <X className="w-6 h-6 text-white" />

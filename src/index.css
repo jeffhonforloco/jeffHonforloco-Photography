@@ -264,8 +264,9 @@
 /* Optimized animations for better performance */
 .animate-slide-optimized {
   animation: slideSeamless 40s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
+  transform: translateZ(0);
+  contain: layout style paint;
+  /* Remove will-change to prevent layout thrashing */
 }
 
 /* Enhanced bright theme animations and styles */
@@ -346,13 +347,17 @@ img[loading="lazy"] {
   contain-intrinsic-size: 400px 600px;
 }
 
-/* Will-change for animations */
+/* Optimized animations - removed will-change to prevent layout thrashing */
 .animate-slide-optimized,
 .animate-slide-seamless {
-  will-change: transform;
+  /* Removed will-change: transform to prevent layout thrashing */
 }
 
 .image-hover-effect {
+  /* Only apply will-change on hover to prevent constant layout invalidation */
+}
+
+.image-hover-effect:hover {
   will-change: transform, filter;
 }
 
