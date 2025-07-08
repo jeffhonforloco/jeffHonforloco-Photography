@@ -22,7 +22,7 @@ const BeautyPortfolio = ({ images }: BeautyPortfolioProps) => {
           {/* Title */}
           <div className="text-center mb-12">
             <h1 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-wider">
-              LUXURY BEAUTY
+              BEAUTY
             </h1>
           </div>
 
