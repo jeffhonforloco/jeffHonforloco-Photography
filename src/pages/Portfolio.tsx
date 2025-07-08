@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 const Portfolio = () => {
   const portfolioCategories = [
     {
-      title: 'Fashion Photography',
+      title: 'Fashion',
       slug: 'luxury-fashion-photography-nyc',
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       href: '/portfolio/luxury-fashion-photography-nyc',
