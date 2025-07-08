@@ -28,22 +28,29 @@ const BeautyPortfolio = ({ images }: BeautyPortfolioProps) => {
             </h1>
           </div>
 
-          {/* Image Grid - Dynamic masonry layout like Lindsay Adler */}
-          <div className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-4 auto-rows-max">
+          {/* Image Grid - Varied sizes like Lindsay Adler's actual layout */}
+          <div className="grid grid-cols-2 md:grid-cols-8 gap-3 md:gap-4 auto-rows-max">
             {images.map((image, index) => {
-              // Create dynamic column spans for visual interest
+              // Create more varied column spans based on Lindsay Adler's actual layout
               const getColumnSpan = (index: number) => {
                 const patterns = [
-                  'md:col-span-3', 'md:col-span-3', 'md:col-span-3', 'md:col-span-3', // First row: 4 equal columns
-                  'md:col-span-4', 'md:col-span-4', 'md:col-span-4', // Second row: 3 columns
-                  'md:col-span-6', 'md:col-span-6', // Third row: 2 columns
-                  'md:col-span-3', 'md:col-span-3', 'md:col-span-3', 'md:col-span-3', // Fourth row: 4 columns
+                  'md:col-span-2', 'md:col-span-2', 'md:col-span-2', 'md:col-span-2', // First row: 4 equal narrow columns
+                  'md:col-span-3', 'md:col-span-2', 'md:col-span-3', // Second row: mixed sizes
+                  'md:col-span-2', 'md:col-span-3', 'md:col-span-3', // Third row: mixed
+                  'md:col-span-4', 'md:col-span-4', // Fourth row: 2 wide columns
+                  'md:col-span-2', 'md:col-span-2', 'md:col-span-2', 'md:col-span-2', // Fifth row: back to 4 equal
                 ];
-                return patterns[index % patterns.length] || 'md:col-span-3';
+                return patterns[index % patterns.length] || 'md:col-span-2';
+              };
+              
+              // Add varying heights for more organic feel
+              const getRowSpan = (index: number) => {
+                const heightPatterns = ['', 'md:row-span-1', '', 'md:row-span-1', '', ''];
+                return heightPatterns[index % heightPatterns.length] || '';
               };
               
               return (
-                <div key={index} className={`relative group overflow-hidden cursor-pointer ${getColumnSpan(index)}`}>
+                <div key={index} className={`relative group overflow-hidden cursor-pointer ${getColumnSpan(index)} ${getRowSpan(index)}`}>
                   <img
                     src={image.src}
                     alt={image.alt}
