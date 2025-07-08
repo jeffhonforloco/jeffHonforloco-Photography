@@ -39,7 +39,7 @@ const Portfolio = () => {
     {
       title: 'Lifestyle',
       slug: 'celebrity-lifestyle-photography',
-      image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      image: '/lovable-uploads/bcd80ca3-d60c-4596-9a71-4b8602583ff7.png',
       href: '/portfolio/celebrity-lifestyle-photography',
       description: 'Exclusive celebrity and luxury lifestyle photography capturing authentic moments and sophisticated aesthetics.',
       keywords: 'celebrity photographer, luxury lifestyle photography, exclusive portrait photography, high-profile clients'
