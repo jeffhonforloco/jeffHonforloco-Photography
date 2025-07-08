@@ -7,9 +7,9 @@ export const categoryTitles = {
   'editorial-photography-magazines': 'EDITORIAL',
   'editorial': 'EDITORIAL',
   'celebrity-lifestyle-photography': 'LIFESTYLE',
+  'lifestyle': 'LIFESTYLE',
   // Legacy support
   beauty: 'BEAUTY',
-  lifestyle: 'LIFESTYLE',
   motion: 'MOTION'
 };
 

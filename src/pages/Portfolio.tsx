@@ -38,9 +38,9 @@ const Portfolio = () => {
     },
     {
       title: 'Lifestyle',
-      slug: 'celebrity-lifestyle-photography',
+      slug: 'lifestyle',
       image: '/lovable-uploads/bcd80ca3-d60c-4596-9a71-4b8602583ff7.png',
-      href: '/portfolio/celebrity-lifestyle-photography',
+      href: '/portfolio/lifestyle',
       description: 'Exclusive celebrity and luxury lifestyle photography capturing authentic moments and sophisticated aesthetics.',
       keywords: 'celebrity photographer, luxury lifestyle photography, exclusive portrait photography, high-profile clients'
     }
