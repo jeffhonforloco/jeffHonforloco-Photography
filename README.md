@@ -61,7 +61,7 @@ MIT License
 
 🤝 Contact
 
-For inquiries, shoot Jeff an email at [email@email.com] or use the Contact form on the live site.
+For inquiries, shoot Jeff an email at info@jeffhonforlocophotos.com or use the Contact form on the live site.
 
 ⸻
 
