@@ -26,7 +26,7 @@ const DefaultPortfolio = ({ title, description, images }: DefaultPortfolioProps)
           {/* Category Title */}
           <div className="text-center mb-12">
             <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-wide">
-              {title || 'FASHION'}
+              FASHION
             </h1>
           </div>
 
