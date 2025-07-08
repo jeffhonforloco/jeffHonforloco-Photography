@@ -263,12 +263,9 @@
 
 /* Optimized animations for better performance */
 .animate-slide-optimized {
-  animation: slideSeamless 30s linear infinite;
+  animation: slideSeamless 40s linear infinite;
   will-change: transform;
-  transform: translate3d(0, 0, 0);
-  contain: layout style paint;
   backface-visibility: hidden;
-  perspective: 1000px;
 }
 
 /* Enhanced bright theme animations and styles */
