@@ -13,7 +13,7 @@ const PortfolioCategory = () => {
   const currentCategory = category || 'luxury-fashion-photography-nyc';
   const images = portfolioImages[currentCategory as keyof typeof portfolioImages] || 
                  portfolioImages[currentCategory.split('-')[0] as keyof typeof portfolioImages] || 
-                 portfolioImages.beauty;
+                 [];
   const title = categoryTitles[currentCategory as keyof typeof categoryTitles] || 'Portfolio';
   const description = categoryDescriptions[currentCategory as keyof typeof categoryDescriptions] || '';
 
