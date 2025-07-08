@@ -1,6 +1,7 @@
 export const categoryTitles = {
   'luxury-fashion-photography-nyc': 'FASHION',
   'glamour-photography': 'GLAMOUR',
+  'glamour': 'GLAMOUR',
   'luxury-beauty-photography-nationwide': 'BEAUTY',
   'editorial-photography-magazines': 'EDITORIAL',
   'celebrity-lifestyle-photography': 'LIFESTYLE',
@@ -8,7 +9,6 @@ export const categoryTitles = {
   beauty: 'BEAUTY',
   fashion: 'FASHION',
   editorial: 'EDITORIAL',
-  glamour: 'GLAMOUR',
   lifestyle: 'LIFESTYLE',
   motion: 'MOTION'
 };
