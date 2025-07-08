@@ -21,7 +21,7 @@ const Portfolio = () => {
       keywords: 'glamour photographer, sophisticated portraits, dramatic lighting, elegant photography'
     },
     {
-      title: 'Beauty Photography', 
+      title: 'Beauty', 
       slug: 'luxury-beauty-photography-nationwide',
       image: '/lovable-uploads/08c64276-3665-4346-a637-ca41acc6c602.png',
       href: '/portfolio/luxury-beauty-photography-nationwide',
