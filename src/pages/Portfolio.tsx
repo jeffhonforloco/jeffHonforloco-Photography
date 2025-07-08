@@ -6,9 +6,9 @@ const Portfolio = () => {
   const portfolioCategories = [
     {
       title: 'Fashion',
-      slug: 'luxury-fashion-photography-nyc',
+      slug: 'fashion',
       image: '/lovable-uploads/9cac59de-27c1-4b0a-8c2b-1d8333486e54.png',
-      href: '/portfolio/luxury-fashion-photography-nyc',
+      href: '/portfolio/fashion',
       description: 'High-end fashion photography for luxury brands, fashion weeks, and celebrity campaigns across NYC, LA, and major fashion capitals.',
       keywords: 'luxury fashion photographer NYC, high-end fashion photography, fashion week photographer, celebrity fashion shoots'
     },

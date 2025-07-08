@@ -1,5 +1,6 @@
 export const categoryTitles = {
   'luxury-fashion-photography-nyc': 'FASHION',
+  'fashion': 'FASHION',
   'glamour-photography': 'GLAMOUR',
   'glamour': 'GLAMOUR',
   'luxury-beauty-photography-nationwide': 'BEAUTY',
@@ -7,7 +8,6 @@ export const categoryTitles = {
   'celebrity-lifestyle-photography': 'LIFESTYLE',
   // Legacy support
   beauty: 'BEAUTY',
-  fashion: 'FASHION',
   editorial: 'EDITORIAL',
   lifestyle: 'LIFESTYLE',
   motion: 'MOTION'

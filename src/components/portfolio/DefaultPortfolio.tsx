@@ -140,7 +140,7 @@ const DefaultPortfolio = ({ title, description, images }: DefaultPortfolioProps)
     { src: '/lovable-uploads/ffaad10e-ef84-4236-bc74-370ddacc394b.png', alt: 'Fashion Photography', caption: 'FASHION' }
   ];
 
-  const displayImages = (title === 'FASHION' || window.location.pathname.includes('luxury-fashion-photography-nyc')) ? fashionImages : images;
+  const displayImages = (title === 'FASHION' || window.location.pathname.includes('luxury-fashion-photography-nyc') || window.location.pathname.includes('/portfolio/fashion')) ? fashionImages : images;
   return (
     <Layout>
       <div className="pt-24 pb-12 bg-black min-h-screen">
