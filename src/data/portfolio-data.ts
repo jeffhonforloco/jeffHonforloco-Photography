@@ -49,6 +49,56 @@ export const portfolioImages = {
       src: '/lovable-uploads/866a8725-5cf5-417a-bd5f-acce3532066a.png',
       alt: 'Floral Beauty Concept',
       caption: 'Creative beauty with sunflower accents'
+    },
+    {
+      src: '/lovable-uploads/35e9a46e-e427-4bac-a68b-dbbd510572a3.png',
+      alt: 'Dramatic Red Beauty',
+      caption: 'Bold red monochrome beauty with satin gloves'
+    },
+    {
+      src: '/lovable-uploads/ffaad10e-ef84-4236-bc74-370ddacc394b.png',
+      alt: 'Golden Glamour Beauty',
+      caption: 'Editorial beauty with gold shimmer and crystal accents'
+    },
+    {
+      src: '/lovable-uploads/9da2302c-328a-4b71-a77c-3bab8685cdc3.png',
+      alt: 'Classic Red Lip Beauty',
+      caption: 'Timeless elegance with bold red lips and winged liner'
+    },
+    {
+      src: '/lovable-uploads/7fc7338e-58f3-461a-aa6a-a7592f9ce82c.png',
+      alt: 'Sophisticated Beauty Look',
+      caption: 'High-end beauty with metallic eyes and glossy red lips'
+    },
+    {
+      src: '/lovable-uploads/221ec5df-4792-4bc0-a0e4-a5d59ba23319.png',
+      alt: 'Electric Blue Editorial',
+      caption: 'Striking beauty with electric blue liner and glossy lips'
+    },
+    {
+      src: '/lovable-uploads/80de2833-dbec-48e6-a25a-c8779bd528cd.png',
+      alt: 'Artistic Blue Beauty',
+      caption: 'Creative beauty with blue shimmer liner and natural lips'
+    },
+    {
+      src: '/lovable-uploads/270d66ab-2bac-4d01-9396-368e98145c5a.png',
+      alt: 'Luxury Red Beauty',
+      caption: 'High-fashion beauty with red lips and statement jewelry'
+    },
+    {
+      src: '/lovable-uploads/a279f373-675a-45d0-8695-6c986446600f.png',
+      alt: 'Natural Wind-Blown Beauty',
+      caption: 'Effortless beauty with flowing hair and natural glow'
+    },
+    {
+      src: '/lovable-uploads/2ab4a1c7-225f-4632-ad1d-9183c8fb9f94.png',
+      alt: 'Vibrant Pink Beauty',
+      caption: 'Bold editorial beauty with pink and purple eyeshadow'
+    },
+    {
+      src: '/lovable-uploads/8495ca3f-5792-435a-864c-99c380bd088c.png',
+      alt: 'Contemporary Beauty Portrait',
+      caption: 'Modern beauty with blue accents and glossy finish'
     }
   ],
   fashion: [
