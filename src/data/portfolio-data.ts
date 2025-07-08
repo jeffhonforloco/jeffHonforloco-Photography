@@ -103,9 +103,9 @@ export const portfolioImages = {
   ],
   fashion: [
     {
-      src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      alt: 'Fashion Portrait 1',
-      caption: 'High fashion editorial'
+      src: '/lovable-uploads/9cac59de-27c1-4b0a-8c2b-1d8333486e54.png',
+      alt: 'Red Fashion Portrait',
+      caption: 'Bold red glamour fashion editorial'
     },
     {
       src: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
@@ -121,6 +121,57 @@ export const portfolioImages = {
       src: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       alt: 'Fashion Portrait 4',
       caption: 'Avant-garde fashion concept'
+    }
+  ],
+  glamour: [
+    {
+      src: '/lovable-uploads/7c6c25d5-48ef-4f79-8369-b5edab7ddc85.png',
+      alt: 'Glamour Portrait',
+      caption: 'Black and white glamour with sparkly dress'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      alt: 'Glamour Portrait 2',
+      caption: 'Classic glamour styling'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      alt: 'Glamour Portrait 3',
+      caption: 'Sophisticated glamour look'
+    }
+  ],
+  editorial: [
+    {
+      src: '/lovable-uploads/67b5c2bf-d1a3-44e4-af56-212f23e37262.png',
+      alt: 'Editorial Portrait',
+      caption: 'Sunflower field editorial concept'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      alt: 'Editorial Portrait 2',
+      caption: 'Magazine editorial styling'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      alt: 'Editorial Portrait 3',
+      caption: 'Contemporary editorial concept'
+    }
+  ],
+  lifestyle: [
+    {
+      src: '/lovable-uploads/bcd80ca3-d60c-4596-9a71-4b8602583ff7.png',
+      alt: 'Lifestyle Portrait',
+      caption: 'Natural outdoor lifestyle portrait'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      alt: 'Lifestyle Portrait 2',
+      caption: 'Authentic lifestyle moment'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      alt: 'Lifestyle Portrait 3',
+      caption: 'Casual lifestyle photography'
     }
   ],
   motion: [
