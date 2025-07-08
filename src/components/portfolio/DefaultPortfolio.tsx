@@ -140,7 +140,7 @@ const DefaultPortfolio = ({ title, description, images }: DefaultPortfolioProps)
     { src: '/lovable-uploads/ffaad10e-ef84-4236-bc74-370ddacc394b.png', alt: 'Fashion Photography', caption: 'FASHION' }
   ];
 
-  const displayImages = title === 'FASHION' || window.location.pathname.includes('luxury-fashion-photography-nyc') ? fashionImages : images;
+  const displayImages = (title === 'FASHION' || window.location.pathname.includes('luxury-fashion-photography-nyc')) ? fashionImages : images;
   return (
     <Layout>
       <div className="pt-24 pb-12 bg-black min-h-screen">
@@ -159,7 +159,7 @@ const DefaultPortfolio = ({ title, description, images }: DefaultPortfolioProps)
           {/* Category Title */}
           <div className="text-center mb-12">
             <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-wide">
-              FASHION
+              {title}
             </h1>
           </div>
 
