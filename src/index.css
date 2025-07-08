@@ -244,14 +244,16 @@
   to { transform: translateY(-100%); }
 }
 
-/* Enhanced seamless infinite scroll animation with pause-reverse pattern */
+/* Enhanced seamless infinite scroll animation with quick pauses */
 @keyframes slideSeamless {
   0% { transform: translateY(0); }
-  47% { transform: translateY(-50%); }
-  50% { transform: translateY(-50%); } /* Pause at bottom */
-  53% { transform: translateY(-50%); }
-  97% { transform: translateY(0); }
-  100% { transform: translateY(0); } /* Pause at top */
+  48% { transform: translateY(-100%); }
+  49% { transform: translateY(-100%); } /* Quick pause at bottom */
+  50% { transform: translateY(-100%); }
+  51% { transform: translateY(0); }
+  98% { transform: translateY(0); }
+  99% { transform: translateY(0); } /* Quick pause at top */
+  100% { transform: translateY(0); }
 }
 
 .animate-slide-up-continuous {
