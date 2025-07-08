@@ -1,5 +1,6 @@
 export const portfolioImages: string[] = [
-  // Your 10 latest uploaded images
+  // Your latest uploaded images
+  '/lovable-uploads/3c8df810-b480-49e2-853e-13b49a6330ba.png',
   '/lovable-uploads/2301434b-9540-429b-b183-c3f01e585450.png',
   '/lovable-uploads/fbeb876e-8eb3-40e4-8481-eb136e709b02.png',
   '/lovable-uploads/ae423683-fce8-4398-9f0a-df01c3ff0e83.png',
@@ -10,8 +11,6 @@ export const portfolioImages: string[] = [
   '/lovable-uploads/1dac84ed-b80a-479f-937c-1beab4e1f12e.png',
   '/lovable-uploads/b4c42681-bbee-4882-8cb7-d652bb854191.png',
   '/lovable-uploads/7cdb389a-0507-4d05-8782-18edd5afe814.png',
-  
-  // Your previous 20 uploaded images
   '/lovable-uploads/cd3eb066-6ffe-4e1e-9613-a1b067806092.png',
   '/lovable-uploads/060e27c9-b2d8-4f33-b575-794287894fd6.png',
   '/lovable-uploads/1bb36c8a-ad7c-469a-bc03-92b007c271c3.png',
@@ -30,6 +29,5 @@ export const portfolioImages: string[] = [
   '/lovable-uploads/c279306c-86cb-49fe-a393-c5330888db34.png',
   '/lovable-uploads/3566a61b-2d58-4e4a-920f-b2f011f69289.png',
   '/lovable-uploads/3773cab4-5d54-45b9-befe-7e8b70874496.png',
-  '/lovable-uploads/37f4ae80-0bd4-4eae-8c84-a252aa263a64.png',
-  '/lovable-uploads/3b2350e8-72d9-4325-bd13-a5b6ceec335f.png'
+  '/lovable-uploads/37f4ae80-0bd4-4eae-8c84-a252aa263a64.png'
 ];
