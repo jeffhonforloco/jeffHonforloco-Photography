@@ -34,22 +34,6 @@ const Footer = () => {
               ))}
             </div>
           </div>
-          <div>
-            <h4 className="font-inter font-medium mb-6 tracking-wider uppercase text-sm">Connect</h4>
-            <div className="space-y-4">
-              <a href="https://instagram.com/jeffhonforloco" target="_blank" rel="noopener noreferrer" 
-                 className="block text-gray-400 hover:text-photo-red transition-colors duration-300 font-light">
-                Instagram
-              </a>
-              <a href="https://youtube.com/@jeffhonforloco" target="_blank" rel="noopener noreferrer" 
-                 className="block text-gray-400 hover:text-photo-red transition-colors duration-300 font-light">
-                YouTube
-              </a>
-              <Link to="/contact" className="block text-gray-400 hover:text-photo-red transition-colors duration-300 font-light">
-                Book a Session
-              </Link>
-            </div>
-          </div>
         </div>
         
         {/* Copyright */}
