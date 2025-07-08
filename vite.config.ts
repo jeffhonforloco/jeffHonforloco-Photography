@@ -36,14 +36,8 @@ export default defineConfig(({ mode }) => ({
     assetsInlineLimit: 4096,
     // Enable source maps for production debugging
     sourcemap: false,
-    // Minimize bundle size
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
+    // Minimize bundle size with esbuild (default, no extra dependencies)
+    minify: 'esbuild'
   },
   // Performance optimizations
   optimizeDeps: {
