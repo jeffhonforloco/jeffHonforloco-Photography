@@ -317,6 +317,16 @@ img {
   transform: translateZ(0);
   will-change: auto;
   contain: layout style paint;
+  
+  /* Modern image loading optimizations */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  
+  /* Memory optimization */
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Optimize images for hero section */
@@ -324,9 +334,20 @@ img {
   content-visibility: auto;
   contain-intrinsic-size: 400px 600px;
   image-rendering: -webkit-optimize-contrast;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0.2s ease-out;
   backface-visibility: hidden;
   transform: translateZ(0);
+  
+  /* Critical performance improvements */
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Image compression hints */
+  image-orientation: from-image;
+  object-fit: cover;
+  object-position: center;
 }
 
 .hero-image-container {
@@ -346,10 +367,18 @@ img[loading="lazy"] {
   contain-intrinsic-size: 400px 600px;
 }
 
-/* Optimized animations - removed will-change to prevent layout thrashing */
+/* Optimized animations - performance focused */
 .animate-slide-optimized,
 .animate-slide-seamless {
-  /* Removed will-change: transform to prevent layout thrashing */
+  /* GPU acceleration for smoother animations */
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  /* Reduce layout recalculations */
+  contain: layout style;
+  isolation: isolate;
 }
 
 .image-hover-effect {

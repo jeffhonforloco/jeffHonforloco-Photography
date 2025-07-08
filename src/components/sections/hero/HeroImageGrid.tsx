@@ -13,10 +13,12 @@ const HeroImageGrid = () => {
           src={image}
           alt={`Portfolio ${index + 1}`} 
           className="hero-image w-full h-auto object-cover"
-          loading={index < 6 ? "eager" : "lazy"}
+          loading={index < 3 ? "eager" : "lazy"}
           decoding="async"
+          fetchPriority={index < 3 ? "high" : "low"}
           width="400"
           height="600"
+          sizes="(max-width: 768px) 50vw, 33vw"
           style={{
             contentVisibility: 'auto',
             containIntrinsicSize: '400px 600px'

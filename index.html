@@ -45,16 +45,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- Critical image preloading -->
-    <link rel="preload" as="image" href="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" />
-    <link rel="prefetch" as="image" href="/lovable-uploads/cd3eb066-6ffe-4e1e-9613-a1b067806092.png" />
-    <link rel="prefetch" as="image" href="/lovable-uploads/060e27c9-b2d8-4f33-b575-794287894fd6.png" />
-    <link rel="prefetch" as="image" href="/lovable-uploads/1bb36c8a-ad7c-469a-bc03-92b007c271c3.png" />
+    <!-- Critical image preloading with modern formats -->
+    <link rel="preload" as="image" href="/lovable-uploads/ff1ac4ba-08e6-4647-8c5c-5e76943f6cfa.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/lovable-uploads/cd3eb066-6ffe-4e1e-9613-a1b067806092.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/lovable-uploads/060e27c9-b2d8-4f33-b575-794287894fd6.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/lovable-uploads/1bb36c8a-ad7c-469a-bc03-92b007c271c3.png" fetchpriority="high" />
     
-    <!-- Performance hints -->
+    <!-- Critical CSS inlining hint -->
+    <link rel="preload" as="style" href="/src/index.css" fetchpriority="high" />
+    
+    <!-- Resource hints for better loading -->
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    <link rel="prefetch" href="/portfolio" />
+    <link rel="prefetch" href="/about" />
+    <link rel="prefetch" href="/contact" />
+    
+    <!-- Enhanced Performance hints -->
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+    <link rel="preconnect" href="//vitals.vercel-insights.com" />
     <meta name="theme-color" content="#C8102E" />
     <meta name="color-scheme" content="dark light" />
+    
+    <!-- Core Web Vitals optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width" />
+    
+    <!-- Performance timing -->
+    <meta name="performance-timing" content="mark-as-interactive" />
+    <link rel="modulepreload" href="/src/main.tsx" />
 
     <!-- Enhanced Open Graph -->
     <meta property="og:title" content="Jeff Honforloco Photography - World's Premier Luxury Fashion & Beauty Photographer | Global Elite Services" />
