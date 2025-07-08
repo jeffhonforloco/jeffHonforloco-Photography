@@ -154,7 +154,58 @@ export const portfolioImages = {
       caption: 'High-fashion glamour with dramatic sequin styling'
     }
   ],
-  editorial: [],
+  editorial: [
+    {
+      src: '/lovable-uploads/299addc7-e4cd-4359-9057-9164326e1dd5.png',
+      alt: 'Cultural Heritage Editorial',
+      caption: 'Editorial portrait celebrating traditional African culture and beauty'
+    },
+    {
+      src: '/lovable-uploads/c9fe7ba2-c11c-4358-9066-cf360c369068.png',
+      alt: 'Natural Beauty Editorial',
+      caption: 'Editorial lifestyle portrait in sunflower field setting'
+    },
+    {
+      src: '/lovable-uploads/53f863ad-ee66-47ea-b006-979e266b08f7.png',
+      alt: 'Dramatic Profile Editorial',
+      caption: 'High-contrast black and white editorial portrait'
+    },
+    {
+      src: '/lovable-uploads/638bdba4-346f-4915-ba41-8970511852cf.png',
+      alt: 'Artistic Paint Editorial',
+      caption: 'Creative editorial featuring body paint and artistic expression'
+    },
+    {
+      src: '/lovable-uploads/2f2d0b45-3d49-4c46-ac10-916f05d481e4.png',
+      alt: 'Romantic Silhouette Editorial',
+      caption: 'Dramatic editorial silhouette with bold red backdrop'
+    },
+    {
+      src: '/lovable-uploads/178f1381-f722-4459-90a9-1448d0dd498c.png',
+      alt: 'Urban Style Editorial',
+      caption: 'Contemporary editorial with dramatic red lighting'
+    },
+    {
+      src: '/lovable-uploads/a493cc92-5a76-4b46-a300-26ef349b94cb.png',
+      alt: 'Floral Beauty Editorial',
+      caption: 'Editorial beauty concept with vibrant floral elements'
+    },
+    {
+      src: '/lovable-uploads/60734e37-0d82-462a-aff2-a6ebb9c1ab09.png',
+      alt: 'Natural Hair Editorial',
+      caption: 'Editorial celebrating natural beauty with floral crown'
+    },
+    {
+      src: '/lovable-uploads/031f6e00-0baa-4cc0-bf30-6960bf585044.png',
+      alt: 'Goddess Editorial',
+      caption: 'High-fashion editorial with golden sunburst headpiece'
+    },
+    {
+      src: '/lovable-uploads/f3227ce4-80ae-48e0-b97d-c6f9fd22284a.png',
+      alt: 'Floral Crown Editorial',
+      caption: 'Editorial portrait with ornate floral and butterfly styling'
+    }
+  ],
   lifestyle: [],
   motion: [
     {
