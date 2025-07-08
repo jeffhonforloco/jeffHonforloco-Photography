@@ -8,65 +8,61 @@ interface BeautyPortfolioProps {
 const BeautyPortfolio = ({ images }: BeautyPortfolioProps) => {
   return (
     <Layout>
-      <div className="min-h-screen bg-black pt-24 pb-20">
-        <div className="max-w-6xl mx-auto px-4">
-          {/* Back to Portfolios Link */}
-          <div className="mb-8">
-            <Link 
-              to="/portfolio" 
-              className="inline-flex items-center text-photo-red hover:text-white transition-colors duration-300 text-lg"
-            >
-              <span className="mr-2">←</span>
-              Back to Portfolios
-            </Link>
-          </div>
+      <div className="min-h-screen bg-black">
+        {/* Back to Portfolios Link - Fixed position */}
+        <div className="fixed top-24 left-4 z-10">
+          <Link 
+            to="/portfolio" 
+            className="inline-flex items-center text-photo-red hover:text-white transition-colors duration-300 text-lg bg-black/80 backdrop-blur px-3 py-1 rounded"
+          >
+            <span className="mr-2">←</span>
+            Back to Portfolios
+          </Link>
+        </div>
 
-          {/* Title */}
-          <div className="text-center mb-12">
-            <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-wide">
-              BEAUTY
-            </h1>
-          </div>
+        {/* Title - Fixed position */}
+        <div className="fixed top-0 left-0 right-0 z-10 bg-black/90 backdrop-blur pt-16 pb-4">
+          <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-wide text-center">
+            BEAUTY
+          </h1>
+        </div>
 
-          {/* Image Grid - MASSIVE layout exactly like Lindsay Adler */}
-          <div className="grid grid-cols-2 md:grid-cols-12 gap-1 md:gap-2 auto-rows-max">
-            {images.map((image, index) => {
-              // Create MUCH larger sizing to match Lindsay Adler's massive scale
-              const getSizeClass = (index: number) => {
-                const patterns = [
-                  'md:col-span-3 md:row-span-3', // Large
-                  'md:col-span-6 md:row-span-4', // MASSIVE center piece (like Lindsay's main image)
-                  'md:col-span-3 md:row-span-2', // Large rectangle
-                  'md:col-span-3 md:row-span-3', // Large square
-                  'md:col-span-4 md:row-span-3', // Very large
-                  'md:col-span-3 md:row-span-2', // Large rectangle
-                  'md:col-span-2 md:row-span-2', // Medium
-                  'md:col-span-4 md:row-span-4', // MASSIVE
-                  'md:col-span-5 md:row-span-3', // Very large wide
-                  'md:col-span-3 md:row-span-3', // Large square
-                ];
-                return patterns[index % patterns.length] || 'md:col-span-4 md:row-span-3';
-              };
-              
-              return (
-                <div key={index} className={`relative group overflow-hidden cursor-pointer ${getSizeClass(index)}`}>
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover min-h-[200px] md:min-h-[400px] transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
-                </div>
-              );
-            })}
-          </div>
+        {/* Full-width masonry grid - EXACTLY like Lindsay Adler */}
+        <div className="pt-32 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-2 auto-rows-max">
+          {images.map((image, index) => {
+            // Create varying sizes like Lindsay's actual layout
+            const getSizeClass = (index: number) => {
+              const patterns = [
+                'col-span-1 row-span-1', // Small
+                'md:col-span-2 md:row-span-2', // Medium  
+                'col-span-1 row-span-1', // Small
+                'col-span-1 row-span-1', // Small
+                'md:col-span-1 md:row-span-2', // Tall
+                'md:col-span-2 md:row-span-1', // Wide
+                'col-span-1 row-span-1', // Small
+                'md:col-span-1 md:row-span-1', // Medium
+              ];
+              return patterns[index % patterns.length] || 'col-span-1 row-span-1';
+            };
+            
+            return (
+              <div key={index} className={`relative group overflow-hidden cursor-pointer ${getSizeClass(index)}`}>
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover min-h-[150px] md:min-h-[200px] lg:min-h-[300px] transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
+              </div>
+            );
+          })}
+        </div>
 
-          {/* Copyright Notice */}
-          <div className="text-center mt-16 pt-8">
-            <p className="text-white/60 text-sm tracking-wide">
-              © 2025 Jeff Honforloco Photography. All rights reserved.
-            </p>
-          </div>
+        {/* Copyright Notice - Fixed at bottom */}
+        <div className="fixed bottom-4 left-0 right-0 text-center z-10">
+          <p className="text-white/60 text-sm tracking-wide bg-black/80 backdrop-blur inline-block px-4 py-2 rounded">
+            © 2025 Jeff Honforloco Photography. All rights reserved.
+          </p>
         </div>
       </div>
     </Layout>
