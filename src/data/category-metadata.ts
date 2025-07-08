@@ -1,5 +1,5 @@
 export const categoryTitles = {
-  'luxury-fashion-photography-nyc': 'Luxury Fashion Photography',
+  'luxury-fashion-photography-nyc': '',
   'luxury-beauty-photography-nationwide': 'Luxury Beauty Photography',
   'editorial-photography-magazines': 'Editorial Photography',
   'celebrity-lifestyle-photography': 'Celebrity & Lifestyle Photography',
