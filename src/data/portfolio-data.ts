@@ -102,7 +102,58 @@ export const portfolioImages = {
     }
   ],
   fashion: [],
-  glamour: [],
+  glamour: [
+    {
+      src: '/lovable-uploads/0999eeeb-51de-4779-bde5-250d4e16b9fd.png',
+      alt: 'Red Hat Glamour Portrait',
+      caption: 'Classic red glamour with dramatic hat styling'
+    },
+    {
+      src: '/lovable-uploads/d4d5f4a0-6d58-4861-8b26-16493d507bd1.png',
+      alt: 'Red Dress Glamour',
+      caption: 'Sophisticated glamour with red satin gloves'
+    },
+    {
+      src: '/lovable-uploads/45760ff2-ca5e-4f96-94f9-07c481485952.png',
+      alt: 'Red Lips Glamour',
+      caption: 'Bold red lips with elegant glove styling'
+    },
+    {
+      src: '/lovable-uploads/87926666-b0fe-4e8e-ae84-c3199a40c517.png',
+      alt: 'Sequin Glamour',
+      caption: 'Luxurious red sequin dress glamour portrait'
+    },
+    {
+      src: '/lovable-uploads/170f8ef5-0e2a-4371-812b-bc064ba01440.png',
+      alt: 'Holiday Glamour',
+      caption: 'Festive glamour with sparkling red dress'
+    },
+    {
+      src: '/lovable-uploads/92ba7135-1793-4f02-bba7-4ceb746e5b1b.png',
+      alt: 'Pearl Jewelry Glamour',
+      caption: 'Elegant beauty with statement pearl jewelry'
+    },
+    {
+      src: '/lovable-uploads/4d7a433a-0a68-4156-9269-48a434439ea1.png',
+      alt: 'Gold Jewelry Editorial',
+      caption: 'Luxury glamour with gold coin headpiece'
+    },
+    {
+      src: '/lovable-uploads/d5e8e24b-1f18-406e-813d-6e1567ad8c05.png',
+      alt: 'Monochrome Beaded Glamour',
+      caption: 'Black and white glamour with intricate beading'
+    },
+    {
+      src: '/lovable-uploads/8c5d607a-de80-49a0-902d-7db820218108.png',
+      alt: 'Sequin Portrait Glamour',
+      caption: 'Classic black and white sequin dress portrait'
+    },
+    {
+      src: '/lovable-uploads/7e1d639b-923e-43ff-97b8-1047ac004091.png',
+      alt: 'Dramatic Sequin Glamour',
+      caption: 'High-fashion glamour with dramatic sequin styling'
+    }
+  ],
   editorial: [],
   lifestyle: [],
   motion: [
