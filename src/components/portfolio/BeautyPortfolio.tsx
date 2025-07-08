@@ -26,9 +26,9 @@ const BeautyPortfolio = ({ images }: BeautyPortfolioProps) => {
             </h1>
           </div>
 
-          {/* Image Grid - 2x2 on mobile, responsive */}
-          <div className="grid grid-cols-2 gap-2 md:gap-4">
-            {images.slice(0, 4).map((image, index) => (
+          {/* Image Grid - 2x3 on mobile, 3x3 on larger screens */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+            {images.slice(0, 9).map((image, index) => (
               <div key={index} className="aspect-[3/4] overflow-hidden">
                 <img
                   src={image.src}
@@ -37,13 +37,6 @@ const BeautyPortfolio = ({ images }: BeautyPortfolioProps) => {
                 />
               </div>
             ))}
-          </div>
-
-          {/* Website URL */}
-          <div className="text-center mt-12">
-            <p className="text-gray-400 text-sm">
-              jeffhonforloco.com
-            </p>
           </div>
         </div>
       </div>
