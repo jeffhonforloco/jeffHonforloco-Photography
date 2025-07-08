@@ -16,6 +16,12 @@ const SocialMediaIcons = ({ variant }: SocialMediaIconsProps) => {
       ), 
       href: "#" 
     },
+    { 
+      Icon: ({ className }: { className: string }) => (
+        <img src="/lovable-uploads/5a60bf0e-6e49-4d51-8166-23e29f649d84.png" alt="YouPic" className={className} />
+      ), 
+      href: "https://youpic.com/jeffhonforlocophotos" 
+    },
     { Icon: Youtube, href: "https://youtube.com/@jeffhonforlocophotos" }
   ];
 
