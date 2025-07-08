@@ -23,9 +23,9 @@ const BeautyPortfolio = ({ images }: BeautyPortfolioProps) => {
           </h1>
         </div>
 
-        {/* Image Grid - 2x3 on mobile, 3x3 on larger screens */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
-          {images.slice(0, 9).map((image, index) => (
+        {/* Image Grid - Responsive grid that grows with content */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
+          {images.map((image, index) => (
             <div key={index} className="aspect-[3/4] overflow-hidden">
               <img
                 src={image.src}
