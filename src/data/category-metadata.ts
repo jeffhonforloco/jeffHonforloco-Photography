@@ -5,10 +5,10 @@ export const categoryTitles = {
   'glamour': 'GLAMOUR',
   'luxury-beauty-photography-nationwide': 'BEAUTY',
   'editorial-photography-magazines': 'EDITORIAL',
+  'editorial': 'EDITORIAL',
   'celebrity-lifestyle-photography': 'LIFESTYLE',
   // Legacy support
   beauty: 'BEAUTY',
-  editorial: 'EDITORIAL',
   lifestyle: 'LIFESTYLE',
   motion: 'MOTION'
 };
