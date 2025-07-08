@@ -1,73 +1,79 @@
-# Welcome to your Lovable project
+# JeffHonforloco Photography Website
 
-## Project info
+**JeffHonforloco** is the personal website of Jeff Honforloco, a hyper‑creative photographer and entrepreneur blending beauty, fashion, editorial, wedding, and portrait photography.
 
-**URL**: https://lovable.dev/projects/b1d129be-f1bc-4d2c-b454-b1d030dcaf68
+---
 
-## How can I edit this code?
+## 🌟 Features
 
-There are several ways of editing your application.
+- **Homepage**: Stunning hero slider showcasing key visuals and niches (Beauty, Fashion, Wedding, etc.)
+- **About**: Personal brand statement emphasizing creativity, client satisfaction, and storytelling.
+- **Pricing**: Includes Wedding pricing and photography package details.
+- **Portfolio Overview**: Categories for Commercial, Fashion, Editorial, Makeup/Beauty, Hair, Wedding Portraits, Headshots, and more.
+- **Store**: E-commerce interface for prints, image rights, and booking (if integrated).
+- **Contact**: Inquiry form to connect with clients and request quotes.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b1d129be-f1bc-4d2c-b454-b1d030dcaf68) and start prompting.
+## ❤️ Why This Project
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Builds Personal Brand**: Showcases Jeff’s diverse photography portfolio and professional narrative.
+- **Client Conversion**: Clear calls to action and easy contact make booking seamless.
+- **Modular Design**: Structured navigation supports scalability—add more services or portfolio content as needed.
 
-**Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Tech stack suggestions (adjust based on your site setup):
+	•	Static site generator (e.g. Next.js, Gatsby, Eleventy)
+	•	CSS framework (Tailwind, Bootstrap)
+	•	Headless CMS / markdown for content management
+	•	Netlify/Vercel for deployment
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+⸻
 
-Follow these steps:
+🚀 Usage
+	•	Adding Images: Place portfolio images under public/portfolio/{category}/.
+	•	Updating Text: Modify about, pricing, and contact content in src/data/.
+	•	Shipping Store Elements: Populate product listings via CMS (e.g. Shopify, Snipcart).
+	•	Meta Tags & SEO: Edit inside src/components/SEO.js (or equivalent) to improve discovery.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+🧩 Contributing
+	1.	Fork this repo
+	2.	Create a feature branch (e.g., feat/optimize-images)
+	3.	Make edits
+	4.	Submit a pull request for review
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+⸻
 
-# Step 3: Install the necessary dependencies.
-npm i
+📄 License
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+MIT License
 
-**Edit a file directly in GitHub**
+⸻
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+🎯 To Do
+	•	Add real image galleries per category
+	•	Optimize delivery with lazy‑loading & CDN
+	•	Build full store integration for prints/digital assets
+	•	Improve SEO with unique meta tags per page
+	•	Add blog or client testimonial section
 
-**Use GitHub Codespaces**
+⸻
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+🤝 Contact
 
-## What technologies are used for this project?
+For inquiries, shoot Jeff an email at [email@email.com] or use the Contact form on the live site.
 
-This project is built with:
+⸻
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Crafted with ❤️ for JeffHonforloco – Capturing beauty, one frame at a time.
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/b1d129be-f1bc-4d2c-b454-b1d030dcaf68) and click on Share -> Publish.
+### 🛠️ Next Steps
 
-## Can I connect a custom domain to my Lovable project?
+- Deploy the GitHub repo to a hosting platform.
+- Use this README to onboard collaborators or show potential clients your online presence.
+- Continuously update portfolio, pricing, and products to reflect your evolving brand.
 
-Yes, you can!
+Let me know if you'd like help adding SEO, performance audits, or store integrations!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
