@@ -52,6 +52,13 @@ const DefaultPortfolio = ({ title, description, images }: DefaultPortfolioProps)
               </div>
             ))}
           </div>
+
+          {/* Copyright Notice */}
+          <div className="text-center mt-16 pt-8">
+            <p className="text-white/60 text-sm tracking-wide">
+              © 2025 Jeff Honforloco Photography. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </Layout>
