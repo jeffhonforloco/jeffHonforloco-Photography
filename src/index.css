@@ -244,16 +244,10 @@
   to { transform: translateY(-100%); }
 }
 
-/* Enhanced seamless infinite scroll animation with quick pauses */
+/* Smooth continuous upward scroll like lindsayadlerphotography.com */
 @keyframes slideSeamless {
   0% { transform: translateY(0); }
-  48% { transform: translateY(-100%); }
-  49% { transform: translateY(-100%); } /* Quick pause at bottom */
-  50% { transform: translateY(-100%); }
-  51% { transform: translateY(0); }
-  98% { transform: translateY(0); }
-  99% { transform: translateY(0); } /* Quick pause at top */
-  100% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
 }
 
 .animate-slide-up-continuous {
@@ -267,9 +261,9 @@
   contain: layout style paint;
 }
 
-/* Optimized infinite scroll animation like lindsayadlerphotography.com */
+/* Smooth continuous animation like Lindsay Adler's site */
 .animate-slide-optimized {
-  animation: slideSeamless 50s ease-in-out infinite;
+  animation: slideSeamless 60s linear infinite;
   transform: translateZ(0);
   contain: layout;
 }
