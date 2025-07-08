@@ -31,7 +31,7 @@ const Portfolio = () => {
     {
       title: 'Editorial',
       slug: 'editorial-photography-magazines',
-      image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 
+      image: '/lovable-uploads/67b5c2bf-d1a3-44e4-af56-212f23e37262.png', 
       href: '/portfolio/editorial-photography-magazines',
       description: 'Magazine-quality editorial photography for publications, brands, and storytelling campaigns that captivate audiences.',
       keywords: 'editorial photographer, magazine photographer, commercial editorial photography, brand storytelling'
