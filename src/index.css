@@ -263,10 +263,10 @@
 
 /* Optimized animations for better performance */
 .animate-slide-optimized {
-  animation: slideSeamless 25s linear infinite;
+  animation: slideSeamless 30s linear infinite;
   transform: translateZ(0);
-  contain: layout style paint;
-  /* Remove will-change to prevent layout thrashing */
+  contain: layout;
+  content-visibility: auto;
 }
 
 /* Enhanced bright theme animations and styles */
