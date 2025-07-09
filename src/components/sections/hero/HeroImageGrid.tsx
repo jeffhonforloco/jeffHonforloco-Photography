@@ -1,35 +1,33 @@
 import { useHeroImages } from '../../../hooks/useHeroImages';
+import LazyImage from '../../common/LazyImage';
 
 const HeroImageGrid = () => {
   const { col1Images, col2Images, col3Images } = useHeroImages();
 
   const renderImage = (image: string, index: number, columnPrefix: string) => {
+    // Load first 6 images eagerly to ensure smooth initial animation
+    const shouldEagerLoad = index < 6;
+    
     return (
       <div 
         key={`${columnPrefix}-${index}`} 
         className="relative overflow-hidden flex-shrink-0 hero-image-container"
       >
-        <img 
+        <LazyImage 
           src={image}
           alt={`Portfolio ${index + 1}`} 
           className="hero-image w-full h-auto object-cover"
-          loading={index < 3 ? "eager" : "lazy"}
-          decoding="async"
-          fetchPriority={index < 3 ? "high" : "low"}
+          fetchPriority={shouldEagerLoad ? "high" : "low"}
           width="400"
           height="600"
           sizes="(max-width: 768px) 50vw, 33vw"
-          style={{
-            contentVisibility: 'auto',
-            containIntrinsicSize: '400px 600px'
-          }}
         />
       </div>
     );
   };
 
   return (
-    <div className="absolute inset-0 p-2 md:p-3">
+    <div className="absolute inset-0 p-2 md:p-3 bg-gradient-to-br from-gray-900 via-black to-gray-800">
       {/* Mobile: 2 columns */}
       <div className="md:hidden grid grid-cols-2 gap-3 h-full">
         <div className="flex flex-col gap-3 animate-slide-col1">
