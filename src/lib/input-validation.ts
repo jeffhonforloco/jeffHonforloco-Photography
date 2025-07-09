@@ -32,7 +32,7 @@ class InputValidator {
   private readonly EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   // URL validation regex
-  private readonly URL_REGEX = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+  private readonly URL_REGEX = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/;
 
   // Phone number regex (international format)
   private readonly PHONE_REGEX = /^\+?[1-9]\d{1,14}$/;
@@ -137,7 +137,7 @@ class InputValidator {
    */
   validateUrl(url: string, required: boolean = false): ValidationResult {
     const errors: string[] = [];
-    let sanitized = url.trim();
+    const sanitized = url.trim();
 
     if (required && !sanitized) {
       errors.push('URL is required');
@@ -166,7 +166,7 @@ class InputValidator {
   validatePhone(phone: string, required: boolean = false): ValidationResult {
     const errors: string[] = [];
     // Remove common phone number formatting characters
-    const sanitized = phone.replace(/[\s\-\(\)\+]/g, '');
+    const sanitized = phone.replace(/[\s\-()+ ]/g, '');
 
     if (required && !sanitized) {
       errors.push('Phone number is required');
@@ -226,7 +226,7 @@ class InputValidator {
       errors.push('Password must contain at least one number');
     }
 
-    if (requireSpecialChars && !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+    if (requireSpecialChars && !/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
       errors.push('Password must contain at least one special character');
     }
 

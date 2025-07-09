@@ -5,10 +5,10 @@
  */
 export function extractYouTubeId(url: string): string | null {
   const patterns = [
-    /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i,
-    /(?:youtube\.com\/embed\/)([^"&?\/\s]{11})/i,
-    /(?:youtube\.com\/watch\?v=)([^"&?\/\s]{11})/i,
-    /(?:youtu\.be\/)([^"&?\/\s]{11})/i
+    /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i,
+    /(?:youtube\.com\/embed\/)([^"&?/\s]{11})/i,
+    /(?:youtube\.com\/watch\?v=)([^"&?/\s]{11})/i,
+    /(?:youtu\.be\/)([^"&?/\s]{11})/i
   ];
 
   for (const pattern of patterns) {
@@ -32,7 +32,7 @@ export function isYouTubeUrl(url: string): boolean {
  * Extracts YouTube ID from iframe embed code
  */
 export function extractYouTubeIdFromEmbed(embedCode: string): string | null {
-  const match = embedCode.match(/(?:embed\/|v=)([^"&?\/\s]{11})/i);
+  const match = embedCode.match(/(?:embed\/|v=)([^"&?/\s]{11})/i);
   return match ? match[1] : null;
 }
 

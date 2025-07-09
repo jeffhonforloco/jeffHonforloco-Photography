@@ -5,7 +5,7 @@ import { AlertTriangle } from 'lucide-react';
 
 interface SecureFormProps {
   children: React.ReactNode;
-  onSubmit: (data: Record<string, any>, csrfToken: string) => void;
+  onSubmit: (data: Record<string, unknown>, csrfToken: string) => void;
   rateLimitKey?: string;
   className?: string;
 }
@@ -40,7 +40,7 @@ export const SecureForm: React.FC<SecureFormProps> = ({
     }
 
     const formData = new FormData(e.currentTarget);
-    const data: Record<string, any> = {};
+    const data: Record<string, unknown> = {};
     const errors: FormErrors = {};
 
     // Validate each form field
