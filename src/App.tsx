@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Analytics from "./components/Analytics";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 
@@ -40,6 +40,9 @@ const App = () => (
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
+              {/* Redirect old portfolio route to new portfolios route */}
+              <Route path="/portfolio" element={<Navigate to="/portfolios" replace />} />
+              <Route path="/portfolio/:category" element={<Navigate to="/portfolios/:category" replace />} />
               <Route path="/portfolios" element={<Portfolio />} />
               <Route path="/portfolios/:category" element={<PortfolioCategory />} />
               <Route path="/journal" element={<Journal />} />
