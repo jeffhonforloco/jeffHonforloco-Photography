@@ -246,12 +246,12 @@
 /* Smooth, stable continuous upward scroll - optimized for stability */
 @keyframes slideStable {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+  100% { transform: translateY(-66.67%); }
 }
 
 @keyframes slideStableMobile {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+  100% { transform: translateY(-66.67%); }
 }
 
 .animate-slide-up-continuous {
@@ -403,6 +403,7 @@ img {
 .hero-image-container {
   contain: layout style paint;
   will-change: auto;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
 }
 
 /* Critical resource hints */

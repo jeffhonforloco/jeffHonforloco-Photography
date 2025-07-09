@@ -8,16 +8,24 @@ interface LazyImageProps {
   onLoad?: () => void;
   onError?: () => void;
   style?: React.CSSProperties;
+  width?: string;
+  height?: string;
+  sizes?: string;
+  fetchPriority?: "high" | "low" | "auto";
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({
   src,
   alt,
   className = '',
-  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZjNmNGY2Ii8+Cjwvc3ZnPgo=',
+  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDQwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWExYTFhO3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMyZDJkMmQ7c3RvcC1vcGFjaXR5OjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPHN2Zz4K',
   onLoad,
   onError,
-  style
+  style,
+  width,
+  height,
+  sizes,
+  fetchPriority
 }) => {
   const [imageSrc, setImageSrc] = useState<string>(placeholder);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -26,6 +34,12 @@ const LazyImage: React.FC<LazyImageProps> = ({
 
   useEffect(() => {
     const imgElement = imgRef.current;
+    
+    // For high priority images, load immediately
+    if (fetchPriority === "high") {
+      setImageSrc(src);
+      return;
+    }
     
     const observer = new IntersectionObserver(
       (entries) => {
@@ -51,7 +65,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
         observer.unobserve(imgElement);
       }
     };
-  }, [src]);
+  }, [src, fetchPriority]);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -68,12 +82,20 @@ const LazyImage: React.FC<LazyImageProps> = ({
       ref={imgRef}
       src={imageSrc}
       alt={alt}
-      className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-75'} transition-opacity duration-300`}
-      style={style}
+      className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-90'} transition-opacity duration-500`}
+      style={{
+        ...style,
+        contentVisibility: 'auto',
+        containIntrinsicSize: '400px 600px'
+      }}
       onLoad={handleLoad}
       onError={handleError}
-      loading="lazy"
+      loading={fetchPriority === "high" ? "eager" : "lazy"}
       decoding="async"
+      width={width}
+      height={height}
+      sizes={sizes}
+      fetchpriority={fetchPriority}
     />
   );
 };
