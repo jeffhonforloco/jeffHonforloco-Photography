@@ -26,21 +26,28 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-          ui: ['lucide-react', '@radix-ui/react-dialog']
+          ui: ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-accordion', '@radix-ui/react-tabs'],
+          query: ['@tanstack/react-query'],
+          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
+          crypto: ['crypto-js'],
+          carousel: ['embla-carousel-react'],
+          theme: ['next-themes']
         }
       }
     },
     // Enable CSS code splitting
     cssCodeSplit: true,
-    // Optimize assets
-    assetsInlineLimit: 4096,
-    // Enable source maps for production debugging
+    // Optimize assets - reduce inline threshold for better caching
+    assetsInlineLimit: 2048,
+    // Disable source maps for production to reduce bundle size
     sourcemap: false,
     // Minimize bundle size with esbuild (default, no extra dependencies)
-    minify: 'esbuild'
+    minify: 'esbuild',
+    // Target modern browsers for better performance
+    target: 'es2015'
   },
   // Performance optimizations
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom']
+    include: ['react', 'react-dom', 'react-router-dom', '@tanstack/react-query', 'lucide-react']
   }
 }));

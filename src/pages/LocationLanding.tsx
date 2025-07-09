@@ -113,38 +113,43 @@ const locationData = {
 const LocationLanding = () => {
   const { location } = useParams<{ location: string }>();
   
-  // Redirect if location is not supported
-  if (!location || !locationData[location as keyof typeof locationData]) {
-    return <Navigate to="/not-found" replace />;
-  }
-
-  const locationInfo = locationData[location as keyof typeof locationData];
+  // Get location info, with fallback to prevent crashes
+  const locationInfo = location && locationData[location as keyof typeof locationData] 
+    ? locationData[location as keyof typeof locationData]
+    : null;
 
   // Update page title and meta on mount
   useEffect(() => {
-    document.title = locationInfo.title;
-    
-    // Update meta description
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', locationInfo.description);
-    }
+    if (locationInfo) {
+      document.title = locationInfo.title;
+      
+      // Update meta description
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', locationInfo.description);
+      }
 
-    // Update meta keywords
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', locationInfo.keywords);
-    }
+      // Update meta keywords
+      const metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (metaKeywords) {
+        metaKeywords.setAttribute('content', locationInfo.keywords);
+      }
 
-    // Track page view
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'page_view', {
-        page_title: locationInfo.title,
-        page_location: window.location.href,
-        location_name: locationInfo.name
-      });
+      // Track page view
+      if (typeof window !== 'undefined' && (window as { gtag?: (...args: unknown[]) => void }).gtag) {
+        window.gtag('event', 'page_view', {
+          page_title: locationInfo.title,
+          page_location: window.location.href,
+          location_name: locationInfo.name
+        });
+      }
     }
   }, [locationInfo]);
+
+  // Redirect if location is not supported (after hooks)
+  if (!locationInfo) {
+    return <Navigate to="/not-found" replace />;
+  }
 
   return (
     <Layout>

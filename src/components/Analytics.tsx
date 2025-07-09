@@ -18,10 +18,10 @@ interface AnalyticsConfig {
 }
 
 // Enhanced analytics tracking
-export const trackEvent = (eventName: string, parameters: Record<string, any> = {}) => {
+export const trackEvent = (eventName: string, parameters: Record<string, unknown> = {}) => {
   // Google Analytics 4
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', eventName, {
+  if (typeof window !== 'undefined' && (window as { gtag?: (...args: unknown[]) => void }).gtag) {
+    window.gtag('event', eventName, {
       ...parameters,
       timestamp: new Date().toISOString(),
       user_agent: navigator.userAgent,
@@ -31,8 +31,8 @@ export const trackEvent = (eventName: string, parameters: Record<string, any> = 
   }
 
   // Facebook Pixel
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    (window as any).fbq('track', eventName, parameters);
+  if (typeof window !== 'undefined' && (window as { fbq?: (action: string, event: string, params?: Record<string, unknown>) => void }).fbq) {
+    window.fbq('track', eventName, parameters);
   }
 
   // Console logging for development
@@ -50,12 +50,12 @@ export const trackPortfolioView = (category: string) => {
   });
 };
 
-export const trackContactForm = (formData: Record<string, any>) => {
+export const trackContactForm = (formData: Record<string, unknown>) => {
   trackEvent('contact_form_submit', {
     form_type: 'contact',
-    location: formData.location || 'not_specified',
-    service_type: formData.service || 'not_specified',
-    budget_range: formData.budget || 'not_specified'
+    location: (formData.location as string) || 'not_specified',
+    service_type: (formData.service as string) || 'not_specified',
+    budget_range: (formData.budget as string) || 'not_specified'
   });
 };
 
@@ -101,11 +101,12 @@ const Analytics = () => {
           script.src = `https://www.googletagmanager.com/gtag/js?id=${config.googleAnalytics.trackingId}`;
           document.head.appendChild(script);
 
-          (window as any).dataLayer = (window as any).dataLayer || [];
-          function gtag(...args: any[]) {
-            (window as any).dataLayer.push(args);
+          (window as { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void }).dataLayer = 
+            (window as { dataLayer?: unknown[] }).dataLayer || [];
+          function gtag(...args: unknown[]) {
+            ((window as { dataLayer: unknown[] }).dataLayer).push(args);
           }
-          (window as any).gtag = gtag;
+          (window as { gtag: typeof gtag }).gtag = gtag;
           
           gtag('js', new Date());
           gtag('config', config.googleAnalytics.trackingId, {
@@ -118,25 +119,29 @@ const Analytics = () => {
 
         // Initialize Facebook Pixel
         if (config.facebookPixel.enabled && config.facebookPixel.pixelId !== 'FB_PIXEL_ID') {
-          (function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
+          (function(f: Window & { fbq?: { callMethod?: (...args: unknown[]) => void; queue?: unknown[]; loaded?: boolean; version?: string; push?: unknown; _fbq?: unknown }; _fbq?: unknown }, b: Document, e: string, v: string) {
             if (f.fbq) return;
-            n = f.fbq = function() {
-              n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            const n = f.fbq = function(...args: unknown[]) {
+              if (n.callMethod) {
+                n.callMethod(...args);
+              } else {
+                n.queue?.push(args);
+              }
             };
             if (!f._fbq) f._fbq = n;
             n.push = n;
-            n.loaded = !0;
+            n.loaded = true;
             n.version = '2.0';
             n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
+            const t = b.createElement(e) as HTMLScriptElement;
+            t.async = true;
             t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s);
+            const s = b.getElementsByTagName(e)[0];
+            s.parentNode?.insertBefore(t, s);
           })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-          (window as any).fbq('init', config.facebookPixel.pixelId);
-          (window as any).fbq('track', 'PageView');
+          (window as { fbq?: (action: string, ...args: unknown[]) => void }).fbq?.('init', config.facebookPixel.pixelId);
+          (window as { fbq?: (action: string, ...args: unknown[]) => void }).fbq?.('track', 'PageView');
         }
       })
       .catch(error => console.error('Failed to load analytics config:', error));
@@ -147,8 +152,8 @@ const Analytics = () => {
     const currentPath = location.pathname;
     
     // Track page views
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('config', 'GA_MEASUREMENT_ID', {
+    if (typeof window !== 'undefined' && (window as { gtag?: (...args: unknown[]) => void }).gtag) {
+      window.gtag('config', 'GA_MEASUREMENT_ID', {
         page_path: currentPath,
         page_title: document.title,
         page_location: window.location.href
