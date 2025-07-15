@@ -185,7 +185,7 @@ const Dashboard = () => {
             </TabsContent>
 
             <TabsContent value="email">
-              <EmailAutomation />
+              <EmailAutomation onSubmit={() => {}} />
             </TabsContent>
 
             <TabsContent value="leads">

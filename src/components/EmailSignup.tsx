@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useEmailAutomation } from '@/hooks/useEmailAutomation';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { useEmailSequence } from '@/hooks/useEmailSequence';
 
 interface EmailFormData {
   email: string;
@@ -16,12 +17,15 @@ const EmailSignup = () => {
   const { toast } = useToast();
   const { addLead } = useEmailAutomation();
   const { trackEmailSignup } = useAnalytics();
+  const { addLead: addEmailLead } = useEmailSequence();
 
   const onSubmit = async (data: EmailFormData) => {
     setIsLoading(true);
     
     try {
+      // Add to both systems
       const success = addLead(data.email, 'website');
+      await addEmailLead(data.email);
       
       if (success) {
         // Track analytics
@@ -29,8 +33,8 @@ const EmailSignup = () => {
         
         reset();
         toast({
-          title: "Welcome aboard! ✨",
-          description: "You're now part of Jeff's exclusive community. Check your email for a special welcome gift!",
+          title: "Check your inbox! 📩",
+          description: "Your prep guide is on its way. Welcome to Jeff's exclusive community!",
         });
       }
     } catch (error) {
@@ -49,11 +53,10 @@ const EmailSignup = () => {
       <div className="max-w-4xl mx-auto text-center px-6">
         <div className="mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            📩 Stay Inspired
+            📩 Get the Free Prep Guide
           </h2>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Join Jeff's exclusive insider list for photography tips, behind-the-scenes insights, 
-            and early access to booking windows.
+            Join my list and get your free editorial shoot prep guide—plus insider tips and early access to booking windows.
           </p>
         </div>
         
@@ -61,7 +64,7 @@ const EmailSignup = () => {
           <div className="flex-1">
             <Input
               type="email"
-              placeholder="your@email.com"
+              placeholder="Your email"
               {...register('email', { 
                 required: 'Email is required',
                 pattern: {
@@ -82,12 +85,12 @@ const EmailSignup = () => {
             disabled={isLoading}
             className="h-12 px-8 bg-white text-black font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
           >
-            {isLoading ? 'Joining...' : 'Join Now'}
+            {isLoading ? 'Sending...' : 'Get the Guide'}
           </Button>
         </form>
         
         <p className="mt-6 text-sm text-gray-400">
-          🎁 Get a free shoot prep guide when you join • Unsubscribe anytime
+          🎁 Free prep guide + exclusive photography tips • Unsubscribe anytime
         </p>
       </div>
     </section>
