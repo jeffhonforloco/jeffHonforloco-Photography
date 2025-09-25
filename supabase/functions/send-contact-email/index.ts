@@ -34,15 +34,27 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { type, name, email, phone, message, service, budget, projectDate, location } = requestData;
 
-    // Email to Jeff
-    const emailToJeff = await resend.emails.send({
-      from: "Photography Website <noreply@resend.dev>",
-      to: ["info@jeffhonforlocophotos.com"],
-      subject: `New ${type} inquiry from ${name}`,
-      html: generateEmailHtml({ type, name, email, phone, message, service, budget, projectDate, location }),
-    });
-
-    console.log("Email to Jeff sent:", emailToJeff);
+    // Email to Jeff - try primary email first, fallback to verified Gmail if domain not verified
+    let emailToJeff;
+    try {
+      emailToJeff = await resend.emails.send({
+        from: "Photography Website <noreply@resend.dev>",
+        to: ["info@jeffhonforlocophotos.com"],
+        subject: `New ${type} inquiry from ${name}`,
+        html: generateEmailHtml({ type, name, email, phone, message, service, budget, projectDate, location }),
+      });
+      console.log("Email to Jeff sent successfully:", emailToJeff);
+    } catch (error: any) {
+      console.log("Primary email failed, trying fallback:", error);
+      // Fallback to verified Gmail if domain verification fails
+      emailToJeff = await resend.emails.send({
+        from: "Photography Website <noreply@resend.dev>",
+        to: ["jeffhonforloco@gmail.com"],
+        subject: `[FALLBACK] New ${type} inquiry from ${name}`,
+        html: generateEmailHtml({ type, name, email, phone, message, service, budget, projectDate, location }),
+      });
+      console.log("Fallback email to Jeff sent:", emailToJeff);
+    }
 
     // Confirmation email to client (except for newsletter signups)
     if (type !== 'newsletter') {
