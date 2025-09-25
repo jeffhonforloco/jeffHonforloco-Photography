@@ -95,7 +95,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
       width={width}
       height={height}
       sizes={sizes}
-      fetchPriority={fetchPriority}
+      {...(fetchPriority && { fetchpriority: fetchPriority })}
     />
   );
 };
