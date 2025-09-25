@@ -36,7 +36,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Email to Jeff
     const emailToJeff = await resend.emails.send({
-      from: "Photography Website <noreply@jeffhonforlocophotos.com>",
+      from: "Photography Website <noreply@resend.dev>",
       to: ["info@jeffhonforlocophotos.com"],
       subject: `New ${type} inquiry from ${name}`,
       html: generateEmailHtml({ type, name, email, phone, message, service, budget, projectDate, location }),
@@ -47,7 +47,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Confirmation email to client (except for newsletter signups)
     if (type !== 'newsletter') {
       const confirmationEmail = await resend.emails.send({
-        from: "Jeff Honforloco Photography <info@jeffhonforlocophotos.com>",
+        from: "Jeff Honforloco Photography <noreply@resend.dev>",
         to: [email],
         subject: "Thank you for your inquiry!",
         html: generateConfirmationHtml(name, type),
