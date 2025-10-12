@@ -1,5 +1,5 @@
 
-import { Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,8 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Analytics from "./components/Analytics";
 import PerformanceMonitor from "./components/PerformanceMonitor";
-import ImagePerformanceMonitor from "./components/ImagePerformanceMonitor";
 import ErrorBoundary from "./components/common/ErrorBoundary";
+import { initializeImageOptimization } from "./utils/performanceOptimizer";
 
 // Lazy load all pages for better performance
 const Index = lazy(() => import("./pages/Index"));
@@ -34,17 +34,22 @@ const LoadingFallback = () => (
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Analytics />
-          <PerformanceMonitor />
-          <ImagePerformanceMonitor />
-          <Suspense fallback={<LoadingFallback />}>
+const App = () => {
+  // Initialize image optimization on app load
+  React.useEffect(() => {
+    initializeImageOptimization();
+  }, []);
+
+  return (
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Analytics />
+            <PerformanceMonitor />
+            <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
               {/* Redirect old portfolio route to new portfolios route */}
@@ -83,6 +88,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
   </ErrorBoundary>
-);
+  );
+};
 
 export default App;
