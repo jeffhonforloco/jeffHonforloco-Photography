@@ -55,44 +55,44 @@ const App = () => {
             <Analytics />
             <PerformanceMonitor />
             <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              {/* Redirect old portfolio route to new portfolios route */}
-              <Route path="/portfolio" element={<Navigate to="/portfolios" replace />} />
-              <Route path="/portfolio/:category" element={<Navigate to="/portfolios/:category" replace />} />
-              <Route path="/portfolios" element={<Portfolio />} />
-              <Route path="/portfolios/:category" element={<PortfolioCategory />} />
-              <Route path="/journal" element={<Journal />} />
-              <Route path="/journal/:slug" element={<JournalArticle />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-          <Route path="/book" element={<Book />} />
-          <Route path="/prep-guide" element={<PrepGuidePage />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-              {/* Location-specific landing pages */}
-              <Route path="/location/:location" element={<LocationLanding />} />
-              {/* Legacy location routes for SEO */}
-              <Route path="/nyc" element={<LocationLanding />} />
-              <Route path="/los-angeles" element={<LocationLanding />} />
-              <Route path="/miami" element={<LocationLanding />} />
-              <Route path="/paris" element={<LocationLanding />} />
-              <Route path="/london" element={<LocationLanding />} />
-              <Route path="/italy" element={<LocationLanding />} />
-              <Route path="/lagos" element={<LocationLanding />} />
-              <Route path="/switzerland" element={<LocationLanding />} />
-              <Route path="/malta" element={<LocationLanding />} />
-              <Route path="/monaco" element={<LocationLanding />} />
-              {/* Admin Panel */}
-              <Route path="/admin/*" element={<Admin />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                {/* Redirect old portfolio route to new portfolios route */}
+                <Route path="/portfolio" element={<Navigate to="/portfolios" replace />} />
+                <Route path="/portfolio/:category" element={<Navigate to="/portfolios/:category" replace />} />
+                <Route path="/portfolios" element={<Portfolio />} />
+                <Route path="/portfolios/:category" element={<PortfolioCategory />} />
+                <Route path="/journal" element={<Journal />} />
+                <Route path="/journal/:slug" element={<JournalArticle />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/book" element={<Book />} />
+                <Route path="/prep-guide" element={<PrepGuidePage />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                {/* Location-specific landing pages */}
+                <Route path="/location/:location" element={<LocationLanding />} />
+                {/* Legacy location routes for SEO */}
+                <Route path="/nyc" element={<LocationLanding />} />
+                <Route path="/los-angeles" element={<LocationLanding />} />
+                <Route path="/miami" element={<LocationLanding />} />
+                <Route path="/paris" element={<LocationLanding />} />
+                <Route path="/london" element={<LocationLanding />} />
+                <Route path="/italy" element={<LocationLanding />} />
+                <Route path="/lagos" element={<LocationLanding />} />
+                <Route path="/switzerland" element={<LocationLanding />} />
+                <Route path="/malta" element={<LocationLanding />} />
+                <Route path="/monaco" element={<LocationLanding />} />
+                {/* Admin Panel */}
+                <Route path="/admin/*" element={<Admin />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 
