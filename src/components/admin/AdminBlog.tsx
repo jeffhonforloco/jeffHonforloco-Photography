@@ -1,325 +1,499 @@
-import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Textarea } from '../ui/textarea';
-import { Badge } from '../ui/badge';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Plus, Edit, Trash2, Eye, Calendar } from 'lucide-react';
-import { useToast } from '../../hooks/use-toast';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from '@/components/ui/table';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { 
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { 
+  Search, 
+  Plus, 
+  Edit, 
+  Trash2, 
+  Eye, 
+  Calendar,
+  FileText,
+  RefreshCw,
+  Save,
+  X
+} from 'lucide-react';
 
 interface BlogPost {
-  id: string;
+  id: number;
   title: string;
-  excerpt: string;
+  slug: string;
   content: string;
-  category: string;
-  status: 'published' | 'draft';
-  createdAt: string;
-  updatedAt: string;
-  views: number;
-  readTime: string;
+  excerpt: string;
+  featured_image_url?: string;
+  author_id: number;
+  status: string;
+  published_at?: string;
+  tags: string;
+  metadata: string;
+  created_at: string;
+  updated_at: string;
 }
 
-const AdminBlog = () => {
-  const { toast } = useToast();
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([
-    {
-      id: '1',
-      title: 'Photography Tips for Beginners',
-      excerpt: 'Essential tips and techniques for aspiring photographers starting their journey.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-      category: 'Tutorial',
-      status: 'published',
-      createdAt: '2024-01-20',
-      updatedAt: '2024-01-20',
-      views: 1543,
-      readTime: '5 min read'
-    },
-    {
-      id: '2',
-      title: 'Behind the Scenes: Fashion Week',
-      excerpt: 'An exclusive look at what happens behind the camera during fashion week.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-      category: 'Behind the Scenes',
-      status: 'published',
-      createdAt: '2024-01-18',
-      updatedAt: '2024-01-19',
-      views: 892,
-      readTime: '8 min read'
-    },
-    {
-      id: '3',
-      title: 'Lighting Techniques for Portrait Photography',
-      excerpt: 'Master the art of lighting to create stunning portrait photographs.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-      category: 'Tutorial',
-      status: 'draft',
-      createdAt: '2024-01-15',
-      updatedAt: '2024-01-16',
-      views: 0,
-      readTime: '12 min read'
-    }
-  ]);
-
+const AdminBlog: React.FC = () => {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    excerpt: '',
-    content: '',
-    category: '',
-    status: 'draft' as 'published' | 'draft',
-    readTime: ''
-  });
+  const [editForm, setEditForm] = useState<Partial<BlogPost>>({});
 
-  const categories = ['Tutorial', 'Behind the Scenes', 'Equipment Review', 'Industry News', 'Personal Story'];
+  useEffect(() => {
+    fetchBlogPosts();
+  }, []);
+
+  useEffect(() => {
+    filterPosts();
+  }, [blogPosts, searchTerm, statusFilter]);
+
+  const fetchBlogPosts = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('/api/v1/blog', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch blog posts');
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setBlogPosts(data.data);
+      } else {
+        throw new Error(data.message || 'Failed to fetch blog posts');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterPosts = () => {
+    let filtered = blogPosts;
+
+    // Filter by search term
+    if (searchTerm) {
+      filtered = filtered.filter(post =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.content.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Filter by status
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(post => post.status === statusFilter);
+    }
+
+    setFilteredPosts(filtered);
+  };
+
+  const createBlogPost = async (postData: Partial<BlogPost>) => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('/api/v1/blog', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create blog post');
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        fetchBlogPosts(); // Refresh the list
+        setIsDialogOpen(false);
+        setEditForm({});
+      } else {
+        throw new Error(data.message || 'Failed to create blog post');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create blog post');
+    }
+  };
+
+  const updateBlogPost = async (postId: number, postData: Partial<BlogPost>) => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`/api/v1/blog/${postId}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update blog post');
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        fetchBlogPosts(); // Refresh the list
+        setIsDialogOpen(false);
+        setEditForm({});
+        setIsEditing(false);
+      } else {
+        throw new Error(data.message || 'Failed to update blog post');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update blog post');
+    }
+  };
+
+  const deleteBlogPost = async (postId: number) => {
+    if (!confirm('Are you sure you want to delete this blog post?')) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`/api/v1/blog/${postId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete blog post');
+      }
+
+      // Update local state
+      setBlogPosts(prev => prev.filter(post => post.id !== postId));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete blog post');
+    }
+  };
 
   const handleEdit = (post: BlogPost) => {
     setSelectedPost(post);
-    setFormData({
+    setEditForm({
       title: post.title,
-      excerpt: post.excerpt,
       content: post.content,
-      category: post.category,
+      excerpt: post.excerpt,
       status: post.status,
-      readTime: post.readTime
+      featured_image_url: post.featured_image_url,
+      tags: post.tags
     });
     setIsEditing(true);
+    setIsDialogOpen(true);
   };
 
   const handleSave = () => {
-    if (selectedPost) {
-      // Update existing post
-      setBlogPosts(posts =>
-        posts.map(post =>
-          post.id === selectedPost.id
-            ? { ...post, ...formData, updatedAt: new Date().toISOString().split('T')[0] }
-            : post
-        )
-      );
-      toast({
-        title: "Blog Post Updated",
-        description: "Blog post has been successfully updated.",
-      });
+    if (isEditing && selectedPost) {
+      updateBlogPost(selectedPost.id, editForm);
     } else {
-      // Add new post
-      const newPost: BlogPost = {
-        id: Date.now().toString(),
-        ...formData,
-        createdAt: new Date().toISOString().split('T')[0],
-        updatedAt: new Date().toISOString().split('T')[0],
-        views: 0
-      };
-      setBlogPosts(posts => [newPost, ...posts]);
-      toast({
-        title: "Blog Post Created",
-        description: "New blog post has been created.",
-      });
+      createBlogPost(editForm);
     }
+  };
+
+  const getStatusBadge = (status: string) => {
+    const statusConfig = {
+      draft: { variant: 'secondary' as const, color: 'bg-gray-100 text-gray-800' },
+      published: { variant: 'default' as const, color: 'bg-green-100 text-green-800' },
+      archived: { variant: 'outline' as const, color: 'bg-yellow-100 text-yellow-800' }
+    };
+
+    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.draft;
     
-    setIsEditing(false);
-    setSelectedPost(null);
-    setFormData({ title: '', excerpt: '', content: '', category: '', status: 'draft', readTime: '' });
-  };
-
-  const handleDelete = (id: string) => {
-    setBlogPosts(posts => posts.filter(post => post.id !== id));
-    toast({
-      title: "Blog Post Deleted",
-      description: "Blog post has been removed.",
-    });
-  };
-
-  const handleStatusToggle = (id: string) => {
-    setBlogPosts(posts =>
-      posts.map(post =>
-        post.id === id
-          ? { 
-              ...post, 
-              status: post.status === 'published' ? 'draft' : 'published',
-              updatedAt: new Date().toISOString().split('T')[0]
-            }
-          : post
-      )
+    return (
+      <Badge variant={config.variant} className={config.color}>
+        {status}
+      </Badge>
     );
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <RefreshCw className="h-8 w-8 animate-spin" />
+        <span className="ml-2">Loading blog posts...</span>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      {/* Header */}
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Blog Management</h1>
-          <p className="text-gray-600 dark:text-gray-400">Create and manage your blog posts</p>
+          <h1 className="text-3xl font-bold">Blog Management</h1>
+          <p className="text-muted-foreground">Manage your blog posts and content</p>
         </div>
-        
-        <Dialog open={isEditing} onOpenChange={setIsEditing}>
-          <DialogTrigger asChild>
-            <Button onClick={() => {
-              setSelectedPost(null);
-              setFormData({ title: '', excerpt: '', content: '', category: '', status: 'draft', readTime: '' });
-            }}>
-              <Plus className="mr-2 h-4 w-4" />
-              New Blog Post
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[700px] max-h-[80vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>
-                {selectedPost ? 'Edit Blog Post' : 'Create New Blog Post'}
-              </DialogTitle>
-              <DialogDescription>
-                {selectedPost ? 'Update the blog post details below.' : 'Create a new blog post for your readers.'}
-              </DialogDescription>
-            </DialogHeader>
-            
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="title">Title</Label>
+        <div className="flex space-x-2">
+          <Button onClick={fetchBlogPosts} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+          <Button onClick={() => {
+            setEditForm({});
+            setIsEditing(false);
+            setIsDialogOpen(true);
+          }}>
+            <Plus className="h-4 w-4 mr-2" />
+            New Post
+          </Button>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Filters</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex space-x-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <Input
-                  id="title"
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Enter blog post title"
+                  placeholder="Search blog posts..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
                 />
               </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
-                  <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {categories.map(category => (
-                        <SelectItem key={category} value={category}>{category}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="readTime">Read Time</Label>
-                  <Input
-                    id="readTime"
-                    value={formData.readTime}
-                    onChange={(e) => setFormData({ ...formData, readTime: e.target.value })}
-                    placeholder="e.g., 5 min read"
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="excerpt">Excerpt</Label>
-                <Textarea
-                  id="excerpt"
-                  value={formData.excerpt}
-                  onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                  placeholder="Brief description of the blog post"
-                  rows={3}
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="content">Content</Label>
-                <Textarea
-                  id="content"
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  placeholder="Write your blog post content here..."
-                  rows={10}
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="status">Status</Label>
-                <Select value={formData.status} onValueChange={(value: 'published' | 'draft') => setFormData({ ...formData, status: value })}>
-                  <SelectTrigger>
+            </div>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Filter by status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Statuses</SelectItem>
+                <SelectItem value="draft">Draft</SelectItem>
+                <SelectItem value="published">Published</SelectItem>
+                <SelectItem value="archived">Archived</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Blog Posts Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Blog Posts ({filteredPosts.length})</CardTitle>
+          <CardDescription>
+            Manage your blog posts and content
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Title</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Author</TableHead>
+                  <TableHead>Published</TableHead>
+                  <TableHead>Created</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredPosts.map((post) => (
+                  <TableRow key={post.id}>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center space-x-2">
+                        <FileText className="h-4 w-4 text-gray-400" />
+                        <span>{post.title}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      {getStatusBadge(post.status)}
+                    </TableCell>
+                    <TableCell>
+                      Admin
+                    </TableCell>
+                    <TableCell>
+                      {post.published_at ? new Date(post.published_at).toLocaleDateString() : 'Not published'}
+                    </TableCell>
+                    <TableCell>
+                      {new Date(post.created_at).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex space-x-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedPost(post);
+                            setIsDialogOpen(true);
+                          }}
+                        >
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleEdit(post)}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => deleteBlogPost(post.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Blog Post Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {isEditing ? 'Edit Blog Post' : 'Create New Blog Post'}
+            </DialogTitle>
+            <DialogDescription>
+              {isEditing ? 'Update the blog post information' : 'Create a new blog post'}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-gray-500">Title</label>
+              <Input
+                value={editForm.title || ''}
+                onChange={(e) => setEditForm(prev => ({ ...prev, title: e.target.value }))}
+                placeholder="Enter blog post title"
+                className="mt-1"
+              />
+            </div>
+            
+            <div>
+              <label className="text-sm font-medium text-gray-500">Excerpt</label>
+              <Textarea
+                value={editForm.excerpt || ''}
+                onChange={(e) => setEditForm(prev => ({ ...prev, excerpt: e.target.value }))}
+                placeholder="Enter blog post excerpt"
+                className="mt-1"
+                rows={3}
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-gray-500">Content</label>
+              <Textarea
+                value={editForm.content || ''}
+                onChange={(e) => setEditForm(prev => ({ ...prev, content: e.target.value }))}
+                placeholder="Enter blog post content"
+                className="mt-1"
+                rows={10}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium text-gray-500">Status</label>
+                <Select
+                  value={editForm.status || 'draft'}
+                  onValueChange={(value) => setEditForm(prev => ({ ...prev, status: value }))}
+                >
+                  <SelectTrigger className="mt-1">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="draft">Draft</SelectItem>
                     <SelectItem value="published">Published</SelectItem>
+                    <SelectItem value="archived">Archived</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-              
-              <div className="flex justify-end gap-2 pt-4">
-                <Button variant="outline" onClick={() => setIsEditing(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={handleSave}>
-                  {selectedPost ? 'Update' : 'Create'}
-                </Button>
+
+              <div>
+                <label className="text-sm font-medium text-gray-500">Featured Image URL</label>
+                <Input
+                  value={editForm.featured_image_url || ''}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, featured_image_url: e.target.value }))}
+                  placeholder="Enter image URL"
+                  className="mt-1"
+                />
               </div>
             </div>
-          </DialogContent>
-        </Dialog>
-      </div>
 
-      {/* Blog Posts List */}
-      <div className="space-y-4">
-        {blogPosts.map((post) => (
-          <Card key={post.id}>
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <CardTitle className="text-xl">{post.title}</CardTitle>
-                    <Badge variant={post.status === 'published' ? 'default' : 'secondary'}>
-                      {post.status}
-                    </Badge>
-                  </div>
-                  <CardDescription className="text-base mb-2">
-                    {post.excerpt}
-                  </CardDescription>
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {new Date(post.updatedAt).toLocaleDateString()}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Eye className="h-4 w-4" />
-                      {post.views} views
-                    </span>
-                    <span>{post.readTime}</span>
-                    <Badge variant="outline">{post.category}</Badge>
-                  </div>
-                </div>
-                
-                <div className="flex gap-2 ml-4">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleStatusToggle(post.id)}
-                  >
-                    {post.status === 'published' ? 'Unpublish' : 'Publish'}
-                  </Button>
-                  
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleEdit(post)}
-                  >
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    onClick={() => handleDelete(post.id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </CardHeader>
-          </Card>
-        ))}
-      </div>
+            <div>
+              <label className="text-sm font-medium text-gray-500">Tags</label>
+              <Input
+                value={editForm.tags || ''}
+                onChange={(e) => setEditForm(prev => ({ ...prev, tags: e.target.value }))}
+                placeholder="Enter tags (comma separated)"
+                className="mt-1"
+              />
+            </div>
+
+            <div className="flex justify-end space-x-2">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setIsDialogOpen(false);
+                  setEditForm({});
+                  setIsEditing(false);
+                }}
+              >
+                <X className="h-4 w-4 mr-2" />
+                Cancel
+              </Button>
+              <Button onClick={handleSave}>
+                <Save className="h-4 w-4 mr-2" />
+                {isEditing ? 'Update' : 'Create'}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

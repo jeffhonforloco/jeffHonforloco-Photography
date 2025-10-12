@@ -16,6 +16,7 @@ import blogRoutes from './routes/blog.js';
 import portfolioRoutes from './routes/portfolio.js';
 import emailRoutes from './routes/email.js';
 import adminRoutes from './routes/admin.js';
+import adminAuthRoutes from './routes/adminAuth.js';
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
@@ -121,6 +122,7 @@ app.use(`${apiPrefix}/${apiVersion}/blog`, blogRoutes);
 app.use(`${apiPrefix}/${apiVersion}/portfolio`, portfolioRoutes);
 app.use(`${apiPrefix}/${apiVersion}/email`, emailRoutes);
 app.use(`${apiPrefix}/${apiVersion}/admin`, adminRoutes);
+app.use(`${apiPrefix}/${apiVersion}/admin-auth`, adminAuthRoutes);
 
 // API documentation endpoint
 app.get(`${apiPrefix}/docs`, (req, res) => {
@@ -134,7 +136,8 @@ app.get(`${apiPrefix}/docs`, (req, res) => {
       blog: `${apiPrefix}/${apiVersion}/blog`,
       portfolio: `${apiPrefix}/${apiVersion}/portfolio`,
       email: `${apiPrefix}/${apiVersion}/email`,
-      admin: `${apiPrefix}/${apiVersion}/admin`
+      admin: `${apiPrefix}/${apiVersion}/admin`,
+      adminAuth: `${apiPrefix}/${apiVersion}/admin-auth`
     },
     documentation: 'https://github.com/jeffhonforloco/photography-backend#api-documentation'
   });

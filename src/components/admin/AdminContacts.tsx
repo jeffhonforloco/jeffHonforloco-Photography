@@ -1,290 +1,438 @@
-import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { Textarea } from '../ui/textarea';
-import { Mail, Phone, Calendar, Star, Reply, Archive, Trash2 } from 'lucide-react';
-import { useToast } from '../../hooks/use-toast';
-import { ContactFilter } from '@/types/content';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from '@/components/ui/table';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { 
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { 
+  Search, 
+  Filter, 
+  Download, 
+  Mail, 
+  Phone, 
+  Calendar,
+  MapPin,
+  Eye,
+  Edit,
+  Trash2,
+  RefreshCw
+} from 'lucide-react';
 
-interface ContactMessage {
-  id: string;
-  name: string;
+interface Contact {
+  id: number;
+  full_name: string;
   email: string;
   phone?: string;
-  subject: string;
   message: string;
-  status: 'new' | 'replied' | 'archived';
-  priority: 'low' | 'medium' | 'high';
-  createdAt: string;
-  repliedAt?: string;
+  service_type?: string;
+  budget_range?: string;
+  event_date?: string;
+  location?: string;
+  status: string;
+  notes?: string;
+  created_at: string;
+  updated_at: string;
 }
 
-const AdminContacts = () => {
-  const { toast } = useToast();
-  const [contacts, setContacts] = useState<ContactMessage[]>([
-    {
-      id: '1',
-      name: 'Sarah Johnson',
-      email: 'sarah.johnson@email.com',
-      phone: '+1 (555) 123-4567',
-      subject: 'Wedding Photography Inquiry',
-      message: 'Hello! I am interested in booking your services for my wedding in June. Could we schedule a call to discuss packages and availability?',
-      status: 'new',
-      priority: 'high',
-      createdAt: '2024-01-20T10:30:00Z'
-    },
-    {
-      id: '2',
-      name: 'Mike Chen',
-      email: 'mike.chen@company.com',
-      phone: '+1 (555) 987-6543',
-      subject: 'Corporate Headshots',
-      message: 'We need professional headshots for our executive team. Looking for a package that includes 8 people. What are your rates?',
-      status: 'replied',
-      priority: 'medium',
-      createdAt: '2024-01-19T14:15:00Z',
-      repliedAt: '2024-01-19T16:30:00Z'
-    },
-    {
-      id: '3',
-      name: 'Emily Rodriguez',
-      email: 'emily.r@email.com',
-      subject: 'Portfolio Shoot',
-      message: 'I am an aspiring model and would love to work with you on building my portfolio. Do you offer model portfolio packages?',
-      status: 'new',
-      priority: 'medium',
-      createdAt: '2024-01-18T09:45:00Z'
-    },
-    {
-      id: '4',
-      name: 'James Wilson',
-      email: 'j.wilson@magazine.com',
-      phone: '+1 (555) 456-7890',
-      subject: 'Editorial Assignment',
-      message: 'We are interested in commissioning you for an editorial shoot for our upcoming spring issue. The shoot would be in March.',
-      status: 'archived',
-      priority: 'high',
-      createdAt: '2024-01-15T11:20:00Z',
-      repliedAt: '2024-01-15T15:45:00Z'
+const AdminContacts: React.FC = () => {
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
+
+  useEffect(() => {
+    filterContacts();
+  }, [contacts, searchTerm, statusFilter]);
+
+  const fetchContacts = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('/api/v1/contacts', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch contacts');
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setContacts(data.data);
+      } else {
+        throw new Error(data.message || 'Failed to fetch contacts');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
     }
-  ]);
+  };
 
-  const [selectedContact, setSelectedContact] = useState<ContactMessage | null>(null);
-  const [replyMessage, setReplyMessage] = useState('');
-  const [filter, setFilter] = useState<'all' | 'new' | 'replied' | 'archived'>('all');
+  const filterContacts = () => {
+    let filtered = contacts;
 
-  const filteredContacts = contacts.filter(contact => 
-    filter === 'all' || contact.status === filter
-  );
+    // Filter by search term
+    if (searchTerm) {
+      filtered = filtered.filter(contact =>
+        contact.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.message.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
 
-  const handleStatusChange = (id: string, status: ContactMessage['status']) => {
-    setContacts(contacts =>
-      contacts.map(contact =>
-        contact.id === id
-          ? { 
-              ...contact, 
-              status, 
-              repliedAt: status === 'replied' ? new Date().toISOString() : contact.repliedAt 
-            }
-          : contact
-      )
+    // Filter by status
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(contact => contact.status === statusFilter);
+    }
+
+    setFilteredContacts(filtered);
+  };
+
+  const updateContactStatus = async (contactId: number, newStatus: string) => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`/api/v1/contacts/${contactId}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: newStatus })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update contact status');
+      }
+
+      // Update local state
+      setContacts(prev => prev.map(contact =>
+        contact.id === contactId ? { ...contact, status: newStatus } : contact
+      ));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update contact');
+    }
+  };
+
+  const deleteContact = async (contactId: number) => {
+    if (!confirm('Are you sure you want to delete this contact?')) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`/api/v1/contacts/${contactId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete contact');
+      }
+
+      // Update local state
+      setContacts(prev => prev.filter(contact => contact.id !== contactId));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete contact');
+    }
+  };
+
+  const exportContacts = async () => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('/api/v1/admin/export/contacts?format=csv', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Export failed');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'contacts_export.csv';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Export failed');
+    }
+  };
+
+  const getStatusBadge = (status: string) => {
+    const statusConfig = {
+      new: { variant: 'default' as const, color: 'bg-blue-100 text-blue-800' },
+      contacted: { variant: 'secondary' as const, color: 'bg-yellow-100 text-yellow-800' },
+      qualified: { variant: 'outline' as const, color: 'bg-green-100 text-green-800' },
+      booked: { variant: 'destructive' as const, color: 'bg-purple-100 text-purple-800' },
+      completed: { variant: 'secondary' as const, color: 'bg-gray-100 text-gray-800' }
+    };
+
+    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.new;
+    
+    return (
+      <Badge variant={config.variant} className={config.color}>
+        {status}
+      </Badge>
     );
   };
 
-  const handleReply = (contact: ContactMessage) => {
-    // In a real app, this would send an email
-    handleStatusChange(contact.id, 'replied');
-    setReplyMessage('');
-    setSelectedContact(null);
-    toast({
-      title: "Reply Sent",
-      description: `Reply sent to ${contact.name}`,
-    });
-  };
-
-  const handleDelete = (id: string) => {
-    setContacts(contacts => contacts.filter(contact => contact.id !== id));
-    toast({
-      title: "Message Deleted",
-      description: "Contact message has been removed.",
-    });
-  };
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'high': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-      case 'medium': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-      case 'low': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'new': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-      case 'replied': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case 'archived': return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
-    }
-  };
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <RefreshCw className="h-8 w-8 animate-spin" />
+        <span className="ml-2">Loading contacts...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      {/* Header */}
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Contact Messages</h1>
-          <p className="text-gray-600 dark:text-gray-400">Manage client inquiries and communications</p>
+          <h1 className="text-3xl font-bold">Contact Management</h1>
+          <p className="text-muted-foreground">Manage your contacts and leads</p>
         </div>
-        
-        <div className="flex gap-2">
-          {['all', 'new', 'replied', 'archived'].map((status) => (
-            <Button
-              key={status}
-              variant={filter === status ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setFilter(status as ContactFilter)}
-              className="capitalize"
-            >
-              {status} ({contacts.filter(c => status === 'all' || c.status === status).length})
-            </Button>
-          ))}
+        <div className="flex space-x-2">
+          <Button onClick={fetchContacts} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+          <Button onClick={exportContacts}>
+            <Download className="h-4 w-4 mr-2" />
+            Export
+          </Button>
         </div>
       </div>
 
-      {/* Messages List */}
-      <div className="space-y-4">
-        {filteredContacts.map((contact) => (
-          <Card key={contact.id} className={`${contact.status === 'new' ? 'border-blue-200 dark:border-blue-800' : ''}`}>
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <CardTitle className="text-lg">{contact.subject}</CardTitle>
-                    <Badge className={getPriorityColor(contact.priority)}>
-                      {contact.priority}
-                    </Badge>
-                    <Badge className={getStatusColor(contact.status)}>
-                      {contact.status}
-                    </Badge>
-                  </div>
-                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
-                    <span className="font-medium">{contact.name}</span>
-                    <span className="flex items-center gap-1">
-                      <Mail className="h-4 w-4" />
-                      {contact.email}
-                    </span>
-                    {contact.phone && (
-                      <span className="flex items-center gap-1">
-                        <Phone className="h-4 w-4" />
-                        {contact.phone}
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {new Date(contact.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
+      {/* Filters */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Filters</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex space-x-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input
+                  placeholder="Search contacts..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+            </div>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Filter by status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Statuses</SelectItem>
+                <SelectItem value="new">New</SelectItem>
+                <SelectItem value="contacted">Contacted</SelectItem>
+                <SelectItem value="qualified">Qualified</SelectItem>
+                <SelectItem value="booked">Booked</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Contacts Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Contacts ({filteredContacts.length})</CardTitle>
+          <CardDescription>
+            Manage your contact inquiries and leads
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Email</TableHead>
+                  <TableHead>Service</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredContacts.map((contact) => (
+                  <TableRow key={contact.id}>
+                    <TableCell className="font-medium">
+                      {contact.full_name}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center space-x-2">
+                        <Mail className="h-4 w-4 text-gray-400" />
+                        <span>{contact.email}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      {contact.service_type || 'N/A'}
+                    </TableCell>
+                    <TableCell>
+                      {getStatusBadge(contact.status)}
+                    </TableCell>
+                    <TableCell>
+                      {new Date(contact.created_at).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex space-x-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedContact(contact);
+                            setIsDialogOpen(true);
+                          }}
+                        >
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                        <Select
+                          value={contact.status}
+                          onValueChange={(value) => updateContactStatus(contact.id, value)}
+                        >
+                          <SelectTrigger className="w-32">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="new">New</SelectItem>
+                            <SelectItem value="contacted">Contacted</SelectItem>
+                            <SelectItem value="qualified">Qualified</SelectItem>
+                            <SelectItem value="booked">Booked</SelectItem>
+                            <SelectItem value="completed">Completed</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => deleteContact(contact.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Contact Detail Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Contact Details</DialogTitle>
+            <DialogDescription>
+              View and manage contact information
+            </DialogDescription>
+          </DialogHeader>
+          {selectedContact && (
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Name</label>
+                  <p className="text-sm">{selectedContact.full_name}</p>
                 </div>
-                
-                <div className="flex gap-2 ml-4">
-                  {contact.status === 'new' && (
-                    <>
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button
-                            size="sm"
-                            onClick={() => {
-                              setSelectedContact(contact);
-                              setReplyMessage(`Hi ${contact.name},\n\nThank you for your inquiry about ${contact.subject.toLowerCase()}. `);
-                            }}
-                          >
-                            <Reply className="h-4 w-4 mr-1" />
-                            Reply
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-[600px]">
-                          <DialogHeader>
-                            <DialogTitle>Reply to {contact.name}</DialogTitle>
-                            <DialogDescription>
-                              Responding to: {contact.subject}
-                            </DialogDescription>
-                          </DialogHeader>
-                          
-                          <div className="space-y-4">
-                            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                              <p className="text-sm font-medium mb-1">Original Message:</p>
-                              <p className="text-sm text-gray-600 dark:text-gray-400">{contact.message}</p>
-                            </div>
-                            
-                            <Textarea
-                              value={replyMessage}
-                              onChange={(e) => setReplyMessage(e.target.value)}
-                              placeholder="Type your reply..."
-                              rows={8}
-                            />
-                            
-                            <div className="flex justify-end gap-2">
-                              <Button variant="outline" onClick={() => setSelectedContact(null)}>
-                                Cancel
-                              </Button>
-                              <Button onClick={() => selectedContact && handleReply(selectedContact)}>
-                                Send Reply
-                              </Button>
-                            </div>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                    </>
-                  )}
-                  
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleStatusChange(contact.id, contact.status === 'archived' ? 'new' : 'archived')}
-                  >
-                    <Archive className="h-4 w-4" />
-                  </Button>
-                  
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    onClick={() => handleDelete(contact.id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Email</label>
+                  <p className="text-sm">{selectedContact.email}</p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Phone</label>
+                  <p className="text-sm">{selectedContact.phone || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Service Type</label>
+                  <p className="text-sm">{selectedContact.service_type || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Budget Range</label>
+                  <p className="text-sm">{selectedContact.budget_range || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Event Date</label>
+                  <p className="text-sm">{selectedContact.event_date || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Location</label>
+                  <p className="text-sm">{selectedContact.location || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Status</label>
+                  <div className="mt-1">
+                    {getStatusBadge(selectedContact.status)}
+                  </div>
                 </div>
               </div>
-            </CardHeader>
-            
-            <CardContent>
-              <p className="text-gray-700 dark:text-gray-300">{contact.message}</p>
-              {contact.repliedAt && (
-                <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-                  <p className="text-sm text-green-600 dark:text-green-400">
-                    ✓ Replied on {new Date(contact.repliedAt).toLocaleDateString()}
+              <div>
+                <label className="text-sm font-medium text-gray-500">Message</label>
+                <p className="text-sm mt-1 p-3 bg-gray-50 rounded-md">
+                  {selectedContact.message}
+                </p>
+              </div>
+              {selectedContact.notes && (
+                <div>
+                  <label className="text-sm font-medium text-gray-500">Notes</label>
+                  <p className="text-sm mt-1 p-3 bg-yellow-50 rounded-md">
+                    {selectedContact.notes}
                   </p>
                 </div>
               )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {filteredContacts.length === 0 && (
-        <Card>
-          <CardContent className="text-center py-12">
-            <Mail className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              No messages found
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              {filter === 'all' ? 'No contact messages yet.' : `No ${filter} messages.`}
-            </p>
-          </CardContent>
-        </Card>
-      )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

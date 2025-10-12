@@ -1,312 +1,522 @@
-import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Textarea } from '../ui/textarea';
-import { Badge } from '../ui/badge';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Plus, Edit, Trash2, Eye, Upload } from 'lucide-react';
-import { useToast } from '../../hooks/use-toast';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from '@/components/ui/table';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { 
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { 
+  Search, 
+  Plus, 
+  Edit, 
+  Trash2, 
+  Eye, 
+  Image as ImageIcon,
+  Star,
+  RefreshCw,
+  Save,
+  X,
+  Upload
+} from 'lucide-react';
 
-interface PortfolioItem {
-  id: string;
+interface PortfolioImage {
+  id: number;
   title: string;
-  category: string;
   description: string;
-  image: string;
-  status: 'published' | 'draft';
-  createdAt: string;
-  views: number;
+  image_url: string;
+  thumbnail_url: string;
+  category: string;
+  is_featured: boolean;
+  sort_order: number;
+  tags: string;
+  metadata: string;
+  created_at: string;
+  updated_at: string;
 }
 
-const AdminPortfolio = () => {
-  const { toast } = useToast();
-  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([
-    {
-      id: '1',
-      title: 'Fashion Week 2024',
-      category: 'Fashion',
-      description: 'Exclusive behind-the-scenes photography from New York Fashion Week',
-      image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400',
-      status: 'published',
-      createdAt: '2024-01-15',
-      views: 1247
-    },
-    {
-      id: '2',
-      title: 'Beauty Campaign',
-      category: 'Beauty',
-      description: 'Professional beauty photography for luxury skincare brand',
-      image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400',
-      status: 'published',
-      createdAt: '2024-01-10',
-      views: 892
-    },
-    {
-      id: '3',
-      title: 'Editorial Portraits',
-      category: 'Editorial',
-      description: 'Magazine editorial featuring emerging artists',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616c6e7ad4b?w=400',
-      status: 'draft',
-      createdAt: '2024-01-05',
-      views: 0
-    }
-  ]);
-
-  const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
+const AdminPortfolio: React.FC = () => {
+  const [portfolioImages, setPortfolioImages] = useState<PortfolioImage[]>([]);
+  const [filteredImages, setFilteredImages] = useState<PortfolioImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [selectedImage, setSelectedImage] = useState<PortfolioImage | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    category: '',
-    description: '',
-    image: '',
-    status: 'draft' as 'published' | 'draft'
-  });
+  const [editForm, setEditForm] = useState<Partial<PortfolioImage>>({});
 
-  const categories = ['Fashion', 'Beauty', 'Editorial', 'Portrait', 'Lifestyle'];
+  useEffect(() => {
+    fetchPortfolioImages();
+  }, []);
 
-  const handleEdit = (item: PortfolioItem) => {
-    setSelectedItem(item);
-    setFormData({
-      title: item.title,
-      category: item.category,
-      description: item.description,
-      image: item.image,
-      status: item.status
+  useEffect(() => {
+    filterImages();
+  }, [portfolioImages, searchTerm, categoryFilter]);
+
+  const fetchPortfolioImages = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('/api/v1/portfolio', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch portfolio images');
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setPortfolioImages(data.data);
+      } else {
+        throw new Error(data.message || 'Failed to fetch portfolio images');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterImages = () => {
+    let filtered = portfolioImages;
+
+    // Filter by search term
+    if (searchTerm) {
+      filtered = filtered.filter(image =>
+        image.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        image.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        image.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Filter by category
+    if (categoryFilter !== 'all') {
+      filtered = filtered.filter(image => image.category === categoryFilter);
+    }
+
+    setFilteredImages(filtered);
+  };
+
+  const createPortfolioImage = async (imageData: Partial<PortfolioImage>) => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('/api/v1/portfolio', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(imageData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create portfolio image');
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        fetchPortfolioImages(); // Refresh the list
+        setIsDialogOpen(false);
+        setEditForm({});
+      } else {
+        throw new Error(data.message || 'Failed to create portfolio image');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create portfolio image');
+    }
+  };
+
+  const updatePortfolioImage = async (imageId: number, imageData: Partial<PortfolioImage>) => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`/api/v1/portfolio/${imageId}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(imageData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update portfolio image');
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        fetchPortfolioImages(); // Refresh the list
+        setIsDialogOpen(false);
+        setEditForm({});
+        setIsEditing(false);
+      } else {
+        throw new Error(data.message || 'Failed to update portfolio image');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update portfolio image');
+    }
+  };
+
+  const deletePortfolioImage = async (imageId: number) => {
+    if (!confirm('Are you sure you want to delete this portfolio image?')) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`/api/v1/portfolio/${imageId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete portfolio image');
+      }
+
+      // Update local state
+      setPortfolioImages(prev => prev.filter(image => image.id !== imageId));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete portfolio image');
+    }
+  };
+
+  const toggleFeatured = async (imageId: number, isFeatured: boolean) => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`/api/v1/portfolio/${imageId}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ is_featured: !isFeatured })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update portfolio image');
+      }
+
+      // Update local state
+      setPortfolioImages(prev => prev.map(image =>
+        image.id === imageId ? { ...image, is_featured: !isFeatured } : image
+      ));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update portfolio image');
+    }
+  };
+
+  const handleEdit = (image: PortfolioImage) => {
+    setSelectedImage(image);
+    setEditForm({
+      title: image.title,
+      description: image.description,
+      image_url: image.image_url,
+      category: image.category,
+      tags: image.tags,
+      is_featured: image.is_featured,
+      sort_order: image.sort_order
     });
     setIsEditing(true);
+    setIsDialogOpen(true);
   };
 
   const handleSave = () => {
-    if (selectedItem) {
-      // Update existing item
-      setPortfolioItems(items =>
-        items.map(item =>
-          item.id === selectedItem.id
-            ? { ...item, ...formData }
-            : item
-        )
-      );
-      toast({
-        title: "Portfolio Updated",
-        description: "Portfolio item has been successfully updated.",
-      });
+    if (isEditing && selectedImage) {
+      updatePortfolioImage(selectedImage.id, editForm);
     } else {
-      // Add new item
-      const newItem: PortfolioItem = {
-        id: Date.now().toString(),
-        ...formData,
-        createdAt: new Date().toISOString().split('T')[0],
-        views: 0
-      };
-      setPortfolioItems(items => [newItem, ...items]);
-      toast({
-        title: "Portfolio Added",
-        description: "New portfolio item has been created.",
-      });
+      createPortfolioImage(editForm);
     }
-    
-    setIsEditing(false);
-    setSelectedItem(null);
-    setFormData({ title: '', category: '', description: '', image: '', status: 'draft' });
   };
 
-  const handleDelete = (id: string) => {
-    setPortfolioItems(items => items.filter(item => item.id !== id));
-    toast({
-      title: "Portfolio Deleted",
-      description: "Portfolio item has been removed.",
-    });
-  };
+  const categories = ['beauty', 'fashion', 'glamour', 'editorial', 'lifestyle', 'motion'];
 
-  const handleStatusToggle = (id: string) => {
-    setPortfolioItems(items =>
-      items.map(item =>
-        item.id === id
-          ? { ...item, status: item.status === 'published' ? 'draft' : 'published' }
-          : item
-      )
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <RefreshCw className="h-8 w-8 animate-spin" />
+        <span className="ml-2">Loading portfolio images...</span>
+      </div>
     );
-  };
+  }
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      {/* Header */}
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Portfolio Management</h1>
-          <p className="text-gray-600 dark:text-gray-400">Manage your photography portfolio</p>
+          <h1 className="text-3xl font-bold">Portfolio Management</h1>
+          <p className="text-muted-foreground">Manage your portfolio images and galleries</p>
         </div>
-        
-        <Dialog open={isEditing} onOpenChange={setIsEditing}>
-          <DialogTrigger asChild>
-            <Button onClick={() => {
-              setSelectedItem(null);
-              setFormData({ title: '', category: '', description: '', image: '', status: 'draft' });
-            }}>
-              <Plus className="mr-2 h-4 w-4" />
-              Add Portfolio Item
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[500px]">
-            <DialogHeader>
-              <DialogTitle>
-                {selectedItem ? 'Edit Portfolio Item' : 'Add New Portfolio Item'}
-              </DialogTitle>
-              <DialogDescription>
-                {selectedItem ? 'Update the portfolio item details below.' : 'Create a new portfolio item for your gallery.'}
-              </DialogDescription>
-            </DialogHeader>
-            
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="title">Title</Label>
+        <div className="flex space-x-2">
+          <Button onClick={fetchPortfolioImages} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+          <Button onClick={() => {
+            setEditForm({});
+            setIsEditing(false);
+            setIsDialogOpen(true);
+          }}>
+            <Plus className="h-4 w-4 mr-2" />
+            New Image
+          </Button>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Filters</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex space-x-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <Input
-                  id="title"
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Enter portfolio title"
+                  placeholder="Search portfolio images..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
                 />
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="category">Category</Label>
-                <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
+            </div>
+            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Filter by category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Categories</SelectItem>
+                {categories.map(category => (
+                  <SelectItem key={category} value={category}>
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Portfolio Images Grid */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Portfolio Images ({filteredImages.length})</CardTitle>
+          <CardDescription>
+            Manage your portfolio images and galleries
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredImages.map((image) => (
+              <Card key={image.id} className="overflow-hidden">
+                <div className="aspect-square relative">
+                  <img
+                    src={image.image_url}
+                    alt={image.title}
+                    className="w-full h-full object-cover"
+                  />
+                  {image.is_featured && (
+                    <div className="absolute top-2 right-2">
+                      <Badge className="bg-yellow-500">
+                        <Star className="h-3 w-3 mr-1" />
+                        Featured
+                      </Badge>
+                    </div>
+                  )}
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold text-sm truncate">{image.title}</h3>
+                  <p className="text-xs text-gray-500 mt-1">{image.category}</p>
+                  <div className="flex items-center justify-between mt-3">
+                    <Badge variant="outline" className="text-xs">
+                      {image.category}
+                    </Badge>
+                    <div className="flex space-x-1">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedImage(image);
+                          setIsDialogOpen(true);
+                        }}
+                      >
+                        <Eye className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleEdit(image)}
+                      >
+                        <Edit className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => toggleFeatured(image.id, image.is_featured)}
+                      >
+                        <Star className={`h-3 w-3 ${image.is_featured ? 'text-yellow-500' : 'text-gray-400'}`} />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => deletePortfolioImage(image.id)}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Portfolio Image Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>
+              {isEditing ? 'Edit Portfolio Image' : 'Add New Portfolio Image'}
+            </DialogTitle>
+            <DialogDescription>
+              {isEditing ? 'Update the portfolio image information' : 'Add a new portfolio image'}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-gray-500">Title</label>
+              <Input
+                value={editForm.title || ''}
+                onChange={(e) => setEditForm(prev => ({ ...prev, title: e.target.value }))}
+                placeholder="Enter image title"
+                className="mt-1"
+              />
+            </div>
+            
+            <div>
+              <label className="text-sm font-medium text-gray-500">Description</label>
+              <Input
+                value={editForm.description || ''}
+                onChange={(e) => setEditForm(prev => ({ ...prev, description: e.target.value }))}
+                placeholder="Enter image description"
+                className="mt-1"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-gray-500">Image URL</label>
+              <Input
+                value={editForm.image_url || ''}
+                onChange={(e) => setEditForm(prev => ({ ...prev, image_url: e.target.value }))}
+                placeholder="Enter image URL"
+                className="mt-1"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium text-gray-500">Category</label>
+                <Select
+                  value={editForm.category || 'beauty'}
+                  onValueChange={(value) => setEditForm(prev => ({ ...prev, category: value }))}
+                >
+                  <SelectTrigger className="mt-1">
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map(category => (
-                      <SelectItem key={category} value={category}>{category}</SelectItem>
+                      <SelectItem key={category} value={category}>
+                        {category.charAt(0).toUpperCase() + category.slice(1)}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Enter description"
-                  rows={3}
+
+              <div>
+                <label className="text-sm font-medium text-gray-500">Sort Order</label>
+                <Input
+                  type="number"
+                  value={editForm.sort_order || 0}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, sort_order: parseInt(e.target.value) || 0 }))}
+                  placeholder="Enter sort order"
+                  className="mt-1"
                 />
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="image">Image URL</Label>
-                <div className="flex gap-2">
-                  <Input
-                    id="image"
-                    value={formData.image}
-                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    placeholder="Enter image URL"
-                  />
-                  <Button variant="outline">
-                    <Upload className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="status">Status</Label>
-                <Select value={formData.status} onValueChange={(value: 'published' | 'draft') => setFormData({ ...formData, status: value })}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="draft">Draft</SelectItem>
-                    <SelectItem value="published">Published</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="flex justify-end gap-2 pt-4">
-                <Button variant="outline" onClick={() => setIsEditing(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={handleSave}>
-                  {selectedItem ? 'Update' : 'Create'}
-                </Button>
-              </div>
             </div>
-          </DialogContent>
-        </Dialog>
-      </div>
 
-      {/* Portfolio Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {portfolioItems.map((item) => (
-          <Card key={item.id} className="overflow-hidden">
-            <div className="aspect-square relative">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover"
+            <div>
+              <label className="text-sm font-medium text-gray-500">Tags</label>
+              <Input
+                value={editForm.tags || ''}
+                onChange={(e) => setEditForm(prev => ({ ...prev, tags: e.target.value }))}
+                placeholder="Enter tags (comma separated)"
+                className="mt-1"
               />
-              <div className="absolute top-2 right-2">
-                <Badge variant={item.status === 'published' ? 'default' : 'secondary'}>
-                  {item.status}
-                </Badge>
-              </div>
             </div>
-            
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <div>
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
-                  <CardDescription>{item.category}</CardDescription>
-                </div>
-                <div className="flex items-center gap-1 text-sm text-gray-500">
-                  <Eye className="h-4 w-4" />
-                  {item.views}
-                </div>
-              </div>
-            </CardHeader>
-            
-            <CardContent>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                {item.description}
-              </p>
-              
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">
-                  Created: {new Date(item.createdAt).toLocaleDateString()}
-                </span>
-                
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleStatusToggle(item.id)}
-                  >
-                    {item.status === 'published' ? 'Unpublish' : 'Publish'}
-                  </Button>
-                  
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleEdit(item)}
-                  >
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="is_featured"
+                checked={editForm.is_featured || false}
+                onChange={(e) => setEditForm(prev => ({ ...prev, is_featured: e.target.checked }))}
+                className="rounded"
+              />
+              <label htmlFor="is_featured" className="text-sm font-medium text-gray-500">
+                Featured Image
+              </label>
+            </div>
+
+            <div className="flex justify-end space-x-2">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setIsDialogOpen(false);
+                  setEditForm({});
+                  setIsEditing(false);
+                }}
+              >
+                <X className="h-4 w-4 mr-2" />
+                Cancel
+              </Button>
+              <Button onClick={handleSave}>
+                <Save className="h-4 w-4 mr-2" />
+                {isEditing ? 'Update' : 'Create'}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
