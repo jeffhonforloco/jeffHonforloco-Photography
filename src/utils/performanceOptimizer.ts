@@ -36,7 +36,8 @@ export const setupLazyLoading = (): void => {
 
 export const optimizeImageFormats = (): void => {
   // Check WebP support and optimize images
-  const webpSupported = 'WebP' in document.createElement('canvas').toDataURL('image/webp');
+  const canvas = document.createElement('canvas');
+  const webpSupported = canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
   
   if (webpSupported) {
     const images = document.querySelectorAll('img');
@@ -93,10 +94,14 @@ const generateResponsiveSrcSet = (src: string): string => {
 };
 
 export const initializeImageOptimization = (): void => {
-  // Run all optimizations
-  optimizeImageLoading();
-  setupLazyLoading();
-  optimizeImageFormats();
-  preloadAboveFoldImages();
-  optimizeImageSizes();
+  // Run all optimizations with error handling
+  try {
+    optimizeImageLoading();
+    setupLazyLoading();
+    optimizeImageFormats();
+    preloadAboveFoldImages();
+    optimizeImageSizes();
+  } catch (error) {
+    console.warn('Image optimization failed:', error);
+  }
 };

@@ -37,10 +37,12 @@ export const preloadCriticalImages = (images: string[]): void => {
 
 export const isWebPSupported = (): Promise<boolean> => {
   return new Promise((resolve) => {
-    const webP = new Image();
-    webP.onload = webP.onerror = () => {
-      resolve(webP.height === 2);
-    };
-    webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+    try {
+      const canvas = document.createElement('canvas');
+      const webpSupported = canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+      resolve(webpSupported);
+    } catch (error) {
+      resolve(false);
+    }
   });
 };
