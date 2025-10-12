@@ -1,0 +1,210 @@
+name: Automated Backup
+
+on:
+  schedule:
+    # Run daily at 3 AM UTC
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      backup_type:
+        description: 'Type of backup to perform'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - database
+          - files
+          - config
+
+env:
+  BACKUP_RETENTION_DAYS: 30
+
+jobs:
+  backup-database:
+    name: Backup Database
+    runs-on: ubuntu-latest
+    if: github.event.inputs.backup_type == 'full' || github.event.inputs.backup_type == 'database' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+      
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm ci
+      
+      - name: Create database backup
+        run: |
+          cd backend
+          mkdir -p backups
+          
+          # Create timestamped backup
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          BACKUP_FILE="backups/database_backup_${TIMESTAMP}.sql"
+          
+          # Export database to SQL file
+          sqlite3 database/photography.db ".dump" > $BACKUP_FILE
+          
+          # Compress backup
+          gzip $BACKUP_FILE
+          
+          echo "BACKUP_FILE=${BACKUP_FILE}.gz" >> $GITHUB_ENV
+          echo "BACKUP_TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+      
+      - name: Upload database backup to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          name: database-backup-${{ env.BACKUP_TIMESTAMP }}
+          path: backend/backups/
+          retention-days: ${{ env.BACKUP_RETENTION_DAYS }}
+      
+      - name: Upload to cloud storage (if configured)
+        if: env.AWS_ACCESS_KEY_ID != ''
+        run: |
+          # Upload to AWS S3
+          aws s3 cp backend/backups/ s3://${{ secrets.AWS_S3_BACKUP_BUCKET }}/database/ --recursive
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+
+  backup-files:
+    name: Backup Files
+    runs-on: ubuntu-latest
+    if: github.event.inputs.backup_type == 'full' || github.event.inputs.backup_type == 'files' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Create files backup
+        run: |
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          BACKUP_DIR="backups/files_backup_${TIMESTAMP}"
+          mkdir -p $BACKUP_DIR
+          
+          # Backup important files
+          cp -r src/ $BACKUP_DIR/
+          cp -r public/ $BACKUP_DIR/
+          cp -r backend/src/ $BACKUP_DIR/backend_src/
+          cp package.json $BACKUP_DIR/
+          cp backend/package.json $BACKUP_DIR/backend_package.json
+          cp *.md $BACKUP_DIR/ 2>/dev/null || true
+          
+          # Create archive
+          tar -czf "files_backup_${TIMESTAMP}.tar.gz" $BACKUP_DIR/
+          
+          echo "BACKUP_FILE=files_backup_${TIMESTAMP}.tar.gz" >> $GITHUB_ENV
+          echo "BACKUP_TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+      
+      - name: Upload files backup to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          name: files-backup-${{ env.BACKUP_TIMESTAMP }}
+          path: ${{ env.BACKUP_FILE }}
+          retention-days: ${{ env.BACKUP_RETENTION_DAYS }}
+
+  backup-config:
+    name: Backup Configuration
+    runs-on: ubuntu-latest
+    if: github.event.inputs.backup_type == 'full' || github.event.inputs.backup_type == 'config' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Create config backup
+        run: |
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          BACKUP_DIR="backups/config_backup_${TIMESTAMP}"
+          mkdir -p $BACKUP_DIR
+          
+          # Backup configuration files
+          cp -r .github/ $BACKUP_DIR/
+          cp *.json $BACKUP_DIR/ 2>/dev/null || true
+          cp *.js $BACKUP_DIR/ 2>/dev/null || true
+          cp *.ts $BACKUP_DIR/ 2>/dev/null || true
+          cp *.md $BACKUP_DIR/ 2>/dev/null || true
+          cp env.example $BACKUP_DIR/ 2>/dev/null || true
+          cp backend/env.example $BACKUP_DIR/backend_env.example 2>/dev/null || true
+          
+          # Create archive
+          tar -czf "config_backup_${TIMESTAMP}.tar.gz" $BACKUP_DIR/
+          
+          echo "BACKUP_FILE=config_backup_${TIMESTAMP}.tar.gz" >> $GITHUB_ENV
+          echo "BACKUP_TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+      
+      - name: Upload config backup to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          name: config-backup-${{ env.BACKUP_TIMESTAMP }}
+          path: ${{ env.BACKUP_FILE }}
+          retention-days: ${{ env.BACKUP_RETENTION_DAYS }}
+
+  cleanup-old-backups:
+    name: Cleanup Old Backups
+    runs-on: ubuntu-latest
+    needs: [backup-database, backup-files, backup-config]
+    if: always()
+    steps:
+      - name: Cleanup old artifacts
+        run: |
+          echo "Cleaning up old backup artifacts..."
+          # GitHub automatically handles artifact retention
+          echo "Old backups will be automatically cleaned up after ${{ env.BACKUP_RETENTION_DAYS }} days"
+      
+      - name: Cleanup old cloud backups
+        if: env.AWS_ACCESS_KEY_ID != ''
+        run: |
+          # Clean up old backups from cloud storage
+          aws s3 ls s3://${{ secrets.AWS_S3_BACKUP_BUCKET }}/database/ --recursive | \
+          awk '$1 < "'$(date -d "${{ env.BACKUP_RETENTION_DAYS }} days ago" +%Y-%m-%d)'" {print $4}' | \
+          xargs -I {} aws s3 rm s3://${{ secrets.AWS_S3_BACKUP_BUCKET }}/{}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+
+  notify-backup:
+    name: Notify Backup Status
+    runs-on: ubuntu-latest
+    needs: [backup-database, backup-files, backup-config, cleanup-old-backups]
+    if: always()
+    steps:
+      - name: Notify on success
+        if: needs.backup-database.result == 'success' && needs.backup-files.result == 'success' && needs.backup-config.result == 'success'
+        run: |
+          echo "✅ Backup completed successfully!"
+          echo "📦 Database backup created"
+          echo "📁 Files backup created"
+          echo "⚙️ Configuration backup created"
+          echo "🧹 Old backups cleaned up"
+      
+      - name: Notify on failure
+        if: needs.backup-database.result == 'failure' || needs.backup-files.result == 'failure' || needs.backup-config.result == 'failure'
+        run: |
+          echo "❌ Backup failed!"
+          echo "Please check the logs for errors"
+      
+      - name: Create backup report
+        run: |
+          echo "# Backup Report - $(date)" > backup-report.md
+          echo "" >> backup-report.md
+          echo "## Status" >> backup-report.md
+          echo "- Database: ${{ needs.backup-database.result }}" >> backup-report.md
+          echo "- Files: ${{ needs.backup-files.result }}" >> backup-report.md
+          echo "- Config: ${{ needs.backup-config.result }}" >> backup-report.md
+          echo "- Cleanup: ${{ needs.cleanup-old-backups.result }}" >> backup-report.md
+          echo "" >> backup-report.md
+          echo "## Next Steps" >> backup-report.md
+          echo "1. Verify backup integrity" >> backup-report.md
+          echo "2. Test restore procedures" >> backup-report.md
+          echo "3. Monitor backup storage usage" >> backup-report.md

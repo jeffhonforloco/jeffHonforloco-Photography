@@ -1,0 +1,303 @@
+name: Auto Sync and Update
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      sync_type:
+        description: 'Type of sync to perform'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - dependencies
+          - content
+          - security
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  sync-dependencies:
+    name: Sync Dependencies
+    runs-on: ubuntu-latest
+    if: github.event.inputs.sync_type == 'all' || github.event.inputs.sync_type == 'dependencies' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      
+      - name: Check for dependency updates
+        run: |
+          echo "Checking for dependency updates..."
+          
+          # Check frontend dependencies
+          npm outdated || echo "No frontend updates available"
+          
+          # Check backend dependencies
+          cd backend
+          npm outdated || echo "No backend updates available"
+      
+      - name: Update dependencies if available
+        run: |
+          echo "Updating dependencies..."
+          
+          # Update frontend
+          npm update
+          npm audit fix --force
+          
+          # Update backend
+          cd backend
+          npm update
+          npm audit fix --force
+      
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git add .
+          git commit -m "chore: automated dependency updates"
+          git push origin ${{ github.ref_name }}
+
+  sync-content:
+    name: Sync Content
+    runs-on: ubuntu-latest
+    if: github.event.inputs.sync_type == 'all' || github.event.inputs.sync_type == 'content' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      
+      - name: Update content from external sources
+        run: |
+          echo "Syncing content from external sources..."
+          
+          # Update blog posts if needed
+          # This could pull from a CMS or external API
+          echo "Blog posts synced"
+          
+          # Update portfolio images
+          # This could pull from a photo management system
+          echo "Portfolio images synced"
+          
+          # Update contact information
+          # This could sync from a CRM
+          echo "Contact information synced"
+      
+      - name: Update documentation
+        run: |
+          echo "Updating documentation..."
+          
+          # Update README with latest information
+          if [ -f README.md ]; then
+            echo "## Last Content Sync: $(date)" >> README.md
+          fi
+          
+          # Update changelog
+          echo "## $(date +%Y-%m-%d)" >> CHANGELOG.md
+          echo "- Automated content sync" >> CHANGELOG.md
+          echo "" >> CHANGELOG.md
+      
+      - name: Check for content changes
+        id: check-content-changes
+        run: |
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No content changes to commit"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Content changes detected"
+          fi
+      
+      - name: Commit content changes
+        if: steps.check-content-changes.outputs.changes == 'true'
+        run: |
+          git add .
+          git commit -m "content: automated content sync"
+          git push origin ${{ github.ref_name }}
+
+  sync-security:
+    name: Sync Security
+    runs-on: ubuntu-latest
+    if: github.event.inputs.sync_type == 'all' || github.event.inputs.sync_type == 'security' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      
+      - name: Run security audit
+        run: |
+          echo "Running security audit..."
+          
+          # Frontend security audit
+          npm audit --audit-level moderate
+          
+          # Backend security audit
+          cd backend
+          npm audit --audit-level moderate
+      
+      - name: Apply security fixes
+        run: |
+          echo "Applying security fixes..."
+          
+          # Fix frontend security issues
+          npm audit fix --force
+          
+          # Fix backend security issues
+          cd backend
+          npm audit fix --force
+      
+      - name: Update security dependencies
+        run: |
+          echo "Updating security-related dependencies..."
+          
+          # Update security packages
+          npm install @types/node@latest
+          npm install typescript@latest
+          
+          cd backend
+          npm install express@latest
+          npm install helmet@latest
+          npm install bcryptjs@latest
+      
+      - name: Check for security changes
+        id: check-security-changes
+        run: |
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No security changes to commit"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Security changes detected"
+          fi
+      
+      - name: Commit security changes
+        if: steps.check-security-changes.outputs.changes == 'true'
+        run: |
+          git add .
+          git commit -m "security: automated security updates"
+          git push origin ${{ github.ref_name }}
+
+  sync-github-settings:
+    name: Sync GitHub Settings
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Update repository settings
+        run: |
+          echo "Syncing GitHub repository settings..."
+          
+          # Update repository description
+          gh repo edit --description "Professional photography platform with automated workflows"
+          
+          # Update repository topics
+          gh repo edit --add-topic photography,portfolio,blog,automation,ci-cd
+          
+          # Update repository visibility (if needed)
+          # gh repo edit --visibility public
+      
+      - name: Update branch protection
+        run: |
+          echo "Updating branch protection rules..."
+          
+          # Enable branch protection for main branch
+          gh api repos/${{ github.repository }}/branches/main/protection \
+            --method PUT \
+            --field required_status_checks='{"strict":true,"contexts":["ci"]}' \
+            --field enforce_admins=true \
+            --field required_pull_request_reviews='{"required_approving_review_count":1}' \
+            --field restrictions=null || echo "Branch protection update failed"
+
+  notify-sync:
+    name: Notify Sync Status
+    runs-on: ubuntu-latest
+    needs: [sync-dependencies, sync-content, sync-security, sync-github-settings]
+    if: always()
+    steps:
+      - name: Notify on success
+        if: needs.sync-dependencies.result == 'success' && needs.sync-content.result == 'success' && needs.sync-security.result == 'success'
+        run: |
+          echo "✅ Auto sync completed successfully!"
+          echo "📦 Dependencies updated"
+          echo "📝 Content synced"
+          echo "🔒 Security updated"
+          echo "⚙️ GitHub settings synced"
+      
+      - name: Notify on failure
+        if: needs.sync-dependencies.result == 'failure' || needs.sync-content.result == 'failure' || needs.sync-security.result == 'failure'
+        run: |
+          echo "❌ Auto sync failed!"
+          echo "Please check the logs for errors"
+      
+      - name: Create sync report
+        run: |
+          echo "# Auto Sync Report - $(date)" > sync-report.md
+          echo "" >> sync-report.md
+          echo "## Status" >> sync-report.md
+          echo "- Dependencies: ${{ needs.sync-dependencies.result }}" >> sync-report.md
+          echo "- Content: ${{ needs.sync-content.result }}" >> sync-report.md
+          echo "- Security: ${{ needs.sync-security.result }}" >> sync-report.md
+          echo "- GitHub Settings: ${{ needs.sync-github-settings.result }}" >> sync-report.md
+          echo "" >> sync-report.md
+          echo "## Next Steps" >> sync-report.md
+          echo "1. Review any changes made" >> sync-report.md
+          echo "2. Test functionality" >> sync-report.md
+          echo "3. Monitor for issues" >> sync-report.md

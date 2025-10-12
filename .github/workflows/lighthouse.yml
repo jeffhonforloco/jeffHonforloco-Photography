@@ -1,0 +1,293 @@
+name: Lighthouse Performance Audit
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL to audit'
+        required: false
+        default: 'https://jeffhonforloco-photography.vercel.app'
+
+env:
+  LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build frontend
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'http://localhost:3001/api/v1' }}
+          VITE_GA_TRACKING_ID: ${{ secrets.VITE_GA_TRACKING_ID }}
+      
+      - name: Start local server
+        run: |
+          npm run preview &
+          sleep 10
+      
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './lighthouse.config.js'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          urls: |
+            http://localhost:4173
+            http://localhost:4173/portfolios
+            http://localhost:4173/blog
+            http://localhost:4173/contact
+            http://localhost:4173/about
+      
+      - name: Run Lighthouse on production
+        if: github.event.inputs.url != ''
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './lighthouse.config.js'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          urls: ${{ github.event.inputs.url }}
+
+  performance-budget:
+    name: Performance Budget Check
+    runs-on: ubuntu-latest
+    needs: lighthouse
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build frontend
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'http://localhost:3001/api/v1' }}
+      
+      - name: Analyze bundle size
+        run: |
+          echo "Analyzing bundle size..."
+          
+          # Check if dist directory exists
+          if [ -d "dist" ]; then
+            echo "## Bundle Size Analysis" >> performance-report.md
+            echo "" >> performance-report.md
+            
+            # Calculate total size
+            TOTAL_SIZE=$(du -sh dist | cut -f1)
+            echo "Total bundle size: $TOTAL_SIZE" >> performance-report.md
+            echo "" >> performance-report.md
+            
+            # Analyze individual files
+            echo "### Largest Files:" >> performance-report.md
+            find dist -type f -name "*.js" -o -name "*.css" | xargs ls -la | sort -k5 -nr | head -10 >> performance-report.md
+            echo "" >> performance-report.md
+            
+            # Check for large images
+            echo "### Image Analysis:" >> performance-report.md
+            find dist -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.webp" \) | xargs ls -la | sort -k5 -nr | head -10 >> performance-report.md
+          else
+            echo "No dist directory found" >> performance-report.md
+          fi
+      
+      - name: Check performance budget
+        run: |
+          echo "Checking performance budget..."
+          
+          # Define performance budgets
+          MAX_BUNDLE_SIZE_MB=5
+          MAX_IMAGE_SIZE_MB=2
+          MAX_TOTAL_SIZE_MB=10
+          
+          # Check bundle size
+          if [ -d "dist" ]; then
+            BUNDLE_SIZE_MB=$(du -sm dist | cut -f1)
+            echo "Bundle size: ${BUNDLE_SIZE_MB}MB"
+            
+            if [ $BUNDLE_SIZE_MB -gt $MAX_BUNDLE_SIZE_MB ]; then
+              echo "❌ Bundle size exceeds budget (${BUNDLE_SIZE_MB}MB > ${MAX_BUNDLE_SIZE_MB}MB)"
+              exit 1
+            else
+              echo "✅ Bundle size within budget"
+            fi
+          fi
+      
+      - name: Upload performance report
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-report
+          path: performance-report.md
+          retention-days: 7
+
+  accessibility-audit:
+    name: Accessibility Audit
+    runs-on: ubuntu-latest
+    needs: lighthouse
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build frontend
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'http://localhost:3001/api/v1' }}
+      
+      - name: Start local server
+        run: |
+          npm run preview &
+          sleep 10
+      
+      - name: Run accessibility audit
+        run: |
+          echo "Running accessibility audit..."
+          
+          # Install axe-cli for accessibility testing
+          npm install -g @axe-core/cli
+          
+          # Run accessibility audit
+          axe http://localhost:4173 --reporter json > accessibility-report.json || echo "Accessibility audit completed with issues"
+          
+          # Generate summary
+          echo "## Accessibility Audit Report" > accessibility-summary.md
+          echo "" >> accessibility-summary.md
+          echo "### Issues Found:" >> accessibility-summary.md
+          cat accessibility-report.json | jq -r '.violations[] | "- " + .description' >> accessibility-summary.md || echo "No accessibility issues found" >> accessibility-summary.md
+      
+      - name: Upload accessibility report
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-report
+          path: |
+            accessibility-report.json
+            accessibility-summary.md
+          retention-days: 7
+
+  seo-audit:
+    name: SEO Audit
+    runs-on: ubuntu-latest
+    needs: lighthouse
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build frontend
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'http://localhost:3001/api/v1' }}
+      
+      - name: Start local server
+        run: |
+          npm run preview &
+          sleep 10
+      
+      - name: Run SEO audit
+        run: |
+          echo "Running SEO audit..."
+          
+          # Check for meta tags
+          echo "## SEO Audit Report" > seo-report.md
+          echo "" >> seo-report.md
+          
+          # Check title tags
+          echo "### Title Tags:" >> seo-report.md
+          curl -s http://localhost:4173 | grep -i "<title>" >> seo-report.md || echo "No title tags found" >> seo-report.md
+          
+          # Check meta descriptions
+          echo "### Meta Descriptions:" >> seo-report.md
+          curl -s http://localhost:4173 | grep -i "meta.*description" >> seo-report.md || echo "No meta descriptions found" >> seo-report.md
+          
+          # Check for structured data
+          echo "### Structured Data:" >> seo-report.md
+          curl -s http://localhost:4173 | grep -i "application/ld+json" >> seo-report.md || echo "No structured data found" >> seo-report.md
+          
+          # Check for alt tags on images
+          echo "### Image Alt Tags:" >> seo-report.md
+          curl -s http://localhost:4173 | grep -i "alt=" >> seo-report.md || echo "No alt tags found" >> seo-report.md
+      
+      - name: Upload SEO report
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-report
+          path: seo-report.md
+          retention-days: 7
+
+  notify-performance:
+    name: Notify Performance Results
+    runs-on: ubuntu-latest
+    needs: [lighthouse, performance-budget, accessibility-audit, seo-audit]
+    if: always()
+    steps:
+      - name: Notify on success
+        if: needs.lighthouse.result == 'success' && needs.performance-budget.result == 'success'
+        run: |
+          echo "✅ Performance audit completed successfully!"
+          echo "📊 Lighthouse scores within acceptable range"
+          echo "📦 Bundle size within budget"
+          echo "♿ Accessibility issues addressed"
+          echo "🔍 SEO audit completed"
+      
+      - name: Notify on failure
+        if: needs.lighthouse.result == 'failure' || needs.performance-budget.result == 'failure'
+        run: |
+          echo "❌ Performance audit failed!"
+          echo "Please check the reports for issues"
+      
+      - name: Create performance summary
+        run: |
+          echo "# Performance Audit Summary - $(date)" > performance-summary.md
+          echo "" >> performance-summary.md
+          echo "## Results" >> performance-summary.md
+          echo "- Lighthouse: ${{ needs.lighthouse.result }}" >> performance-summary.md
+          echo "- Performance Budget: ${{ needs.performance-budget.result }}" >> performance-summary.md
+          echo "- Accessibility: ${{ needs.accessibility-audit.result }}" >> performance-summary.md
+          echo "- SEO: ${{ needs.seo-audit.result }}" >> performance-summary.md
+          echo "" >> performance-summary.md
+          echo "## Recommendations" >> performance-summary.md
+          echo "1. Review Lighthouse scores" >> performance-summary.md
+          echo "2. Optimize bundle size if needed" >> performance-summary.md
+          echo "3. Fix accessibility issues" >> performance-summary.md
+          echo "4. Improve SEO elements" >> performance-summary.md

@@ -26,7 +26,9 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    if (import.meta.env.DEV) {
+      console.error('ErrorBoundary caught an error:', error, errorInfo);
+    }
     
     // Track error in analytics if available
     if (typeof window !== 'undefined' && (window as { gtag?: (...args: unknown[]) => void }).gtag) {
@@ -35,6 +37,17 @@ class ErrorBoundary extends Component<Props, State> {
         fatal: false
       });
     }
+
+    // Log error to external service in production
+    if (import.meta.env.PROD) {
+      // TODO: Implement error logging service (e.g., Sentry, LogRocket)
+      this.logErrorToService(error, errorInfo);
+    }
+  }
+
+  private logErrorToService(error: Error, errorInfo: ErrorInfo) {
+    // Placeholder for external error logging service
+    // Example: Sentry.captureException(error, { extra: errorInfo });
   }
 
   public render() {

@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useEmailAutomation } from '@/hooks/useEmailAutomation';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { useEmailSequence } from '@/hooks/useEmailSequence';
-import { supabase } from '@/integrations/supabase/client';
+import { apiService } from '@/lib/api-service';
 
 interface EmailFormData {
   email: string;
@@ -24,16 +24,10 @@ const EmailSignup = () => {
     setIsLoading(true);
     
     try {
-      // Send newsletter signup via edge function
-      const { data: result } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          type: 'newsletter',
-          name: data.email.split('@')[0], // Use part of email as name for newsletter
-          email: data.email
-        }
-      });
+      // Send newsletter signup via API service
+      const result = await apiService.sendNewsletterSignup(data.email);
 
-      if (result?.success) {
+      if (result.success) {
         // Add to local systems for tracking
         addLead(data.email, 'website');
         await addEmailLead(data.email);

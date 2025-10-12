@@ -52,7 +52,9 @@ export const useAnalytics = () => {
         pageViews
       }));
     } catch (error) {
-      console.error('Error loading analytics data:', error);
+      if (import.meta.env.DEV) {
+        console.error('Error loading analytics data:', error);
+      }
     }
   };
 
@@ -77,8 +79,16 @@ export const useAnalytics = () => {
     const bouncedSessions = Object.values(visitorSessions).filter(count => count === 1).length;
     const bounceRate = uniqueVisitors > 0 ? Math.round((bouncedSessions / uniqueVisitors) * 100) : 0;
     
-    // Average session duration (mock calculation)
-    const averageSessionDuration = Math.floor(Math.random() * 300) + 120; // 2-7 minutes
+    // Calculate average session duration from actual data
+    const sessionDurations = pageViews.map((pv: PageView) => {
+      const startTime = new Date(pv.timestamp).getTime();
+      const endTime = startTime + (pv.sessionDuration || 0);
+      return endTime - startTime;
+    });
+    
+    const averageSessionDuration = sessionDurations.length > 0 
+      ? Math.floor(sessionDurations.reduce((sum, duration) => sum + duration, 0) / sessionDurations.length / 1000 / 60) // Convert to minutes
+      : 0;
     
     setAnalyticsData(prev => ({
       ...prev,

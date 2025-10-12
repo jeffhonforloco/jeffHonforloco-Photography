@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
 import { trackContactForm, trackBookingIntent } from '../components/Analytics';
-import { supabase } from '@/integrations/supabase/client';
+import { apiService } from '@/lib/api-service';
 
 const Contact = () => {
   const [contentData, setContentData] = useState<ContentData | null>(null);
@@ -40,22 +40,19 @@ const Contact = () => {
       trackContactForm(formData);
       trackBookingIntent('contact_form', formData.location);
       
-      // Send email via Supabase edge function
-      const { data } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          type: 'contact',
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-          service: formData.service,
-          budget: formData.budget,
-          projectDate: formData.projectDate,
-          location: formData.location
-        }
+      // Send email via API service
+      const result = await apiService.sendContactEmail({
+        full_name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        service_type: formData.service,
+        budget_range: formData.budget,
+        event_date: formData.projectDate,
+        location: formData.location
       });
 
-      if (data?.success) {
+      if (result.success) {
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your inquiry. You'll receive a confirmation email shortly and I'll get back to you within 24 hours.",

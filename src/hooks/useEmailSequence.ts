@@ -65,7 +65,9 @@ export const useEmailSequence = () => {
     });
     
     if (template) {
-      console.log(`📧 Sending email to ${email}:`, template);
+      if (import.meta.env.DEV) {
+        console.log(`📧 Sending email to ${email}:`, template);
+      }
       
       // In production, this would call your email service
       // await fetch('/api/sendEmail', { ... });

@@ -31,20 +31,24 @@ export default defineConfig(({ mode }) => ({
           forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
           crypto: ['crypto-js'],
           carousel: ['embla-carousel-react'],
-          theme: ['next-themes']
+          theme: ['next-themes'],
         }
       }
     },
     // Enable CSS code splitting
     cssCodeSplit: true,
     // Optimize assets - reduce inline threshold for better caching
-    assetsInlineLimit: 2048,
+    assetsInlineLimit: 1024, // Reduced for better caching
     // Disable source maps for production to reduce bundle size
     sourcemap: false,
     // Minimize bundle size with esbuild (default, no extra dependencies)
     minify: 'esbuild',
     // Target modern browsers for better performance
-    target: 'es2015'
+    target: 'es2020', // Updated for better performance
+    // Enable tree shaking
+    treeshake: true,
+    // Optimize chunk size
+    chunkSizeWarningLimit: 1000
   },
   // Performance optimizations
   optimizeDeps: {

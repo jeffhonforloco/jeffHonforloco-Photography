@@ -1,0 +1,63 @@
+# Code Owners
+# This file defines who owns different parts of the codebase
+
+# Global owners
+* @jeffhonforloco
+
+# Frontend
+/src/ @jeffhonforloco
+/public/ @jeffhonforloco
+package.json @jeffhonforloco
+vite.config.ts @jeffhonforloco
+tailwind.config.ts @jeffhonforloco
+tsconfig.json @jeffhonforloco
+
+# Backend
+/backend/ @jeffhonforloco
+/backend/src/ @jeffhonforloco
+/backend/package.json @jeffhonforloco
+
+# Documentation
+*.md @jeffhonforloco
+README.md @jeffhonforloco
+SECURITY.md @jeffhonforloco
+CONTRIBUTING.md @jeffhonforloco
+
+# GitHub Actions
+/.github/ @jeffhonforloco
+/.github/workflows/ @jeffhonforloco
+/.github/ISSUE_TEMPLATE/ @jeffhonforloco
+
+# Configuration files
+.env* @jeffhonforloco
+.gitignore @jeffhonforloco
+.gitattributes @jeffhonforloco
+.editorconfig @jeffhonforloco
+.prettierrc @jeffhonforloco
+.eslintrc* @jeffhonforloco
+
+# Database
+/backend/database/ @jeffhonforloco
+/backend/src/database/ @jeffhonforloco
+
+# API
+/backend/src/routes/ @jeffhonforloco
+/backend/src/services/ @jeffhonforloco
+/backend/src/middleware/ @jeffhonforloco
+
+# Tests
+/tests/ @jeffhonforloco
+/backend/tests/ @jeffhonforloco
+*.test.js @jeffhonforloco
+*.test.ts @jeffhonforloco
+*.spec.js @jeffhonforloco
+*.spec.ts @jeffhonforloco
+
+# Security
+SECURITY.md @jeffhonforloco
+/backend/src/lib/auth-security.ts @jeffhonforloco
+/backend/src/lib/input-validation.ts @jeffhonforloco
+
+# Performance
+lighthouse.config.js @jeffhonforloco
+/backend/src/middleware/performance.ts @jeffhonforloco

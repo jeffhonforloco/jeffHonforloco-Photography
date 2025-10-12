@@ -12,12 +12,11 @@ interface LoginAttempt {
   ip?: string;
 }
 
-// Secure admin credentials (in production, these should be environment variables)
+// Secure admin credentials - using environment variables for production
 const ADMIN_CREDENTIALS = {
-  // Password: "JeffPhoto2024!" - hashed with SHA-256
-  username: 'jeff.admin',
-  passwordHash: '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',
-  salt: 'jeff-honforloco-salt-2024'
+  username: import.meta.env.VITE_ADMIN_USERNAME || 'jeff.admin',
+  passwordHash: import.meta.env.VITE_ADMIN_PASSWORD_HASH || '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',
+  salt: import.meta.env.VITE_ADMIN_SALT || 'jeff-honforloco-salt-2024'
 };
 
 class AuthSecurity {

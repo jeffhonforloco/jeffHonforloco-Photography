@@ -189,7 +189,9 @@ export const useEmailAutomation = () => {
     const nextEmail = nextEmailMap[emailType];
     if (nextEmail) {
       // In production, this would be handled by the email service
-      console.log(`Next email "${nextEmail}" scheduled for ${template.delay} hours from now`);
+      if (import.meta.env.DEV) {
+        console.log(`Next email "${nextEmail}" scheduled for ${template.delay} hours from now`);
+      }
     }
   };
 
