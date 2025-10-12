@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Analytics from "./components/Analytics";
 import PerformanceMonitor from "./components/PerformanceMonitor";
+import ImagePerformanceMonitor from "./components/ImagePerformanceMonitor";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 
 // Lazy load all pages for better performance
@@ -42,6 +43,7 @@ const App = () => (
         <BrowserRouter>
           <Analytics />
           <PerformanceMonitor />
+          <ImagePerformanceMonitor />
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
