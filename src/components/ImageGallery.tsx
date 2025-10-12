@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import LazyImage from './common/LazyImage';
 
 interface ImageGalleryProps {
   images: Array<{
@@ -53,13 +52,11 @@ const ImageGallery = ({ images, className = "" }: ImageGalleryProps) => {
             style={{ animationDelay: `${index * 0.1}s` }}
             onClick={() => openLightbox(index)}
           >
-            <LazyImage
+            <img
               src={image.src}
               alt={image.alt}
               className="w-full h-full object-cover image-hover-effect"
-              objectFit="cover"
-              aspectRatio="1"
-              placeholder="blur"
+              loading="lazy"
             />
             <div className="image-overlay opacity-0 group-hover:opacity-100">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -104,12 +101,10 @@ const ImageGallery = ({ images, className = "" }: ImageGalleryProps) => {
 
           {/* Image container */}
           <div className="w-full h-full flex items-center justify-center p-16">
-            <LazyImage
+            <img
               src={images[selectedImage].src}
               alt={images[selectedImage].alt}
               className="max-w-full max-h-full object-contain animate-scale-in"
-              objectFit="contain"
-              priority
             />
           </div>
 
