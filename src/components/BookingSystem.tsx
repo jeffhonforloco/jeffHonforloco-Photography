@@ -287,7 +287,13 @@ ${bookingData.message}`,
             mode="single"
             selected={bookingData.selectedDate}
             onSelect={(date) => updateBookingData('selectedDate', date)}
-            disabled={(date) => date < new Date()}
+            disabled={(date) => {
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              const compareDate = new Date(date);
+              compareDate.setHours(0, 0, 0, 0);
+              return compareDate < today;
+            }}
             className="bg-gray-900 rounded-lg border border-gray-700"
           />
         </div>

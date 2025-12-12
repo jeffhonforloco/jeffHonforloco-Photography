@@ -79,11 +79,17 @@ const HighResImage: React.FC<HighResImageProps> = ({
   };
 
   useEffect(() => {
-    const imgElement = imgRef.current;
-    if (!imgElement) return;
-
     // For priority images, load immediately
     if (priority) {
+      const optimizedSrc = generateOptimizedUrl(src, width, quality);
+      setCurrentSrc(optimizedSrc);
+      return;
+    }
+
+    // For lazy loading, wait for the image element to be available
+    const imgElement = imgRef.current;
+    if (!imgElement) {
+      // If element not ready, set a fallback src
       const optimizedSrc = generateOptimizedUrl(src, width, quality);
       setCurrentSrc(optimizedSrc);
       return;
