@@ -145,7 +145,13 @@ const BookingSystem: React.FC = () => {
         message: `Booking Request:
 Service: ${bookingData.serviceType}
 Package: ${bookingData.packageType}
-Date: ${bookingData.selectedDate ? format(bookingData.selectedDate, 'MMMM dd, yyyy') : 'Not selected'}
+        Date: ${bookingData.selectedDate ? (() => {
+          try {
+            return format(bookingData.selectedDate, 'MMMM dd, yyyy');
+          } catch (e) {
+            return bookingData.selectedDate.toLocaleDateString();
+          }
+        })() : 'Not selected'}
 Time: ${bookingData.selectedTime}
 Location: ${bookingData.location}
 Location Type: ${bookingData.locationType}
@@ -154,7 +160,13 @@ Budget: ${bookingData.budget}
 ${bookingData.message}`,
         service_type: bookingData.serviceType,
         budget_range: bookingData.budget,
-        event_date: bookingData.selectedDate ? format(bookingData.selectedDate, 'yyyy-MM-dd') : '',
+        event_date: bookingData.selectedDate ? (() => {
+          try {
+            return format(bookingData.selectedDate, 'yyyy-MM-dd');
+          } catch (e) {
+            return bookingData.selectedDate.toISOString().split('T')[0];
+          }
+        })() : '',
         location: bookingData.location
       });
 
@@ -467,7 +479,13 @@ ${bookingData.message}`,
             </div>
             <div>
               <span className="font-semibold text-white">Date:</span>{' '}
-              {bookingData.selectedDate ? format(bookingData.selectedDate, 'MMMM dd, yyyy') : 'Not selected'}
+              {bookingData.selectedDate ? (() => {
+                try {
+                  return format(bookingData.selectedDate, 'MMMM dd, yyyy');
+                } catch (e) {
+                  return bookingData.selectedDate.toLocaleDateString();
+                }
+              })() : 'Not selected'}
             </div>
             <div>
               <span className="font-semibold text-white">Time:</span> {bookingData.selectedTime || 'Not selected'}
